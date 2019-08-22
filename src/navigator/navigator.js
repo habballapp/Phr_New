@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {createAppContainer} from 'react-navigation';
 import { createRootNavigator } from '../router';
-import {AsyncStorage} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class App extends Component {
     constructor(props){
@@ -12,7 +12,7 @@ class App extends Component {
 
     componentDidMount() {
         this.setState({loading: true})
-        AsyncStorage.getItem('first_time').then((value) => {
+        AsyncStorage.getItem('@first_time').then((value) => {
             if( value != null ) {
                 this.setState({firstTime:false})
             }

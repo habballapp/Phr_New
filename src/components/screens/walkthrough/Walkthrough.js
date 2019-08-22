@@ -1,64 +1,18 @@
 import React, { Component } from 'react'
 import {
-  View,
-  StatusBar,
-  Dimensions,
   Text,
   TouchableOpacity,
-  AsyncStorage
-} from 'react-native'
+} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage'
+import {Statusbar, Container} from '../../default';
 import LinearGradient from 'react-native-linear-gradient';
 import Swiper from 'react-native-swiper'
 import Slider from "./Slider";
-const { width, height } = Dimensions.get('window')
-
-const colors=['#d57eeb','#fccb90']
-const styles = {
-  wrapper: {
-    // backgroundColor: '#f00'
-  },
-  nextButtonStyles:{
-    backgroundColor:'transparent',
-    position:'absolute',
-    right:20,
-    bottom:65
-  },
-  PreviosButtonStyles:{
-    backgroundColor:'transparent',
-    position:'absolute',
-    left:20,
-    bottom:65
-  },
-  buttonTextStyles:{
-    fontSize:18,
-    color:'white',
-    fontWeight:'bold'
-  },
-  slide: {
-    flex: 1,
-    backgroundColor: 'transparent',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  container: {
-    flex: 1,
-  },
-
-  imgBackground: {
-    width,
-    height,
-    backgroundColor: 'transparent',
-    position: 'absolute'
-  },
-
-  image: {
-    width,
-    height,
-  }
-}
+import {ActiveDot} from './ActiveDot';
+import {InActiveDot} from './InActiveDot';
+import {styles} from './walkthrough_styles';
 
 export default class Walkthrough extends Component {
-  static navigationOptions = { header: null };
   data = [
     { title: 'Screen one', des: 'asd'},
     { title: 'Screen two', des: 'asd'},
@@ -75,18 +29,8 @@ export default class Walkthrough extends Component {
     this.state = { BackShow: false , NextShow:true, StartShow:false, showRealApp: false}
   }
 
-  onScrollingBeginDrag = (a,b,c) => {
-    console.log("onScroll...")
-    this.setState({show:false})
-  }
-
-  onScrollingEndDrag = (a,b,c) => {
-    console.log("onScroll end...")
-    this.setState({show:true})
-  }
-
   swipeEnd(){
-    AsyncStorage.setItem('first_time', 'true').then(() => {
+    AsyncStorage.setItem('@first_time', 'true').then(() => {
       this.setState({ showRealApp: true });
       this.props.navigation.navigate('Login');
     });
@@ -126,17 +70,17 @@ export default class Walkthrough extends Component {
 
   render () {
     return (
-      <View style={styles.container}>
-          <StatusBar 
+      <Container ContainerStyle={styles.container}>
+          <Statusbar 
           backgroundColor={'#0fbe9f'}
           barStyle='light-content' />
           <LinearGradient
-            colors={['#0fbe9f','#039be6']}
+            colors={['#0fbe9f','#ddd','#039be6']}
             style={styles.imgBackground}
           />
           <Swiper style={styles.wrapper}
-            dot={<View style={{backgroundColor: 'rgba(255,255,255,.3)', width: 10, height: 10, borderRadius: 7, marginLeft: 2, marginRight: 2}} />}
-            activeDot={<View style={{backgroundColor: '#fff', width: 8, height: 8, borderRadius: 8, marginLeft: 2, marginRight: 2}} />}
+            dot={<InActiveDot/>}
+            activeDot={<ActiveDot/>}
             paginationStyle={{
               bottom: 70
             }}
@@ -161,7 +105,7 @@ export default class Walkthrough extends Component {
                   <Text style={styles.buttonTextStyles}>BACK</Text>
           </TouchableOpacity>
           ) : null }
-        </View>
+        </Container>
       )
   }
 }

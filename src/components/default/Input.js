@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, View } from 'react-native';
+import { TextInput } from 'react-native';
 
 export const Input = (props) => {
     const {
@@ -24,8 +24,7 @@ export const Input = (props) => {
         blurOnSubmit = {blurOnSubmit}
         onChangeText = {onChangeText}
         secureTextEntry = {secureTextEntry}
-        editable = {editable}
-        />
+        editable = {editable}/>
     );
 }
 
@@ -35,7 +34,7 @@ const Styles = {
         paddingLeft: 5
     },
     inputFields: {
-		color: '#ddd',
+		color: '#000',
 		fontSize: 20,
 		color: '#000',
 		borderBottomWidth: 1,
@@ -44,6 +43,7 @@ const Styles = {
         width: '80%',
         paddingLeft: 10,
         paddingRight: 10,
-        marginLeft: 40
+        marginLeft: 40,
+        marginBottom: 5
 	},
 }
