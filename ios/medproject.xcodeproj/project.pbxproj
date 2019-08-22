@@ -46,6 +46,15 @@
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
+<<<<<<< HEAD
+		8E235556CFF64C45ACDE7526 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A10EF56E009740D09FE59456 /* libBVLinearGradient.a */; };
+		24942DA2DD6A4399891F3307 /* libRNReanimated.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEFE2828EA6F4982955348D6 /* libRNReanimated.a */; };
+		8FC0F3C7C1C24254930FA066 /* libRNReanimated-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530819A26EF4DA1A8F0F281 /* libRNReanimated-tvOS.a */; };
+		176013977BDA4414A53B706C /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C782412CAF6426694075F58 /* libRNGestureHandler.a */; };
+		543116D3C5A1460C9E10CBD1 /* libRNGestureHandler-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DACB1471E43438C89201BD7 /* libRNGestureHandler-tvOS.a */; };
+		73186C8694B8400191AE0FFE /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D4E9A38BC4843EA8C51F80D /* libRNCAsyncStorage.a */; };
+=======
+>>>>>>> master
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -411,6 +420,19 @@
 		E0B4ACBA938341B482D106E9 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGestureHandler.xcodeproj; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+<<<<<<< HEAD
+		8114EE99E8E649C99273F1A1 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; name = "BVLinearGradient.xcodeproj"; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		A10EF56E009740D09FE59456 /* libBVLinearGradient.a */ = {isa = PBXFileReference; name = "libBVLinearGradient.a"; path = "libBVLinearGradient.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		C822467ED0E445B980B9D576 /* RNReanimated.xcodeproj */ = {isa = PBXFileReference; name = "RNReanimated.xcodeproj"; path = "../node_modules/react-native-reanimated/ios/RNReanimated.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		AEFE2828EA6F4982955348D6 /* libRNReanimated.a */ = {isa = PBXFileReference; name = "libRNReanimated.a"; path = "libRNReanimated.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		4530819A26EF4DA1A8F0F281 /* libRNReanimated-tvOS.a */ = {isa = PBXFileReference; name = "libRNReanimated-tvOS.a"; path = "libRNReanimated-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		E0B4ACBA938341B482D106E9 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; name = "RNGestureHandler.xcodeproj"; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		6C782412CAF6426694075F58 /* libRNGestureHandler.a */ = {isa = PBXFileReference; name = "libRNGestureHandler.a"; path = "libRNGestureHandler.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		0DACB1471E43438C89201BD7 /* libRNGestureHandler-tvOS.a */ = {isa = PBXFileReference; name = "libRNGestureHandler-tvOS.a"; path = "libRNGestureHandler-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		E584C88DDE4749D6A19614C1 /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; name = "RNCAsyncStorage.xcodeproj"; path = "../node_modules/@react-native-community/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		2D4E9A38BC4843EA8C51F80D /* libRNCAsyncStorage.a */ = {isa = PBXFileReference; name = "libRNCAsyncStorage.a"; path = "libRNCAsyncStorage.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+=======
+>>>>>>> master
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -443,6 +465,7 @@
 				8E235556CFF64C45ACDE7526 /* libBVLinearGradient.a in Frameworks */,
 				24942DA2DD6A4399891F3307 /* libRNReanimated.a in Frameworks */,
 				176013977BDA4414A53B706C /* libRNGestureHandler.a in Frameworks */,
+				73186C8694B8400191AE0FFE /* libRNCAsyncStorage.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -685,6 +708,7 @@
 				8114EE99E8E649C99273F1A1 /* BVLinearGradient.xcodeproj */,
 				C822467ED0E445B980B9D576 /* RNReanimated.xcodeproj */,
 				E0B4ACBA938341B482D106E9 /* RNGestureHandler.xcodeproj */,
+				E584C88DDE4749D6A19614C1 /* RNCAsyncStorage.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1383,10 +1407,20 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
+<<<<<<< HEAD
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
+					"$(SRCROOT)\..\node_modules\react-native-reanimated\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
+					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+=======
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
+>>>>>>> master
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1415,10 +1449,20 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
+<<<<<<< HEAD
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
+					"$(SRCROOT)\..\node_modules\react-native-reanimated\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
+					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+=======
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
+>>>>>>> master
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1455,6 +1499,16 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = medproject;
 				VERSIONING_SYSTEM = "apple-generic";
+<<<<<<< HEAD
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
+					"$(SRCROOT)\..\node_modules\react-native-reanimated\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
+					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+				);
+=======
+>>>>>>> master
 			};
 			name = Debug;
 		};
@@ -1486,6 +1540,16 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = medproject;
 				VERSIONING_SYSTEM = "apple-generic";
+<<<<<<< HEAD
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
+					"$(SRCROOT)\..\node_modules\react-native-reanimated\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
+					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+				);
+=======
+>>>>>>> master
 			};
 			name = Release;
 		};
@@ -1516,10 +1580,20 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
+<<<<<<< HEAD
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
+					"$(SRCROOT)\..\node_modules\react-native-reanimated\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
+					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+=======
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
+>>>>>>> master
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.medproject-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1556,10 +1630,20 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
+<<<<<<< HEAD
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
+					"$(SRCROOT)\..\node_modules\react-native-reanimated\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
+					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+=======
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
+>>>>>>> master
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.medproject-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1595,10 +1679,20 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
+<<<<<<< HEAD
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
+					"$(SRCROOT)\..\node_modules\react-native-reanimated\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
+					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+=======
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
+>>>>>>> master
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.medproject-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1634,10 +1728,20 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
+<<<<<<< HEAD
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
+					"$(SRCROOT)\..\node_modules\react-native-reanimated\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
+					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+=======
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
+>>>>>>> master
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.medproject-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";

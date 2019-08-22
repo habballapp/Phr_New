@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createRootNavigator } from '../router';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import SplashScreen from 'react-native-splash-screen';
 
 class App extends Component {
