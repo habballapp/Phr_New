@@ -7,11 +7,11 @@ export default Slider = (props) => {
     return(
         <Container ContainerStyle={styles.slide}>
             <Textview 
-                textStyle={{fontSize:36, fontFamily:'calibri', color:'white', fontWeight:'bold', fontStyle:'normal' }}>
+                textStyle={{fontSize:36, color:'white', fontWeight:'bold', fontStyle:'normal' }}>
                     {title}
                 </Textview>
                 <Textview 
-                textStyle={{fontSize:28, fontFamily:'calibri', color:'white', fontStyle:'italic' }}>
+                textStyle={{fontSize:28, color:'white', fontStyle:'italic' }}>
                 {des}
             </Textview>
         </Container>
