@@ -1,0 +1,29 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '9.0'
+pod 'Firebase/Core', '~> 6.3.0'
+
+target 'medproject' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for medproject
+
+  target 'medproject-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'medprojectTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
+
+target 'medproject-tvOS' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for medproject-tvOS
+
+end
