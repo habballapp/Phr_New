@@ -1,0 +1,6 @@
+framework module Pods_medproject_tvOS {
+  umbrella header "Pods-medproject-tvOS-umbrella.h"
+
+  export *
+  module * { export * }
+}
