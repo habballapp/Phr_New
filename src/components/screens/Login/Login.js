@@ -10,6 +10,7 @@ import {
 } from '../../default';
 import {Logintag} from './LoginTag';
 import {styles} from './login_styles';
+import Home from '../Home/Home'
 
 var validateEmail = '';
 var validatePass = '';
@@ -27,6 +28,10 @@ export default class Login extends Component{
         }
         
     }    
+
+    onLoginPressed(){
+        this.props.navigation.navigate("HomeScreen");
+    }
     
     handleEmailChange(event) {
 		this.setState({
@@ -99,7 +104,7 @@ export default class Login extends Component{
                             validatePass ? validatePass : <Container></Container>
                         }
                         <Container ContainerStyle={styles.buttonContainer}>
-                            <Button>
+                            <Button onPress={this.onLoginPressed.bind(this)}>
                                 Login
                             </Button>
                         </Container>
