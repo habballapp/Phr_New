@@ -11,6 +11,7 @@ import {
 import { KeyboardAvoidingView } from "react-native";
 import { Logintag } from './LoginTag';
 import { styles } from './login_styles';
+import Home from '../Home/Home'
 import firebase from 'react-native-firebase';
 
 var validateEmail = '';
@@ -27,7 +28,11 @@ export default class Login extends Component {
             error: false,
             companyCode: '',
         }
+        
+    }    
 
+    onLoginPressed(){
+        this.props.navigation.navigate("HomeScreen");
     }
 
     componentDidMount() {
@@ -95,7 +100,7 @@ export default class Login extends Component {
                             {
                                 validatePass ? validatePass : <Container></Container>
                             }
-                            <Button onPress={()=>{}} title="Login" style={styles.loginButtonStyles} textStyle={styles.loginButtonText}/>
+                            <Button onPress={()=>{this.onLoginPressed.bind(this)}} title="Login" style={styles.loginButtonStyles} textStyle={styles.loginButtonText}/>
                             <Button onPress={()=>{}} title="FORGET PASSWORD?" style={styles.forgetPasswordButton} textStyle={styles.forgetPasswordStyle}/>
                         </Container>
                     </KeyboardAvoidingView>

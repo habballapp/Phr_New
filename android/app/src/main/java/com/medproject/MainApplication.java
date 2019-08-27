@@ -13,8 +13,8 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
 import io.invertase.firebase.auth.RNFirebaseAuthPackage; // <-- Add this line
-
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,6 +37,7 @@ public class MainApplication extends Application implements ReactApplication {
             new ReanimatedPackage(),
             new LinearGradientPackage(),
             new SplashScreenReactPackage(),
+            new VectorIconsPackage(),
             new RNFirebaseAuthPackage()
       );
     }
