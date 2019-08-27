@@ -8,8 +8,9 @@ import {
     Textview,
     ImagePicker
 } from '../../default';
-import { Logintag } from './LoginTag';
-import { styles } from './login_styles';
+import {Logintag} from './LoginTag';
+import {styles} from './login_styles';
+import Home from '../Home/Home'
 import firebase from 'react-native-firebase';
 
 var validateEmail = '';
@@ -26,7 +27,11 @@ export default class Login extends Component {
             error: false,
             companyCode: '',
         }
+        
+    }    
 
+    onLoginPressed(){
+        this.props.navigation.navigate("HomeScreen");
     }
 
     componentDidMount() {
@@ -104,7 +109,7 @@ export default class Login extends Component {
                             validatePass ? validatePass : <Container></Container>
                         }
                         <Container ContainerStyle={styles.buttonContainer}>
-                            <Button>
+                            <Button onPress={this.onLoginPressed.bind(this)}>
                                 Login
                             </Button>
                         </Container>

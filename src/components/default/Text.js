@@ -6,6 +6,12 @@ export const Textview = (props) => {
         textStyle
     } = props;
     return (
-        <Text style={textStyle}>{props.children}</Text>
+        <Text style={[styles.default, textStyle]}>{props.children}</Text>
     )
+}
+const styles = {
+    default: {
+        fontSize: 16,
+        color: 'black',
+    }
 }
