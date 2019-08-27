@@ -1,16 +1,11 @@
 import React from 'react';
 import {Image} from 'react-native';
-import {Container} from './index';
 
-export const ImagePicker = (props) => {
+export const ImageView = (props) => {
     const {
-        ContainerStyle,
         imageStyle,
-        imgSource
+        imgSource,
+        resizeMode
     } = props;
-    return(
-        <Container ContainerStyle={ContainerStyle}>
-            <Image style={imageStyle} source={imgSource}/>
-        </Container>
-    )
+    return( <Image style={imageStyle} source={imgSource} resizeMode={resizeMode} /> )
 }

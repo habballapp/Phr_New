@@ -1,73 +1,57 @@
-
 export const styles = {
-    container: {
-        flex:1,
-    },
-    mainContainer:{
+    scrollViewStyles: { 
         backgroundColor:'#fff',
-        flex:1
-    },
-    imageContainer: {
-        flex:1,
-        alignItems:'flex-start',
-        paddingLeft: 10,
-        paddingRight: 10,
-        marginLeft: 40
+        flexGrow: 1, 
+        justifyContent: 'center'
     },
     formContainer:{
-        flex:1
-    },
-    image: {
-        marginTop: 45,
-        marginBottom: 30,
-        height:80,
-        width:98
-    },
-    buttonContainer:{
-        marginTop: 50,
         flex:1,
-        marginBottom: 10
-    },
-    loginTagContainer:{
         marginTop: 10,
-        marginBottom: 15,
-        flex:1,
-        alignItems:'flex-start',
+        paddingLeft: 30,
+    },
+    input: {
+		fontSize: 20,
+		color: '#000',
+		borderBottomWidth: 1,
+		borderBottomColor: '#000',
+        width: '90%',
         paddingLeft: 10,
         paddingRight: 10,
-        marginLeft: 40
+        marginTop: 30,
+    },
+    loginButtonStyles: {
+        marginTop: 30,
+        marginRight: 30,
+        borderRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#0080ff',
+        height: 50
+    },
+    loginButtonText: {
+        fontWeight: 'bold',
+		color: 'white',
+		fontSize: 24
     },
     lineStyle: {
         borderBottomColor: '#0080ff',
         borderBottomWidth: 3,
         width: 70,
-        alignSelf:'flex-start',
-        paddingLeft: 10,
-        paddingRight: 10,
         marginLeft: 50,
-        marginBottom: 10
+    },
+    forgetPasswordButton: {
+        width: 200,
+        alignSelf: 'center',
+        marginTop: 30,
+        marginRight: 30,
     },
     forgetPasswordStyle: {
         alignSelf:'center',
         fontSize:16, 
         color:'red'
     },
-    fontColor: {
-        color: 'black'
-    },
-    style1:{
-        fontSize:24,
-        color:'black'
-    },
-    style2:{
-        fontSize:16,
-        color:'black'
-    },
-    inValidPasswordStyles: {
-        alignSelf: 'center', 
-        color: 'red' 
-    },
-    inValidEmailStyles: {
+    invalidInputStyles: {
+        marginTop: 5,
         alignSelf: 'center', 
         color: 'red' 
     }

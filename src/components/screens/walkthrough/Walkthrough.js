@@ -11,6 +11,7 @@ import Slider from "./Slider";
 import {ActiveDot} from './ActiveDot';
 import {InActiveDot} from './InActiveDot';
 import {styles} from './walkthrough_styles';
+import { FIRST_EVER_APP_START } from "../../../constants/StorageConstans";
 
 export default class Walkthrough extends Component {
   data = [
@@ -20,18 +21,17 @@ export default class Walkthrough extends Component {
     { title: 'Screen four', des: 'asd'},
     { title: 'Screen five', des: 'asd'},
     { title: 'Screen six', des: 'asd'},
-]
+  ]
 
   constructor(props){
     super(props);
     this.swiper
     this.index = 1
-    this.state = { BackShow: false , NextShow:true, StartShow:false, showRealApp: false}
+    this.state = { BackShow: false , NextShow:true, StartShow:false }
   }
 
   swipeEnd(){
-    AsyncStorage.setItem('@first_time', 'true').then(() => {
-      this.setState({ showRealApp: true });
+    AsyncStorage.setItem(FIRST_EVER_APP_START, 'true').then(() => {
       this.props.navigation.navigate('Login');
     });
   }
@@ -52,21 +52,28 @@ export default class Walkthrough extends Component {
     const { onIndexChanged } = this.props;
     this.index = newIndex+1;
     if(newIndex > 0){ //middle page
-      this.setState({BackShow:true})
       if (newIndex == 5){ //end page
-        this.setState({NextShow:false, StartShow:true})
+        this.updateStates(false, true);
       }
       else{
-        this.setState({NextShow:true, StartShow:false})
+        this.updateStates(true, false, true)
       }
     }
     else if (newIndex == 0){ //start page
-      this.setState({BackShow:false,StartShow:false,NextShow:true})
+      this.updateStates(true, false, false)
     }
     if (onIndexChanged) {
         onIndexChanged(newIndex);
     }
   };
+
+  updateStates(nextShow, startShow, backShow = false){
+    this.setState({
+      NextShow: nextShow,
+      StartShow: startShow,
+      BackShow: backShow
+    })
+  }
 
   render () {
     return (
@@ -75,7 +82,7 @@ export default class Walkthrough extends Component {
           backgroundColor={'#0fbe9f'}
           barStyle='light-content' />
           <LinearGradient
-            colors={['#0fbe9f','#ddd','#039be6']}
+            colors={['#0fbe9f','#039be6']}
             style={styles.imgBackground}
           />
           <Swiper style={styles.wrapper}

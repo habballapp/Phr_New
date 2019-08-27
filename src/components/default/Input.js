@@ -10,13 +10,13 @@ export const Input = (props) => {
         blurOnSubmit,
         onChangeText,
         secureTextEntry,
-        inputstyle,
+        inputStyle,
         editable
     } = props;
 
     return(
         <TextInput 
-        style={[Styles.inputFields, inputstyle]}
+        style={ inputStyle }
         placeholder = {placeholder}
         placeholderTextColor = {placeholderTextColor}
         keyboardType = {keyboardType}
@@ -26,24 +26,4 @@ export const Input = (props) => {
         secureTextEntry = {secureTextEntry}
         editable = {editable}/>
     );
-}
-
-const Styles = {
-    inputStyle: {
-        height: 40,
-        paddingLeft: 5
-    },
-    inputFields: {
-		color: '#000',
-		fontSize: 20,
-		color: '#000',
-		borderBottomWidth: 1,
-		borderBottomColor: '#000',
-        marginTop: 20,
-        width: '80%',
-        paddingLeft: 10,
-        paddingRight: 10,
-        marginLeft: 40,
-        marginBottom: 5
-	},
 }

@@ -6,14 +6,8 @@ export default Slider = (props) => {
     const { title, des} = props.pageItem;
     return(
         <Container ContainerStyle={styles.slide}>
-            <Textview 
-                textStyle={{fontSize:36, color:'white', fontWeight:'bold', fontStyle:'normal' }}>
-                    {title}
-                </Textview>
-                <Textview 
-                textStyle={{fontSize:28, color:'white', fontStyle:'italic' }}>
-                {des}
-            </Textview>
+            <Textview textStyle={{fontSize:36, color:'white', fontWeight:'bold', fontStyle:'normal' }} text={title} />
+            <Textview textStyle={{fontSize:28, color:'white', fontStyle:'italic' }} text={des} />
         </Container>
     )
 }
