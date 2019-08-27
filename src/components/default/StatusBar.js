@@ -8,7 +8,7 @@ export const Statusbar = (props) => {
     } = props;
     return (
         <StatusBar 
-            backgroundColor={backgroundColor}
-            barStyle={barStyle}/>
+            backgroundColor={backgroundColor ? backgroundColor : '#0080ff'}
+            barStyle={barStyle ? barStyle : 'light-content'}/>
     )
 }

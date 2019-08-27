@@ -1,6 +1,5 @@
 import React from 'react';
 import {Container} from '../../default';
-import {styles} from './walkthrough_styles';
 
 export const ActiveDot = () => {
     return(
@@ -8,4 +7,15 @@ export const ActiveDot = () => {
             ContainerStyle={styles.activeDotStyle}
         />
     )
+}
+
+const styles = {
+    activeDotStyle: {
+        backgroundColor: '#fff',
+        width: 8, 
+        height: 8, 
+        borderRadius: 8, 
+        marginLeft: 2, 
+        marginRight: 2
+    }
 }

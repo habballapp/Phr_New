@@ -1,17 +1,20 @@
 import React from 'react';
-import {Text} from 'react-native';
+import { Text } from 'react-native';
 
 export const Textview = (props) => {
     const {
-        textStyle
+        textStyle,
+        text
     } = props;
+
     return (
-        <Text style={[styles.default, textStyle]}>{props.children}</Text>
+        <Text style={[styles.defaulttextstyle, textStyle]}>{ text }</Text>
     )
 }
+
 const styles = {
-    default: {
-        fontSize: 16,
-        color: 'black',
+    defaulttextstyle: {
+		color: 'black',
+		fontSize: 16
     }
 }

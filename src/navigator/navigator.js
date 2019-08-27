@@ -3,21 +3,17 @@ import { createAppContainer } from 'react-navigation';
 import { createRootNavigator } from '../router';
 import AsyncStorage from '@react-native-community/async-storage';
 import SplashScreen from 'react-native-splash-screen';
+import { FIRST_EVER_APP_START } from "../constants/StorageConstans";
 
 class App extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = { firstTime: true, loading: false }
-	}
+	state = { firstTime: true, loading: true }
 
 	componentDidMount() {
-		SplashScreen.hide()
-		this.setState({ loading: true })
-		AsyncStorage.getItem('first_time').then((value) => {
+		AsyncStorage.getItem(FIRST_EVER_APP_START).then((value) => {
 			if (value != null) {
 				this.setState({ firstTime: false })
 			}
+			SplashScreen.hide()
 			this.setState({ loading: false })
 		});
 	}
@@ -27,12 +23,10 @@ class App extends Component {
 			return null;
 		}
 		if (this.state.firstTime) {
-			console.log("....firstTime if", this.state.firstTime)
 			const Layout = createAppContainer(createRootNavigator('GOTOWALK'));
 			return <Layout />
 		}
 		else if (this.state.firstTime == false) {
-			console.log("....firstTime else", this.state.firstTime)
 			const Layout = createAppContainer(createRootNavigator('GOTOLOGIN'));
 			return <Layout />
 		}

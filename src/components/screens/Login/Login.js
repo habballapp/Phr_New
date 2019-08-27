@@ -6,10 +6,11 @@ import {
     Statusbar,
     Scrollview,
     Textview,
-    ImagePicker
+    SafeViewArea
 } from '../../default';
-import {Logintag} from './LoginTag';
-import {styles} from './login_styles';
+import { KeyboardAvoidingView } from "react-native";
+import { Logintag } from './LoginTag';
+import { styles } from './login_styles';
 import Home from '../Home/Home'
 import firebase from 'react-native-firebase';
 
@@ -44,7 +45,7 @@ export default class Login extends Component {
         })
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,15})+$/;
         if (reg.test(event) === false && event != '') {
-            validateEmail = <Textview textStyle={styles.inValidEmailStyles}>Please enter valid email</Textview>;
+            validateEmail = <Textview textStyle={styles.invalidInputStyles}>Please enter valid email</Textview>;
             return false;
         }
         else {
@@ -56,7 +57,7 @@ export default class Login extends Component {
             password: event
         })
         if (event != '' && event.length < 8) {
-            validatePass = <Textview textStyle={styles.inValidPasswordStyles}>Password is not valid</Textview>;
+            validatePass = <Textview textStyle={styles.invalidInputStyles}>Password is not valid</Textview>;
         } else {
             validatePass = <Container></Container>;
         }
@@ -68,55 +69,43 @@ export default class Login extends Component {
 
     render() {
         return (
-            <Container ContainerStyle={styles.container}>
-                <Statusbar
-                    backgroundColor={'#0080ff'}
-                    barStyle='light-content'
-                />
-                <Scrollview ScrollViewStyle={styles.mainContainer} behavior="padding" enabled>
-                    <ImagePicker
-                        ContainerStyle={styles.imageContainer}
-                        imageStyle={styles.image}
-                        imgSource={require('../../../assets/logo.png')}
-                    />
-                    <Logintag
-                        loginTagContainerStyle={styles.loginTagContainer}
-                        style1={styles.style1}
-                        style2={styles.style2}
-                    />
-                    <Container ContainerStyle={styles.lineStyle} />
-                    <Container ContainerStyle={styles.formContainer}>
-                        <Input
-                            placeholder="Email"
-                            placeholderTextColor="#000"
-                            keyboardType="email-address"
-                            returnKeyType={"next"}
-                            blurOnSubmit={true}
-                            onChangeText={(event) => this.handleEmailChange(event)}
-                        />
-                        {
-                            validateEmail ? validateEmail : <Container></Container>
-                        }
-                        <Input
-                            placeholder="Password"
-                            placeholderTextColor="#000"
-                            secureTextEntry={true}
-                            returnKeyType={"next"}
-                            blurOnSubmit={true}
-                            onChangeText={(event) => this.handlePassChange(event)}
-                        />
-                        {
-                            validatePass ? validatePass : <Container></Container>
-                        }
-                        <Container ContainerStyle={styles.buttonContainer}>
-                            <Button onPress={this.onLoginPressed.bind(this)}>
-                                Login
-                            </Button>
+            <SafeViewArea style={{flex: 1}}>
+                <Statusbar barStyle='dark-content'/>
+                <Scrollview contentContainerStyle={styles.scrollViewStyles} >
+                    <KeyboardAvoidingView behavior="position">
+                        <Logintag />
+                        <Container ContainerStyle={styles.lineStyle} />
+                        <Container ContainerStyle={styles.formContainer}>
+                            <Input
+                                placeholder="Email"
+                                placeholderTextColor="#000"
+                                keyboardType="email-address"
+                                returnKeyType={"next"}
+                                blurOnSubmit={true}
+                                inputStyle={styles.input}
+                                onChangeText={(event) => this.handleEmailChange(event)}
+                            />
+                            {
+                                validateEmail ? validateEmail : <Container></Container>
+                            }
+                            <Input
+                                placeholder="Password"
+                                placeholderTextColor="#000"
+                                secureTextEntry={true}
+                                returnKeyType={"next"}
+                                inputStyle={styles.input}
+                                blurOnSubmit={true}
+                                onChangeText={(event) => this.handlePassChange(event)}
+                            />
+                            {
+                                validatePass ? validatePass : <Container></Container>
+                            }
+                            <Button onPress={()=>{this.onLoginPressed.bind(this)}} title="Login" style={styles.loginButtonStyles} textStyle={styles.loginButtonText}/>
+                            <Button onPress={()=>{}} title="FORGET PASSWORD?" style={styles.forgetPasswordButton} textStyle={styles.forgetPasswordStyle}/>
                         </Container>
-                        <Textview textStyle={styles.forgetPasswordStyle}>FORGET PASSWORD?</Textview>
-                    </Container>
+                    </KeyboardAvoidingView>
                 </Scrollview>
-            </Container>
+            </SafeViewArea>
         );
     }
 }
