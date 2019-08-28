@@ -6,4 +6,4 @@ export * from './Scrollview';
 export * from './Text';
 export * from './Image';
 export * from './SafeAreaView'
-export * from './HeaderComponent';
+//export * from './HeaderComponent';
