@@ -15,6 +15,7 @@ export const Button = (props) => {
         <TouchableOpacity 
         onPress={onPress}
         style={ style }>
+            {props.children}
             <Textview textStyle={ textStyle } text={title} />
         </TouchableOpacity>
     );
