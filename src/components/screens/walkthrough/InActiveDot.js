@@ -11,7 +11,7 @@ export const InActiveDot = () => {
 
 const styles = {
     inActiveDotStyle: {
-        backgroundColor: 'rgba(255,255,255,.3)', 
+        backgroundColor: '#A6A6A6', 
         width: 10, 
         height: 10, 
         borderRadius: 7, 

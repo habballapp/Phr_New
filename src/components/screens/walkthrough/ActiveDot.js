@@ -11,7 +11,7 @@ export const ActiveDot = () => {
 
 const styles = {
     activeDotStyle: {
-        backgroundColor: '#fff',
+        backgroundColor: '#0080ff',
         width: 8, 
         height: 8, 
         borderRadius: 8, 

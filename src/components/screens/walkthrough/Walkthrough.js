@@ -12,15 +12,42 @@ import {ActiveDot} from './ActiveDot';
 import {InActiveDot} from './InActiveDot';
 import {styles} from './walkthrough_styles';
 import { FIRST_EVER_APP_START } from "../../../constants/StorageConstans";
+// import console = require('console');
 
 export default class Walkthrough extends Component {
   data = [
-    { title: 'Screen one', des: 'asd'},
-    { title: 'Screen two', des: 'asd'},
-    { title: 'Screen three', des: 'asd'},
-    { title: 'Screen four', des: 'asd'},
-    { title: 'Screen five', des: 'asd'},
-    { title: 'Screen six', des: 'asd'},
+    { 
+      title: 'Urgent Care', 
+      des: 'Health is Life!',
+      lastPageKey: false 
+    },
+    { 
+      title: 'Find the Best Doctors', 
+      des: 'We will provide you the best available professionals in your town. Which will eventually save your time.', 
+      imageSource: require('../../../assets/doctor.png'),
+      lastPageKey: false
+    },
+    {
+      title: 'Find the Best Medical Centers', 
+      des: 'We will provide you the best available professionals in your town. Which will eventually save your time.',
+      imageSource: require('../../../assets/hospital.png'),
+      lastPageKey: false
+    },
+    { 
+      title: 'Schedule your Appointment', 
+      des: 'You can schedule your appointment anytime from any doctor you may feel comfortable with.',
+      imageSource: require('../../../assets/schedule_appointment.png'),
+      lastPageKey: false
+    },
+    { 
+      title: 'Track your Appointments', 
+      des: 'You can track The appointments history which you scheduled from any specific doctor.',
+      imageSource: require('../../../assets/schedule_history.png'),
+      lastPageKey: false
+    },
+    {
+      lastPageKey: true
+    }
   ]
 
   constructor(props){
@@ -50,6 +77,8 @@ export default class Walkthrough extends Component {
 
   onIndexChanged = (newIndex) => {
     const { onIndexChanged } = this.props;
+    console.log("onIndexChanged>>> this.index>>", this.index);
+    console.log("onIndexChanged>>> newIndex>>", newIndex);
     this.index = newIndex+1;
     if(newIndex > 0){ //middle page
       if (newIndex == 5){ //end page
@@ -79,10 +108,10 @@ export default class Walkthrough extends Component {
     return (
       <Container ContainerStyle={styles.container}>
           <Statusbar 
-          backgroundColor={'#0fbe9f'}
+          backgroundColor={'#0080ff'}
           barStyle='light-content' />
           <LinearGradient
-            colors={['#0fbe9f','#039be6']}
+            colors={['#fff','#fff']}
             style={styles.imgBackground}
           />
           <Swiper style={styles.wrapper}
@@ -95,7 +124,7 @@ export default class Walkthrough extends Component {
             showsButtons={false} 
             onIndexChanged={this.onIndexChanged}
             loop={false}>
-                {this.data.map((item, key) =>{ return <Slider pageItem={item} key={key} /> })}
+                {this.data.map((item, key) =>{ return <Slider pageItem={item} key={key} index={this.index}/> })}
           </Swiper>
           {this.state.NextShow ? (
           <TouchableOpacity style={styles.nextButtonStyles} onPress={()=>this.swipeForward(this.index)} >
