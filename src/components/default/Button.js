@@ -11,11 +11,12 @@ export const Button = (props) => {
         style
     } = props;
 
-    return(
-        <TouchableOpacity 
-        onPress={onPress}
-        style={ style }>
-            <Textview textStyle={ textStyle } text={title} />
+    return (
+        <TouchableOpacity
+            onPress={onPress}
+            style={style}>
+            {props.children}
+            {title != null ? <Textview textStyle={textStyle} text={title} /> : null}
         </TouchableOpacity>
     );
 }

@@ -1,14 +1,14 @@
 import React from 'react';
-import {StatusBar} from 'react-native';
+import { StatusBar, Platform } from 'react-native';
 
 export const Statusbar = (props) => {
     const {
         backgroundColor,
-        barStyle
     } = props;
     return (
-        <StatusBar 
+        <StatusBar
+            animated={true}
             backgroundColor={backgroundColor ? backgroundColor : '#0080ff'}
-            barStyle={barStyle ? barStyle : 'light-content'}/>
+            barStyle={Platform.OS === 'ios' ? 'dark-content' : 'light-content'} />
     )
 }
