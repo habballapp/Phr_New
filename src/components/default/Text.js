@@ -8,7 +8,7 @@ export const Textview = (props) => {
     } = props;
 
     return (
-        <Text style={[styles.defaulttextstyle, textStyle]}>{ text }</Text>
+        <Text style={[styles.defaulttextstyle, textStyle]}>{ text }{props.children}</Text>
     )
 }
 
