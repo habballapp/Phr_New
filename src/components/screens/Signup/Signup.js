@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { SafeViewArea, Scrollview, KeyboardAvoidView, Container } from "../../default";
 import Swiper from 'react-native-swiper'
-import { FormOne, FormTwo } from "./SignupFormOne";
+import { FormOne, FormTwo } from "./SignupForm";
 import { SignupHeader } from "./SignupHeader";
 import { SignupButtons } from "./SignupButtonContainer";
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 
 export default class Signup extends Component {
 
@@ -107,7 +107,11 @@ export default class Signup extends Component {
     onBackHandler = () => {
         if (this.state.swiperIndex == 1) {
             this.setState({ swiperIndex: 0 })
-            this.refs.swiper.scrollView.setPage(0)
+            if (Platform.OS === 'android') {
+                this.refs.swiper.scrollView.setPage(0)
+            }else {
+                this.refs.swiper.scrollBy(0)
+            }
         } else {
             this.props.navigation.pop()
         }
@@ -120,7 +124,7 @@ export default class Signup extends Component {
                     <KeyboardAvoidView>
                         <SignupHeader />
                         <Swiper style={styles.swipeWrapper}
-                            scrollEnabled={false}
+                            scrollEnabled={true}
                             dot={<Container></Container>}
                             activeDot={<Container></Container>}
                             ref='swiper'
@@ -134,7 +138,11 @@ export default class Signup extends Component {
                             <FormTwo
                                 firstNameChangeHandler={(firstName) => this.handleUpdateInput('firstName', firstName)}
                                 lastNameChangeHandler={(lastName) => this.handleUpdateInput('lastName', lastName)}
-                                agreementValue={this.state.agreementState} />
+                                agreementValue={this.state.agreementState}
+                                onCheckHandler={(value) => {
+                                    this.setState({agreementState: value})
+                                    console.log('Switch 1 is: ' + value)
+                                 }} />
                         </Swiper>
                         <SignupButtons
                             swiperIndex={this.state.swiperIndex}

@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Input, Textview } from "../../default";
-import { CheckBox, StyleSheet } from 'react-native';
+import { CheckBox, StyleSheet, Platform, Switch } from 'react-native';
 import { EMAIL_PLACEHOLDER, PASSWORD_PLACEHOLDER, CONFIRM_PASS_PLACEHOLDER, FIRST_NAME, LAST_NAME, TERMS_AND_CONDITIONS } from "../../../res/strings";
 
 export const FormOne = (props) => {
@@ -9,6 +9,7 @@ export const FormOne = (props) => {
         <Container ContainerStyle={styles.formContainer}>
             <Input
                 placeholder={EMAIL_PLACEHOLDER}
+                placeholderTextColor='rgba(0,0,0,0.7)'
                 keyboardType="email-address"
                 returnKeyType={"next"}
                 blurOnSubmit={true}
@@ -16,6 +17,7 @@ export const FormOne = (props) => {
                 onChangeText={emailChangeHandler} />
             <Input
                 placeholder={PASSWORD_PLACEHOLDER}
+                placeholderTextColor='rgba(0,0,0,0.7)'
                 secureTextEntry={true}
                 returnKeyType={"next"}
                 inputStyle={styles.input}
@@ -23,6 +25,7 @@ export const FormOne = (props) => {
                 onChangeText={passwordChangeHandler} />
             <Input
                 placeholder={CONFIRM_PASS_PLACEHOLDER}
+                placeholderTextColor='rgba(0,0,0,0.7)'
                 secureTextEntry={true}
                 returnKeyType={"next"}
                 inputStyle={styles.input}
@@ -38,18 +41,24 @@ export const FormTwo = (props) => {
         <Container ContainerStyle={styles.formContainer}>
             <Input
                 placeholder={FIRST_NAME}
+                placeholderTextColor='rgba(0,0,0,0.7)'
                 returnKeyType={"next"}
                 blurOnSubmit={true}
                 inputStyle={styles.input}
                 onChangeText={firstNameChangeHandler} />
             <Input
                 placeholder={LAST_NAME}
+                placeholderTextColor='rgba(0,0,0,0.7)'
                 returnKeyType={"next"}
                 inputStyle={styles.input}
                 blurOnSubmit={true}
                 onChangeText={lastNameChangeHandler} />
             <Container ContainerStyle={styles.agreementsContainer}>
-                <CheckBox onValueChange={(val) => console.log('state', val)} />
+                { Platform.OS === 'android' ? (
+                        <CheckBox onValueChange={(val) => console.log('state', val)} />
+                    ) : (
+                        <Switch onValueChange = {onCheckHandler} value={agreementValue}/>
+                    ) }
                 <Textview text={TERMS_AND_CONDITIONS} textStyle={styles.termsConditionText} />
             </Container>
         </Container>
