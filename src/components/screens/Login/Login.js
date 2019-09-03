@@ -6,12 +6,12 @@ import {
     Statusbar,
     Scrollview,
     Textview,
-    SafeViewArea
+    SafeViewArea,
+    KeyboardAvoidView
 } from '../../default';
-import { KeyboardAvoidingView } from "react-native";
 import { Logintag } from './LoginTag';
 import { styles } from './login_styles';
-import Home from '../Home/Home'
+import { SIGNUP_TEXT } from "../../../res/strings";
 import firebase from 'react-native-firebase';
 
 var validateEmail = '';
@@ -26,17 +26,12 @@ export default class Login extends Component {
             password: '',
             isLoading: false,
             error: false,
-            companyCode: '',
         }
-        
-    }    
-
-    onLoginPressed(){
-        this.props.navigation.navigate("HomeScreen");
+        this.onLoginPressed = this.onLoginPressed.bind(this)
     }
 
-    componentDidMount() {
-        console.log('firbase', firebase)
+    onLoginPressed() {
+        this.props.navigation.navigate("HomeScreen");
     }
 
     handleEmailChange(event) {
@@ -45,23 +40,25 @@ export default class Login extends Component {
         })
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,15})+$/;
         if (reg.test(event) === false && event != '') {
-            validateEmail = <Textview textStyle={styles.invalidInputStyles}>Please enter valid email</Textview>;
+            validateEmail = <Textview textStyle={styles.invalidInputStyles} text="Please enter valid email" />;
             return false;
         }
         else {
             validateEmail = <Container></Container>;
         }
     }
+
     handlePassChange(event) {
         this.setState({
             password: event
         })
         if (event != '' && event.length < 8) {
-            validatePass = <Textview textStyle={styles.invalidInputStyles}>Password is not valid</Textview>;
+            validatePass = <Textview textStyle={styles.invalidInputStyles} text="Password is not valid" />;
         } else {
             validatePass = <Container></Container>;
         }
     }
+
     componentWillMount() {
         validateEmail = '';
         validatePass = '';
@@ -69,10 +66,10 @@ export default class Login extends Component {
 
     render() {
         return (
-            <SafeViewArea style={{flex: 1}}>
-                <Statusbar barStyle='dark-content'/>
+            <SafeViewArea style={{ flex: 1 }}>
+                <Statusbar />
                 <Scrollview contentContainerStyle={styles.scrollViewStyles} >
-                    <KeyboardAvoidingView behavior="position">
+                    <KeyboardAvoidView>
                         <Logintag />
                         <Container ContainerStyle={styles.lineStyle} />
                         <Container ContainerStyle={styles.formContainer}>
@@ -100,10 +97,11 @@ export default class Login extends Component {
                             {
                                 validatePass ? validatePass : <Container></Container>
                             }
-                            <Button onPress={()=>{this.onLoginPressed.bind(this)}} title="Login" style={styles.loginButtonStyles} textStyle={styles.loginButtonText}/>
-                            <Button onPress={()=>{}} title="FORGET PASSWORD?" style={styles.forgetPasswordButton} textStyle={styles.forgetPasswordStyle}/>
+                            <Button onPress={this.onLoginPressed} title="Login" style={styles.loginButtonStyles} textStyle={styles.loginButtonText} />
+                            <Button onPress={() => { }} title="FORGET PASSWORD?" style={styles.forgetPasswordButton} textStyle={styles.forgetPasswordStyle} />
+                            <Button onPress={() => this.props.navigation.push('SignUp')} title={SIGNUP_TEXT} style={styles.signup} textStyle={styles.forgetPasswordStyle} />
                         </Container>
-                    </KeyboardAvoidingView>
+                    </KeyboardAvoidView>
                 </Scrollview>
             </SafeViewArea>
         );

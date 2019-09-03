@@ -1,28 +1,32 @@
-export const styles = {
-    scrollViewStyles: { 
-        backgroundColor:'#fff',
-        flexGrow: 1, 
+import { StyleSheet } from 'react-native'
+
+export const styles = StyleSheet.create({
+    scrollViewStyles: {
+        backgroundColor: '#fff',
+        flexGrow: 1,
         justifyContent: 'center'
     },
-    formContainer:{
-        flex:1,
+    formContainer: {
+        flex: 1,
         marginTop: 10,
-        paddingLeft: 30,
+        marginLeft: 30,
+        marginRight: 30,
+        alignItems: 'center',
     },
     input: {
-		fontSize: 20,
-		color: '#000',
-		borderBottomWidth: 1,
-		borderBottomColor: '#000',
-        width: '90%',
+        fontSize: 20,
+        color: '#000',
+        borderBottomWidth: 1,
+        borderBottomColor: '#000',
+        width: '100%',
         paddingLeft: 10,
         paddingRight: 10,
-        marginTop: 30,
+        marginTop: 20,
     },
     loginButtonStyles: {
         marginTop: 30,
-        marginRight: 30,
-        borderRadius: 20,
+        width: '100%',
+        borderRadius: 15,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#0080ff',
@@ -30,29 +34,29 @@ export const styles = {
     },
     loginButtonText: {
         fontWeight: 'bold',
-		color: 'white',
-		fontSize: 24
+        color: 'white',
+        fontSize: 22
     },
     lineStyle: {
         borderBottomColor: '#0080ff',
         borderBottomWidth: 3,
         width: 70,
-        marginLeft: 50,
+        marginLeft: 30,
+        marginTop: 10
     },
     forgetPasswordButton: {
-        width: 200,
-        alignSelf: 'center',
-        marginTop: 30,
-        marginRight: 30,
+        marginTop: 20,
     },
     forgetPasswordStyle: {
-        alignSelf:'center',
-        fontSize:16, 
-        color:'red'
+        fontSize: 16,
+        color: 'red'
+    },
+    signup: {
+        marginTop: 20,
     },
     invalidInputStyles: {
         marginTop: 5,
-        alignSelf: 'center', 
-        color: 'red' 
+        alignSelf: 'center',
+        color: 'red'
     }
-}
+})
