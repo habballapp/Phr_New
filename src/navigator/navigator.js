@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { createAppContainer } from 'react-navigation';
-import { createRootNavigator } from '../router';
+import { createRootNavigator } from '../router/router';
 import AsyncStorage from '@react-native-community/async-storage';
 import SplashScreen from 'react-native-splash-screen';
 import { FIRST_EVER_APP_START } from "../constants/StorageConstans";
