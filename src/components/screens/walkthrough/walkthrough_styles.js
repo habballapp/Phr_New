@@ -42,7 +42,7 @@ export const styles = {
       
     },
     sliderPageTitleStyle:{
-      padding: 10,
+      paddingLeft:15, paddingRight:15, paddingBottom:10,
       fontSize:30, 
       color:'#0080ff',
       textAlign:'center'
@@ -50,7 +50,7 @@ export const styles = {
     sliderPageDescriptionStyle:{
       fontSize:17, 
       color:'#808080',
-      padding:25,
+      paddingLeft:30, paddingRight:30,
       textAlign:'center', 
       marginBottom:20
     },
@@ -59,7 +59,7 @@ export const styles = {
       marginTop:70
     },
     sliderImageStyle: {
-      height:250,
+      height:270,
       width:250, 
       alignSelf:'center'
     },

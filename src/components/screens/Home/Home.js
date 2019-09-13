@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Container, Textview, Statusbar} from '../../default';
-import {Platform} from 'react-native';
-import {Header, Button, Icon, Title} from 'native-base';
+import { Container, Textview, Statusbar, Button} from '../../default';
+import {Platform, ImageBackground,Image, View} from 'react-native';
+import {Header,  Icon, Title} from 'native-base';
+import {Button as NavButton} from 'native-base';
 
 
 export default class Home extends Component {
@@ -13,6 +14,10 @@ export default class Home extends Component {
         return {drawerLabel, drawerIcon};
     }
 
+    onDoctorPress(){
+        this.props.navigation.navigate("DoctorScreen");
+    }
+
     render(){
         return(
             <Container>
@@ -21,16 +26,24 @@ export default class Home extends Component {
                         backgroundColor={'#0080ff'}
                         barStyle='light-content'
                     />
-                    <Button transparent style={{position:'absolute', left:0}} onPress={this.props.navigation.openDrawer}>
+                    <NavButton transparent style={{position:'absolute', left:0}} onPress={this.props.navigation.openDrawer}>
                         <Icon name= {Platform.OS == 'ios' ? "ios-menu" : "md-menu"} />
-                    </Button>
-
+                    </NavButton>
                     <Title style={styles.titleStyles}>Home</Title>
-                
                 </Header>
-                <Container>
-                    <Textview>HOME SCREEN</Textview>
+                <Container style={{flex:1}}>
+                <ImageBackground
+                    style={{alignSelf:'stretch',width:'100%',height:'100%'}}
+                    source={require('../../../assets/backgroundImage4.jpg')}>
+                        <Container ContainerStyle={{flexDirection:'row', height:70, width:350, alignSelf:'center', position:'absolute', bottom:150}}>
+                            <Button style={{backgroundColor:'blue',borderRadius:50, height:70,width:70, marginRight:20}} onPress={()=>{this.onDoctorPress()}}/>
+                            <Button style={{backgroundColor:'green',borderRadius:50, height:70,width:70, marginRight:20}} onPress={()=>{}}/>
+                            <Button style={{backgroundColor:'orange',borderRadius:50, height:70,width:70}} onPress={()=>{}}/>
+                            <Button style={{backgroundColor:'red',borderRadius:50, height:70,width:70,marginLeft:20}} onPress={()=>{}}/>
+                        </Container>
+                </ImageBackground> 
                 </Container>
+                
             </Container>
         )
     }

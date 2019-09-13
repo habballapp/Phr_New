@@ -2,6 +2,7 @@ import { createStackNavigator, createSwitchNavigator, createDrawerNavigator, Dra
 import Walkthrough from './components/screens/walkthrough/Walkthrough';
 import Login from './components/screens/Login/Login';
 import Home from './components/screens/Home/Home';
+import Doctors from './components/screens/Doctor/Doctors';
 import {View, Text, TouchableOpacity, Dimensions} from 'react-native'
 import React from 'react';
 
@@ -58,12 +59,16 @@ export const createRootNavigator = (signedIn) => {
       },
       HomeScreen: {
         screen: Drawer,
+      },
+      DoctorScreen:{
+        screen: Doctors
       }
     },
     {
       initialRouteName: signedIn === 'GOTOWALK' ? "Walkthrough" : signedIn === 'GOTOLOGIN' ? "Login" : "null"
     }
   )
+  
 }
 
 const styles = {

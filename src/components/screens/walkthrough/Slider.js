@@ -23,7 +23,7 @@ const DescriptionPages = (props) => {
                 <ImageView imageStyle={styles.sliderImageStyle} resizeMode='cover' imgSource={imageSource} />
                 <Container ContainerStyle={{padding:15}} ></Container>                   
                 <Container ContainerStyle={{flexDirection:'row'}}>
-                    <Container ContainerStyle={{alignItems:'center', flex:1}}>
+                    <Container ContainerStyle={{alignItems:'center', flex:1, paddingLeft:10, paddingRight:10}}>
                         <Textview textStyle={styles.sliderPageTitleStyle} text={title} />  
                         {/* FIND BEST DOCTORS SMALL TEXT PARAGRAPH... */}
                         <Textview textStyle={styles.sliderPageDescriptionStyle} text={des}/>  

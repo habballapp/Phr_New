@@ -1,0 +1,22 @@
+[
+    {
+        "id": 0,
+        "name": "Dr. Ahmed",
+        "type": "Physician"
+    },
+    {
+        "id": 1,
+        "name": "Dr. Ali",
+        "type": "Physician"
+    },
+    {
+        "id": 2,
+        "name": "Dr. Haris",
+        "type": "Physician"
+    },
+    {
+        "id": 3,
+        "name": "Dr. Junaid",
+        "type": "Physician"
+    }
+]

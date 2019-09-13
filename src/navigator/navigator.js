@@ -4,6 +4,9 @@ import { createRootNavigator } from '../router';
 import AsyncStorage from '@react-native-community/async-storage';
 import SplashScreen from 'react-native-splash-screen';
 import { FIRST_EVER_APP_START } from "../constants/StorageConstans";
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducers from '../reducers';
 
 class App extends Component {
 	state = { firstTime: true, loading: true }
@@ -28,7 +31,11 @@ class App extends Component {
 		}
 		else if (this.state.firstTime == false) {
 			const Layout = createAppContainer(createRootNavigator('GOTOLOGIN'));
-			return <Layout />
+			return (
+				<Provider store={createStore(reducers)}>
+					<Layout />
+				</Provider>
+			)
 		}
 	}
 }

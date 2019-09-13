@@ -41,7 +41,7 @@ export default class Walkthrough extends Component {
     },
     { 
       title: 'Track your Appointments', 
-      des: 'You can track The appointments history which you scheduled from any specific doctor.',
+      des: 'You can track the appointments history which you scheduled from any specific doctor.',
       imageSource: require('../../../assets/schedule_history.png'),
       lastPageKey: false
     },
