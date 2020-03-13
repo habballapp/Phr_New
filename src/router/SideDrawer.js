@@ -1,15 +1,23 @@
 import React from 'react';
 import { View, Text, Dimensions } from 'react-native'
 import { DrawerItems } from "react-navigation";
+import AppLogo from "../assets/logo.png";
+import {Container,ImageView, Textview} from "../components/default"
+
 
 const { width } = Dimensions.get('window');
 
 const CustomHeaderContentComponent = (props) => {
     return (
         <View>
-            <View style={styles.headerContainerStyle}>
-                <Text style={styles.headerUserTextStyle}>Welcome, User</Text>
-            </View>
+            <Container ContainerStyle={{justifyContent:'center',alignSelf:'center', padding:20, marginTop:15}}>
+                        <ImageView
+                            resizeMode="center"
+                            imageStyle={styles.appLogo}
+                            imgSource={AppLogo}
+                        />
+                        <Textview textStyle={{fontSize:26, color:'black', fontWeight:'bold',alignSelf:'center'}} text="XYZ Urgent Care"/>
+            </Container>
             <DrawerItems {...props} />
         </View>
     )
@@ -26,7 +34,12 @@ const styles = {
     headerContainerStyle: {
         height: 120,
         backgroundColor: '#0080ff'
-    }
+    },
+    appLogo: {
+        height: 100,
+        width: 100,
+        alignSelf:'center'
+    },
 }
 
 export const DrawerNavigationConfig = {

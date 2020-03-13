@@ -1,10 +1,15 @@
 import React, { Component } from "react";
-import { SafeViewArea, Scrollview, KeyboardAvoidView, Container } from "../../default";
+import { SafeViewArea, Scrollview, Statusbar, Container } from "../../default";
 import Swiper from 'react-native-swiper'
 import { FormOne, FormTwo } from "./SignupForm";
 import { SignupHeader } from "./SignupHeader";
 import { SignupButtons } from "./SignupButtonContainer";
 import { StyleSheet, Platform } from 'react-native'
+import firebase from "react-native-firebase";
+import AsyncStorage from '@react-native-community/async-storage'
+import { LOGIN_CHECK } from '../../../constants/StorageConstans';
+
+var user = firebase.auth().currentUser;
 
 export default class Signup extends Component {
 
@@ -102,6 +107,23 @@ export default class Signup extends Component {
             this.setState({ swiperIndex: 1 })
             this.refs.swiper.scrollBy(1)
         }
+        else if (this.state.swiperIndex == 1){
+            firebase.auth().createUserWithEmailAndPassword(email.value,password.value)
+                .then( (user) => {
+                    console.log("asdnaskdnaskd", user);
+                    let userID = firebase.auth().currentUser.uid;
+                    firebase.database().ref('users/').child('patients').child(userID).set({
+                    firstname: this.state.controls.firstName.value,
+                    lastname: this.state.controls.lastName.value,
+                    patientId: userID
+                });
+                    AsyncStorage.setItem(LOGIN_CHECK, 'true').then(() => {
+                        this.props.navigation.navigate('HomeScreen')
+                    });
+                })
+                .catch(console.log("fb promise"));
+            }
+        
     }
 
     onBackHandler = () => {
@@ -120,8 +142,8 @@ export default class Signup extends Component {
     render() {
         return (
             <SafeViewArea style={{ flex: 1 }}>
-                <Scrollview contentContainerStyle={styles.scrollViewStyles} keyboardShouldPersistTaps="true">
-                    <KeyboardAvoidView>
+                <Statusbar barStyle="dark-content"/>
+                <Scrollview keyboardShouldPersistTaps="true">
                         <SignupHeader />
                         <Swiper style={styles.swipeWrapper}
                             scrollEnabled={true}
@@ -147,8 +169,7 @@ export default class Signup extends Component {
                         <SignupButtons
                             swiperIndex={this.state.swiperIndex}
                             continueSignup={this.continueSignupHandler}
-                            goBack={this.onBackHandler} />
-                    </KeyboardAvoidView>
+                            goBack={this.onBackHandler}/>
                 </Scrollview>
             </SafeViewArea>
         )

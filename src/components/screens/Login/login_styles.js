@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     },
     formContainer: {
         flex: 1,
-        marginTop: 10,
+        marginTop: 20,
         marginLeft: 30,
         marginRight: 30,
         alignItems: 'center',
@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
         marginTop: 20,
     },
     loginButtonStyles: {
-        marginTop: 30,
+        marginTop: 50,
         width: '100%',
         borderRadius: 15,
         justifyContent: 'center',
@@ -48,11 +48,18 @@ export const styles = StyleSheet.create({
         marginTop: 20,
     },
     forgetPasswordStyle: {
-        fontSize: 16,
-        color: 'red'
+        marginTop:10,
+        fontSize: 18,
+        color: 'red',
+        fontWeight:'bold',
     },
     signup: {
         marginTop: 20,
+    },
+    signuphere:{
+        fontSize: 18,
+        color: '#0080ff',
+        fontWeight:'bold',
     },
     invalidInputStyles: {
         marginTop: 5,

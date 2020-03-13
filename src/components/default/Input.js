@@ -11,7 +11,8 @@ export const Input = (props) => {
         onChangeText,
         secureTextEntry,
         inputStyle,
-        editable
+        editable,
+        dense
     } = props;
 
     return(
@@ -24,6 +25,7 @@ export const Input = (props) => {
         blurOnSubmit = {blurOnSubmit}
         onChangeText = {onChangeText}
         secureTextEntry = {secureTextEntry}
-        editable = {editable}/>
+        editable = {editable}
+        dense={dense}/>
     );
 }

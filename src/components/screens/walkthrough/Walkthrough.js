@@ -11,7 +11,7 @@ import Slider from "./Slider";
 import {ActiveDot} from './ActiveDot';
 import {InActiveDot} from './InActiveDot';
 import {styles} from './walkthrough_styles';
-import { FIRST_EVER_APP_START } from "../../../constants/StorageConstans";
+import { FIRST_EVER_APP_START, LOGIN_CHECK } from "../../../constants/StorageConstans";
 // import console = require('console');
 
 export default class Walkthrough extends Component {
@@ -59,7 +59,7 @@ export default class Walkthrough extends Component {
 
   swipeEnd(){
     AsyncStorage.setItem(FIRST_EVER_APP_START, 'true').then(() => {
-      this.props.navigation.navigate('Login');
+      this.props.navigation.navigate('HomeScreen');
     });
   }
 

@@ -16,7 +16,7 @@ export const SignupHeader = () => (
 const styles = {
     appLogo: {
         alignSelf: 'center',
-        marginTop: 20,
+        marginTop: 120,
         width: 100,
         height: 100
     },

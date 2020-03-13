@@ -7,12 +7,14 @@ import {
     Scrollview,
     Textview,
     SafeViewArea,
-    KeyboardAvoidView
 } from '../../default';
 import { Logintag } from './LoginTag';
 import { styles } from './login_styles';
 import { SIGNUP_TEXT } from "../../../res/strings";
 import firebase from 'react-native-firebase';
+import { LOGIN_CHECK } from '../../../constants/StorageConstans';
+import AsyncStorage from '@react-native-community/async-storage'
+import { Alert } from 'react-native';
 
 var validateEmail = '';
 var validatePass = '';
@@ -31,7 +33,18 @@ export default class Login extends Component {
     }
 
     onLoginPressed() {
-        this.props.navigation.navigate("HomeScreen");
+        if(this.state.email!='' && this.state.password!=''){
+        firebase.auth().signInWithEmailAndPassword(this.state.email,this.state.password)
+            .then(()=>{
+                AsyncStorage.setItem(LOGIN_CHECK, 'true').then(() => {
+                    this.props.navigation.goBack();
+                  });      
+            })
+            .catch((error)=>{
+                Alert.alert("Error while logging in.")
+                console.log("error...", error);
+            })
+        }
     }
 
     handleEmailChange(event) {
@@ -67,41 +80,39 @@ export default class Login extends Component {
     render() {
         return (
             <SafeViewArea style={{ flex: 1 }}>
-                <Statusbar />
-                <Scrollview contentContainerStyle={styles.scrollViewStyles} >
-                    <KeyboardAvoidView>
-                        <Logintag />
-                        <Container ContainerStyle={styles.lineStyle} />
-                        <Container ContainerStyle={styles.formContainer}>
-                            <Input
-                                placeholder="Email"
-                                placeholderTextColor="#000"
-                                keyboardType="email-address"
-                                returnKeyType={"next"}
-                                blurOnSubmit={true}
-                                inputStyle={styles.input}
-                                onChangeText={(event) => this.handleEmailChange(event)}
-                            />
-                            {
-                                validateEmail ? validateEmail : <Container></Container>
-                            }
-                            <Input
-                                placeholder="Password"
-                                placeholderTextColor="#000"
-                                secureTextEntry={true}
-                                returnKeyType={"next"}
-                                inputStyle={styles.input}
-                                blurOnSubmit={true}
-                                onChangeText={(event) => this.handlePassChange(event)}
-                            />
-                            {
-                                validatePass ? validatePass : <Container></Container>
-                            }
-                            <Button onPress={this.onLoginPressed} title="Login" style={styles.loginButtonStyles} textStyle={styles.loginButtonText} />
-                            <Button onPress={() => { }} title="FORGET PASSWORD?" style={styles.forgetPasswordButton} textStyle={styles.forgetPasswordStyle} />
-                            <Button onPress={() => this.props.navigation.push('SignUp')} title={SIGNUP_TEXT} style={styles.signup} textStyle={styles.forgetPasswordStyle} />
-                        </Container>
-                    </KeyboardAvoidView>
+                <Statusbar barStyle="dark-content"/>
+                <Scrollview >
+                    <Logintag />
+                    <Container ContainerStyle={styles.lineStyle} />
+                    <Container ContainerStyle={styles.formContainer}>
+                        <Input
+                            placeholder="Email"
+                            placeholderTextColor="#000"
+                            keyboardType="email-address"
+                            returnKeyType={"next"}
+                            blurOnSubmit={true}
+                            inputStyle={styles.input}
+                            onChangeText={(event) => this.handleEmailChange(event)}
+                        />
+                        {
+                            validateEmail ? validateEmail : <Container></Container>
+                        }
+                        <Input
+                            placeholder="Password"
+                            placeholderTextColor="#000"
+                            secureTextEntry={true}
+                            returnKeyType={"next"}
+                            inputStyle={styles.input}
+                            blurOnSubmit={true}
+                            onChangeText={(event) => this.handlePassChange(event)}
+                        />
+                        {
+                            validatePass ? validatePass : <Container></Container>
+                        }
+                        <Button onPress={this.onLoginPressed} title="Login" style={styles.loginButtonStyles} textStyle={styles.loginButtonText} />
+                        <Button onPress={() => { }} title="FORGET PASSWORD?" style={styles.forgetPasswordButton} textStyle={styles.forgetPasswordStyle} />
+                        <Button onPress={() => this.props.navigation.push('SignUp')} title={SIGNUP_TEXT} style={styles.signup} textStyle={styles.signuphere} />
+                    </Container>
                 </Scrollview>
             </SafeViewArea>
         );

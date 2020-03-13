@@ -8,4 +8,5 @@ export * from './Image';
 export * from './SafeAreaView';
 export * from './KeyboardAvoidingView';
 export * from './Icon';
+export * from './checkbox';
 //export * from './HeaderComponent';

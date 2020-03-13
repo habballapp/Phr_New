@@ -13,6 +13,26 @@ target 'medproject' do
     # Pods for testing
     pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+    pod 'react-native-checkbox', :path => '../node_modules/@react-native-community/checkbox'
+
+    pod 'react-native-maps', :path => '../node_modules/react-native-maps'
+
+    pod 'RNDateTimePicker', :path => '../node_modules/@react-native-community/datetimepicker'
+
+    pod 'react-native-sms', :path => '../node_modules/react-native-sms'
+
+    pod 'react-native-camera', :path => '../node_modules/react-native-camera'
+
+    pod 'RNFS', :path => '../node_modules/react-native-fs'
+
+    pod 'react-native-document-picker', :path => '../node_modules/react-native-document-picker'
+
+    pod 'RNAudio', :path => '../node_modules/react-native-audio'
+
+    pod 'RNSound', :path => '../node_modules/react-native-sound'
+
+    pod 'RNAudioRecord', :path => '../node_modules/react-native-audio-record'
+
   end
 
   target 'medprojectTests' do

@@ -5,7 +5,8 @@ export const ImageView = (props) => {
     const {
         imageStyle,
         imgSource,
-        resizeMode
+        resizeMode,
+        onLoadEnd
     } = props;
-    return( <Image style={imageStyle} source={imgSource} resizeMode={resizeMode} /> )
+    return( <Image style={imageStyle} source={imgSource} resizeMode={resizeMode} onLoadEnd={onLoadEnd} /> )
 }

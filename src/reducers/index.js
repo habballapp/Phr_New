@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import DoctorsReducer from './DoctorsReducer';
+import getDataReducer from './getDataReducer'
+import userLocationReducer from "./getLocationReducer";
 
 export default combineReducers({
-    doctors: DoctorsReducer
+    data: getDataReducer,
+    userLocation: userLocationReducer
 })
