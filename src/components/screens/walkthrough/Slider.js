@@ -36,21 +36,21 @@ const LastPage = () => {
     return(
         <Container ContainerStyle={{flexDirection:'column', flexGrow:1, justifyContent:'center', alignItems:'center'}}>
                 <Button
-                    style={{borderRadius: 5,backgroundColor: '#0080ff', height:45, width:270, alignItems:'center', flexDirection:'row'}} 
+                    style={{borderRadius: 5,backgroundColor: '#EA2626', height:45, width:270, alignItems:'center', flexDirection:'row'}} 
                     textStyle={{fontSize:18, color:'white',marginLeft:15}} 
                     title="Register with Facebook">
                     <FontAwesomeIcon name = 'facebook' size={25} style={{marginLeft:12, color:'#fff'}} />
                 </Button>
                 <Container ContainerStyle={{padding:7}}></Container>
                 <Button 
-                    style={{borderRadius: 5,backgroundColor: '#0080ff', height:45, width:270, alignItems:'center', flexDirection:'row'}} 
+                    style={{borderRadius: 5,backgroundColor: '#EA2626', height:45, width:270, alignItems:'center', flexDirection:'row'}} 
                     textStyle={{fontSize:18, color:'white',marginLeft:15}} 
                     title="Register with Google">
                     <FontAwesomeIcon name = 'google' size={25} style={{marginLeft:12, color:'#fff'}} />
                 </Button>
                 <Container ContainerStyle={{padding:7}}></Container>                
                 <Button
-                    style={{borderRadius: 5,backgroundColor: '#0080ff', height:45, width:270, alignItems:'center', flexDirection:'row'}} 
+                    style={{borderRadius: 5,backgroundColor: '#EA2626', height:45, width:270, alignItems:'center', flexDirection:'row'}} 
                     textStyle={{fontSize:18, color:'white',marginLeft:15}}  
                     title="Register with Email">
                     <FontAwesomeIcon name = 'envelope' size={25} style={{marginLeft:12, color:'#fff'}} />

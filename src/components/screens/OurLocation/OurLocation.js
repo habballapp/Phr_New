@@ -16,7 +16,7 @@ export default class OurLocation extends Component{
     static navigationOptions = ({navigation}) => {
         let drawerLabel = 'Our Location';
         let drawerIcon= (                            
-            <MaterialCommunityIcons name="map-marker" size={20} color="blue"/>    
+            <MaterialCommunityIcons name="map-marker" size={20} color="red"/>    
         )
         return {drawerLabel, drawerIcon};
     }

@@ -59,7 +59,7 @@ export default class AppointmentHistory extends Component{
                             data={this.state.appointments}
                             extraData={this.state}
                             renderItem={({item,index})=>(
-                                <Container ContainerStyle={{padding:20,alignItems:'center',alignSelf:'center',marginBottom:20,height:160,backgroundColor:'rgba(0,128,255, 0.7)',width:'90%',borderRadius:10,flexDirection:'row'}}>
+                                <Container ContainerStyle={{padding:20,alignItems:'center',alignSelf:'center',marginBottom:20,height:160,backgroundColor:'#EA2626',width:'90%',borderRadius:10,flexDirection:'row'}}>
                                     <MaterialCommunityIcons name="calendar-clock" size={100} color="white"/>
                                     <Container ContainerStyle={{marginLeft:25,width:'60%'}}>
                                         <Textview textStyle={{fontSize:20,color:'white'}} text={item.appointment_subject}/>
@@ -78,5 +78,5 @@ export default class AppointmentHistory extends Component{
     }
 }
 const styles = {
-    titleStyles: {fontWeight: 'bold',fontSize:26, alignSelf:'center', flex:1,color:'#0080ff'},
+    titleStyles: {fontWeight: 'bold',fontSize:26, alignSelf:'center', flex:1,color:'#EA2626'},
 }

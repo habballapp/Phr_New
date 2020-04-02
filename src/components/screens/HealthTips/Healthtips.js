@@ -20,14 +20,17 @@ export default class HealthTips extends Component{
             imagesSlider:[
                 require('./tip01.jpg'),
                 require('./tip02.jpg'),
-                require('./tip03.jpg')
+                require('./tip03.jpg'),
+                require('./tip04.png') 
+                
+           
             ]
         }
     }
     static navigationOptions = ({navigation}) => {
         let drawerLabel = 'Health Tips';
         let drawerIcon= (                            
-            <MaterialCommunityIcons name="lightbulb-on-outline" size={20} color="blue"/> 
+            <MaterialCommunityIcons name="lightbulb-on-outline" size={20} color="red"/> 
         )
         return {drawerLabel, drawerIcon};
     }
@@ -66,6 +69,10 @@ export default class HealthTips extends Component{
                                 <ImageView imageStyle={{width:'100%',height:400}} imgSource={require('./tip03.jpg')}/>
                             </Container>
 
+                            { <Container ContainerStyle={{flex:1, backgroundColor:'white', alignItems:'center',width:'100%'}}>
+                                <ImageView imageStyle={{width:'100%',height:400}} imgSource={require('./tip04.png')}/>
+                            </Container> }
+
                         </Swiper>
                     </Container>
                 </Container>
@@ -98,5 +105,5 @@ const styles = StyleSheet.create({
       fontSize: 30,
       fontWeight: 'bold',
     },
-    titleStyles: {fontWeight: 'bold',fontSize:26, alignSelf:'center', flex:1,color:'#0080ff'},
+    titleStyles: {fontWeight: 'bold',fontSize:26, alignSelf:'center', flex:1,color:'#EA2626'},
   })

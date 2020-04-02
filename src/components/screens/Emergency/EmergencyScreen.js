@@ -201,7 +201,7 @@ export default class EmergencyScreen extends Component{
                                 <Icon name="md-add" style={{fontSize:22,alignSelf:'center',marginRight:5}}/>
                             </Button>
                         </Container>
-                        <Button onPress={()=>{this.onMessageSendPressed()}} textStyle={{fontWeight: 'bold',color: 'white',fontSize: 22}} title="Send" style={{marginTop: 30,width: '100%',borderRadius: 15,justifyContent: 'center',alignItems: 'center',backgroundColor: '#0080ff',height: 50}}/>
+                        <Button onPress={()=>{this.onMessageSendPressed()}} textStyle={{fontWeight: 'bold',color: 'white',fontSize: 22}} title="Send" style={{marginTop: 30,width: '100%',borderRadius: 15,justifyContent: 'center',alignItems: 'center',backgroundColor: '#EA2626',height: 50}}/>
                     
                         <Modal
                             isVisible={this.state.isModalVisible}
@@ -276,7 +276,7 @@ const styles = {
         borderRadius: 15,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#0080ff',
+        backgroundColor: '#EA2626',
         height: 40,
         marginRight:10,
         marginBottom:10

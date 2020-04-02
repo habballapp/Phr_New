@@ -44,7 +44,7 @@ export const styles = {
     sliderPageTitleStyle:{
       paddingLeft:15, paddingRight:15, paddingBottom:10,
       fontSize:30, 
-      color:'#0080ff',
+      color:'#EA2626',
       textAlign:'center'
     },
     sliderPageDescriptionStyle:{

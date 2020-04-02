@@ -36,13 +36,19 @@ class BookAppointment extends Component{
     static navigationOptions = ({navigation}) => {
         let drawerLabel = 'Book Appointment';
         let drawerIcon= (                            
-            <MaterialCommunityIcons name="calendar-clock" size={20} color="blue"/>
+            <MaterialCommunityIcons name="calendar-clock" size={20} color="red"/>
         )
         return {drawerLabel, drawerIcon};
     }
-    onDateChange(date) {
+    onDateChange() {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        today = dd + '/' + mm + '/' + yyyy;
+        console.log("time.. ", this.state.today)
         this.setState({
-          selectedDate: date,
+          selectedDate: today,
         });
       }
     onDonePressed(){
@@ -85,7 +91,7 @@ class BookAppointment extends Component{
                             barStyle='dark-content'
                         />
                         <TouchableOpacity onPress={() => {this.props.navigation.openDrawer(); } }>
-                            <FontAwesome name="bars" size={20} style={{padding: 10, marginLeft:10}} color="#0080ff" />
+                            <FontAwesome name="bars" size={20} style={{padding: 10, marginLeft:10}} color="#EA2626" />
                         </TouchableOpacity>
                         <Title style={styles.titleStyles}>Book Appointment</Title>
                     </Header>
@@ -93,7 +99,7 @@ class BookAppointment extends Component{
                 <Container ContainerStyle={{borderColor:'#707070', borderWidth:0.5,width:'90%',alignSelf:'center', marginTop:20}}>
                     <RNPickerSelect
                         placeholder={{
-                            label: 'Select Appointment Subject:',
+                            label: 'Select Issue Type:',
                             value: null,
                         }}
                         onValueChange={(value) => this.setState({appointmentSubject:value})}
@@ -106,6 +112,7 @@ class BookAppointment extends Component{
                             { label: 'Bronchitis', value: 'Bronchitis' },
                             { label: 'Burns from heat or chemical exposure', value: 'Burns from heat or chemical exposure' },
                             { label: 'Congestion', value: 'Congestion' },
+                            { label: 'Corona Symptoms', value: 'Corona Symptoms' },
                             { label: 'Cough', value: 'Cough' },
                             { label: 'Diaper rash', value: 'Diaper rash' },
                             { label: 'Ear infection', value: 'Ear infection' },
@@ -170,7 +177,7 @@ const styles = StyleSheet.create({
         width: 200,
         alignSelf:'center'
     },
-    titleStyles: {fontWeight: 'bold',fontSize:26, alignSelf:'center', flex:1,color:'#0080ff',},
+    titleStyles: {fontWeight: 'bold',fontSize:26, alignSelf:'center', flex:1,color:'#EA2626',},
     loginButtonStyles: {
         marginTop: 30,
         width: '90%',
@@ -178,7 +185,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#0080ff',
+        backgroundColor: '#EA2626',
         height: 50
     },
     loginButtonText: {

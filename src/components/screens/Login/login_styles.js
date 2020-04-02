@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
         borderRadius: 15,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#0080ff',
+        backgroundColor: '#EA2626',
         height: 50
     },
     loginButtonText: {
@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
         fontSize: 22
     },
     lineStyle: {
-        borderBottomColor: '#0080ff',
+        borderBottomColor: '#EA2626',
         borderBottomWidth: 3,
         width: 70,
         marginLeft: 30,

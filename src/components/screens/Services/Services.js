@@ -42,13 +42,13 @@ export default class Services extends Component{
     static navigationOptions = ({navigation}) => {
         let drawerLabel = 'Our Services';
         let drawerIcon= (                            
-            <FontAwesome name="handshake-o" size={20} color="blue"/>
+            <FontAwesome name="handshake-o" size={20} color="red"/>
         )
         return {drawerLabel, drawerIcon};
     }
     _head(item){
         return(
-            <Container ContainerStyle={{borderRadius:10,height:50,backgroundColor:'rgba(0,128,255, 0.7)',marginBottom:2,justifyContent:'center'}}>
+            <Container ContainerStyle={{borderRadius:10,height:50,backgroundColor:'#EA2626',marginBottom:2,justifyContent:'center'}}>
               <Text style={styles.title}>{item.title}</Text>
             </Container>
         );
@@ -108,6 +108,6 @@ const styles = {
         color:'grey',
         paddingTop:10
     },
-    titleStyles: {fontWeight: 'bold',fontSize:26, alignSelf:'center', flex:1,color:'#0080ff'},
+    titleStyles: {fontWeight: 'bold',fontSize:26, alignSelf:'center', flex:1,color:'#EA2626'},
 
 }

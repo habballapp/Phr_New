@@ -8,7 +8,7 @@ export default class AboutUs extends Component{
     static navigationOptions = ({navigation}) => {
         let drawerLabel = 'About Us';
         let drawerIcon= (                            
-            <MaterialCommunityIcons name="information-outline" size={20} color="blue"/>
+            <MaterialCommunityIcons name="information-outline" size={20} color="red"/>
         )
         return {drawerLabel, drawerIcon};
     }
@@ -23,7 +23,7 @@ export default class AboutUs extends Component{
                         />
                         <Textview textStyle={{fontSize:30, color:'black', fontWeight:'bold',alignSelf:'center'}} text="About Us"/>
                 </Container>
-                <Container ContainerStyle={{width:'85%',height:'70%',backgroundColor:'rgba(0,128,255, 0.7)',alignSelf:'center',padding:20,borderRadius:15,marginBottom:20}}>
+                <Container ContainerStyle={{width:'85%',height:'70%',backgroundColor:'#EA2626',alignSelf:'center',padding:20,borderRadius:15,marginBottom:20}}>
                     
                     <ScrollView 
                     showsVerticalScrollIndicator={false}>

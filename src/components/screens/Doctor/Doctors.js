@@ -262,7 +262,7 @@ class Doctors extends Component{
 export default Doctors;
 
 const styles = {
-    titleStyles: {fontWeight: 'bold',fontSize:26, alignSelf:'center', flex:1,color:'#0080ff'},
+    titleStyles: {fontWeight: 'bold',fontSize:26, alignSelf:'center', flex:1,color:'#EA2626'},
     container: {
     },
     map: {

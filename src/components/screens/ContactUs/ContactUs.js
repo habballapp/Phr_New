@@ -6,7 +6,7 @@ export default class ContactUs extends Component{
     static navigationOptions = ({navigation}) => {
         let drawerLabel = 'Contact Us';
         let drawerIcon= (                            
-            <FontAwesome name="phone" size={20} color="blue"/>
+            <FontAwesome name="phone" size={20} color="red"/>
             )
         return {drawerLabel, drawerIcon};
     }

@@ -32,7 +32,7 @@ const styles = {
         marginLeft: 5,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(0,128,255, 0.7)',
+        backgroundColor: '#EA2626',
         height: 50,
     },
     backStyles: {

@@ -442,7 +442,7 @@ export default class ChatScreen extends Component {
     }
     render() {   
         return (
-            this.state.loading ? <ActivityIndicator size="large" color="#0000ff" style={{flex:1,alignSelf:'center'}} /> :
+            this.state.loading ? <ActivityIndicator size="large" color="#EA2626" style={{flex:1,alignSelf:'center'}} /> :
                 this.state.cameraOpen ? 
                     <Container ContainerStyle={{flex:1}}>
                         <RNCamera
@@ -499,10 +499,10 @@ export default class ChatScreen extends Component {
                                     inputStyle={{flex:1,marginRight:20}} 
                                     onChangeText={(event) => {this.onMessageChange(event)}} />
                                 <Button style={{marginRight:10}} onPress={()=>this.attachFile()}>
-                                    <Icon name="md-attach" color= {"#0080ff"} size={30}/>
+                                    <Icon name="md-attach" color= {"#EA2626"} size={30}/>
                                 </Button> 
                                 <Button style={{marginRight:10}} onPress={()=>this.renderCamera()}>
-                                    <Icon name="md-camera" color= {"#0080ff"} size={30}/>
+                                    <Icon name="md-camera" color= {"#EA2626"} size={30}/>
                                 </Button>      
                             </Container>
                             {this.state.send_message === '' ?  
@@ -512,12 +512,12 @@ export default class ChatScreen extends Component {
                                 </TouchableOpacity>
                             </Container> :
                             <Button style={{marginRight:10}} onPress={this.onSendMessage}>
-                                <Icon name="md-send" color="#0080ff" size={30}/>
+                                <Icon name="md-send" color="#EA2626" size={30}/>
                             </Button>}
                         </Container>
                         <Modal
                             isVisible={this.state.voiceRecorderOpen}
-                            style={{justifyContent: 'flex-end',}}
+                            style={{justifyContent: 'flex-end'}}
                             transparent={true}
                             animationIn="fadeInLeftBig"
                             animationOut="fadeInRightBig"

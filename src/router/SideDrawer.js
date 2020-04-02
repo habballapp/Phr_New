@@ -18,7 +18,7 @@ const CustomHeaderContentComponent = (props) => {
                         />
                         <Textview textStyle={{fontSize:26, color:'black', fontWeight:'bold',alignSelf:'center'}} text="XYZ Urgent Care"/>
             </Container>
-            <DrawerItems {...props} />
+            <DrawerItems {...props} activeTintColor='#EA2626' />
         </View>
     )
 }

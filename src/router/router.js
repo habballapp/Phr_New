@@ -106,9 +106,10 @@ class Hidden extends React.Component {
 const Drawer = createDrawerNavigator({
   "Home": {
     screen: ApplicationStackScreen,
+    
     navigationOptions:{
       drawerIcon: ({ tintColor }) => (
-        <Icon name={Platform.OS == 'ios' ? "ios-home" : "md-home"} style={{ color:'blue' }} size={20}/>
+        <Icon name={Platform.OS == 'ios' ? "ios-home" : "md-home"} style={{ color:'#EA2626' }} size={20}/>
       )
     }
   },

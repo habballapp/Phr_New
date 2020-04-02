@@ -30,7 +30,7 @@ class Home extends Component {
     static navigationOptions = ({navigation}) => {
         let drawerLabel = 'Home';
         let drawerIcon= (
-            <Icon name={Platform.OS == 'ios' ? "ios-home" : "md-home"} style={{ color:'blue' }} size={20}/>
+            <Icon name={Platform.OS == 'ios' ? "ios-home" : "md-home"} style={{ color:'red' }} size={20}/>
         )
         let Header = null
         return {drawerLabel, drawerIcon, Header};
@@ -215,7 +215,7 @@ class Home extends Component {
 
     render(){
         return(
-            this.state.loading ? <ActivityIndicator size="large" color="#0000ff" style={{flex:1,alignSelf:'center'}} /> :
+            this.state.loading ? <ActivityIndicator size="large" color="#EA2626" style={{flex:1,alignSelf:'center'}} /> :
             <Container ContainerStyle={{flex:1, backgroundColor:'#fff'}}>
                 <Header style={{flexDirection:'row',alignItems:'center',backgroundColor:'#fff',height:70}}>
                     <Statusbar 
@@ -224,12 +224,12 @@ class Home extends Component {
                         barStyle='dark-content'
                     />
                     <TouchableOpacity onPress={() => {this.props.navigation.openDrawer(); } }>
-                        <FontAwesome name="bars" style={{padding: 10, marginLeft:10}} size={22} color="#0080ff"/>
+                        <FontAwesome name="bars" style={{padding: 10, marginLeft:10}} size={22} color="#EA2626"/>
                     </TouchableOpacity>
                     <Title style={styles.titleStyles}>Home</Title>
                     <Menu
                         ref={this.setMenuRef}
-                        button={<Icon name='ios-more' size={35} color="#0080ff" onPress={this.showMenu}/>}
+                        button={<Icon name='ios-more' size={35} color="#EA2626" onPress={this.showMenu}/>}
                         >
                         <MenuItem onPress={this.hideMenu}>Sign out</MenuItem>
                     </Menu>
@@ -245,35 +245,35 @@ class Home extends Component {
                     </Container>
                     
                     <Container ContainerStyle={{alignSelf:'center', justifyContent:'center', flexDirection:'row' ,marginTop:20,}}>
-                        <Button textStyle={styles.loginButtonText} title="Book an Appointment" style={{marginRight:10,borderRadius:10,borderWidth:1.5, borderColor:'black',backgroundColor:'rgba(0,128,255, 0.7)', height:100,width:100, alignSelf:'center', marginBottom:20, justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onDoctorPress()}}>
+                        <Button textStyle={styles.loginButtonText} title="Book an Appointment" style={{marginRight:10,borderRadius:10,borderWidth:1.5, borderColor:'black',backgroundColor:'#EA2626', height:100,width:100, alignSelf:'center', marginBottom:20, justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onDoctorPress()}}>
                             <MaterialCommunityIcons name="calendar-clock" size={32} color="white"/>
                         </Button>
-                        <Button textStyle={styles.loginButtonText} title="Our Services" style={{marginRight:10,borderWidth:1.5,borderRadius:10, borderColor:'black',backgroundColor:'rgba(0,128,255, 0.7)',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onServicesPressed()}}>
+                        <Button textStyle={styles.loginButtonText} title="Our Services" style={{marginRight:10,borderWidth:1.5,borderRadius:10, borderColor:'black',backgroundColor:'#EA2626',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onServicesPressed()}}>
                             <FontAwesome name="handshake-o" size={32} color="white"/>
                         </Button>
-                        <Button textStyle={styles.loginButtonText} title="View Health Tips" style={{borderWidth:1.5,borderRadius:10, borderColor:'black', backgroundColor:'rgba(0,128,255, 0.7)',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onHealthTipsPressed()}}>
+                        <Button textStyle={styles.loginButtonText} title="View Health Tips" style={{borderWidth:1.5,borderRadius:10, borderColor:'black', backgroundColor:'#EA2626',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onHealthTipsPressed()}}>
                             <MaterialCommunityIcons name="lightbulb-on-outline" size={32} color="white"/>    
                         </Button>                        
                     </Container>
                     <Container ContainerStyle={{alignSelf:'center', justifyContent:'center', flexDirection:'row' ,marginTop:10,}}>
-                        <Button textStyle={styles.loginButtonText} title="About Us" style={{marginRight:10,borderRadius:10,borderWidth:1.5, borderColor:'black',backgroundColor:'rgba(0,128,255, 0.7)', height:100,width:100, alignSelf:'center', marginBottom:20, justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onAboutUsPressed()}}>
+                        <Button textStyle={styles.loginButtonText} title="About Us" style={{marginRight:10,borderRadius:10,borderWidth:1.5, borderColor:'black',backgroundColor:'#EA2626', height:100,width:100, alignSelf:'center', marginBottom:20, justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onAboutUsPressed()}}>
                             <MaterialCommunityIcons name="information-outline" size={32} color="white"/>
                         </Button>
-                        <Button textStyle={styles.loginButtonText} title="Our Location" style={{marginRight:10,borderWidth:1.5,borderRadius:10, borderColor:'black',backgroundColor:'rgba(0,128,255, 0.7)',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onOurLocationPressed()}}>
+                        <Button textStyle={styles.loginButtonText} title="Our Location" style={{marginRight:10,borderWidth:1.5,borderRadius:10, borderColor:'black',backgroundColor:'#EA2626',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onOurLocationPressed()}}>
                             <MaterialCommunityIcons name="map-marker" size={32} color="white"/>    
                         </Button>
-                        <Button textStyle={styles.loginButtonText} title="Contact Us" style={{borderWidth:1.5,borderRadius:10, borderColor:'black', backgroundColor:'rgba(0,128,255, 0.7)',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{}}>
+                        <Button textStyle={styles.loginButtonText} title="Contact Us" style={{borderWidth:1.5,borderRadius:10, borderColor:'black', backgroundColor:'#EA2626',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{}}>
                             <FontAwesome name="phone" size={32} color="white"/>
                         </Button>                        
                     </Container>
                     <Container ContainerStyle={{alignSelf:'center', justifyContent:'center', flexDirection:'row' ,marginTop:10,}}>
-                        <Button title="Appointment History" textStyle={styles.loginButtonText} style={{borderWidth:1.5,borderRadius:10, borderColor:'black', backgroundColor:'rgba(0,128,255, 0.7)',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center',marginRight:10}} onPress={()=>{this.onAppointmentHistoryPressed()}}>
+                        <Button title="Appointment History" textStyle={styles.loginButtonText} style={{borderWidth:1.5,borderRadius:10, borderColor:'black', backgroundColor:'#EA2626',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center',marginRight:10}} onPress={()=>{this.onAppointmentHistoryPressed()}}>
                             <MaterialCommunityIcons name="clock-outline" size={32} color="white"/>
                         </Button> 
-                        <Button textStyle={styles.loginButtonText} title="EMERGENCY CALL" style={{borderWidth:1.5,borderRadius:10, borderColor:'black', backgroundColor:'#F08080',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center',marginRight:10}} onPress={()=>{this.onEmergencyPressed()}}>
+                        <Button textStyle={styles.loginButtonText} title="EMERGENCY CALL" style={{borderWidth:1.5,borderRadius:10, borderColor:'black', backgroundColor:'#EA2626',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center',marginRight:10}} onPress={()=>{this.onEmergencyPressed()}}>
                             <MaterialCommunityIcons name="phone-plus" size={32} color="white"/>
                         </Button>
-                        <Button title="Chat" textStyle={styles.loginButtonText} style={{borderWidth:1.5,borderRadius:10, borderColor:'black', backgroundColor:'rgba(0,128,255, 0.7)',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{this.chatmenu()}}>
+                        <Button title="Chat" textStyle={styles.loginButtonText} style={{borderWidth:1.5,borderRadius:10, borderColor:'black', backgroundColor:'#EA2626',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{this.chatmenu()}}>
                             <Icon name="md-chatboxes" size={32} color="white"/>
                         </Button> 
                     </Container>
@@ -293,7 +293,7 @@ const mapActionToProps = {
 export default connect(mapStateToProps,mapActionToProps)(Home)
 
 const styles = {
-    titleStyles: {fontWeight: 'bold',fontSize:26, alignSelf:'center', flex:1,color:'#0080ff'},
+    titleStyles: {fontWeight: 'bold',fontSize:26, alignSelf:'center', flex:1,color:'#EA2626'},
     loginButtonText: {
         fontWeight: 'bold',
         color: 'white',
