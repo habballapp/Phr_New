@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Textview, Statusbar, Button, ImageView} from '../../default';
+import { Container, Textview, Statusbar, Button, ImageView,Input} from '../../default';
 import {Platform,ActivityIndicator,Alert,TouchableOpacity,PermissionsAndroid} from 'react-native';
 import {Header, Title, } from 'native-base';
 import { connect } from 'react-redux';
@@ -13,6 +13,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import { LOGIN_CHECK } from '../../../constants/StorageConstans';
 import AppLogo from "../../../assets/logo.png";
 import PushController from './PushController';
+import Modal from "react-native-modal";
 // this.props.navigation.getParam('urgent_care_data')
 var emergency_numbers = [];
 var flag_emergency=0;
@@ -24,6 +25,8 @@ class Home extends Component {
             loading:false,
             urgentcares:'',
             numbers: [],
+            isModalVisible: false,
+            
             urgent_care_data:this.props.navigation.getParam('urgent_care_data')
         }
     }
@@ -100,18 +103,18 @@ class Home extends Component {
     // }
 
     componentDidMount(){
-        PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
-            {
-                title: 'Record Audio permission',
-                message:
-                'Urgent care app needs access to your microphone ' +
-                'so you can record audio.',
-                buttonNeutral: 'Ask Me Later',
-                buttonNegative: 'Cancel',
-                buttonPositive: 'OK',
-            },
-        );
+        // PermissionsAndroid.request(
+        //     PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
+        //     {
+        //         title: 'Record Audio permission',
+        //         message:
+        //         'Urgent care app needs access to your microphone ' +
+        //         'so you can record audio.',
+        //         buttonNeutral: 'Ask Me Later',
+        //         buttonNegative: 'Cancel',
+        //         buttonPositive: 'OK',
+        //     },
+        // );
         AsyncStorage.getItem(LOGIN_CHECK).then((val)=>{
             if(val!=null){
                 let userID = firebase.auth().currentUser.uid; 
@@ -160,6 +163,24 @@ class Home extends Component {
         }
     }
 
+    onSavePressed(){
+        
+        this.props.navigation.navigate("LoginStackScreen")
+        this.setState({isModalVisible:false})
+        
+    }
+
+    onCancelPressed(){
+
+     //   this.props.navigation.navigate("SignUp");
+
+        this.props.navigation.navigate("SignUp",{'urgentcareName':this.state.urgent_care_data.first_name})
+
+     
+        this.setState({ isModalVisible: false });
+    }
+
+    
     onDoctorPress(){
         console.log("urgent care state..", this.state.urgentcares)
         AsyncStorage.getItem(LOGIN_CHECK).then((value) => {
@@ -167,12 +188,16 @@ class Home extends Component {
 				this.props.navigation.navigate("BookAppointmentScreen",{'urgentcareID':this.state.urgent_care_data.key})
             }
             else{
-                this.props.navigation.navigate("LoginStackScreen")
+               
+              this.setState({ isModalVisible: true });
+
+             
             }
 		});
     }
     onHealthTipsPressed(){
-        this.props.navigation.navigate("HealthTips")
+        // this.props.navigation.navigate("HealthTips")
+        this.props.navigation.navigate("HealthTips",{'urgentcareID':this.state.urgent_care_data.key})
     }
     onServicesPressed(){
         this.props.navigation.navigate("Services")
@@ -183,7 +208,7 @@ class Home extends Component {
 				this.props.navigation.navigate("Emergency",{'urgentcareID':this.state.urgent_care_data.key})
             }
             else{
-                this.props.navigation.navigate("LoginStackScreen")
+                this.setState({ isModalVisible: true });
             }
 		});
     }
@@ -193,7 +218,9 @@ class Home extends Component {
 				this.props.navigation.navigate("AppointmentHistory",{'urgentcareID':this.state.urgent_care_data.key})
             }
             else{
-                this.props.navigation.navigate("LoginStackScreen")
+             //   this.props.navigation.navigate("LoginStackScreen")
+            // this.PopUpPressed();
+            this.setState({ isModalVisible: true });
             }
 		});
     }
@@ -212,6 +239,13 @@ class Home extends Component {
     onOurLocationPressed(){
         this.props.navigation.navigate("OurLocation");
     }
+
+    toggleModal = () => {
+        this.setState({isModalVisible: !this.state.isModalVisible});
+      };
+
+    
+   
 
     render(){
         return(
@@ -248,13 +282,40 @@ class Home extends Component {
                         <Button textStyle={styles.loginButtonText} title="Book an Appointment" style={{marginRight:10,borderRadius:10,borderWidth:1.5, borderColor:'black',backgroundColor:'#EA2626', height:100,width:100, alignSelf:'center', marginBottom:20, justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onDoctorPress()}}>
                             <MaterialCommunityIcons name="calendar-clock" size={32} color="white"/>
                         </Button>
-                        <Button textStyle={styles.loginButtonText} title="Our Services" style={{marginRight:10,borderWidth:1.5,borderRadius:10, borderColor:'black',backgroundColor:'#EA2626',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onServicesPressed()}}>
+                        <Button textStyle={styles.loginButtonText} title="Our Services" style={{marginRight:10,borderWidth:1.5,borderRadius:10, borderColor:'black',backgroundColor:'#EA2626',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{ this.props.navigation.navigate("LoginStackScreen")}}>
                             <FontAwesome name="handshake-o" size={32} color="white"/>
                         </Button>
                         <Button textStyle={styles.loginButtonText} title="View Health Tips" style={{borderWidth:1.5,borderRadius:10, borderColor:'black', backgroundColor:'#EA2626',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onHealthTipsPressed()}}>
                             <MaterialCommunityIcons name="lightbulb-on-outline" size={32} color="white"/>    
                         </Button>                        
                     </Container>
+
+                    <Modal
+                            isVisible={this.state.isModalVisible}
+                            style={{justifyContent: 'flex-end',}}
+                            animationIn="slideInUp"
+                            animationOut="slideOutDown"
+                            animationInTiming={1000}
+                            animationOutTiming={1000}
+                            backdropTransitionInTiming={800}
+                            backdropTransitionOutTiming={800}    
+                            >
+                            <Container ContainerStyle={{ backgroundColor: '#fff', padding: 20,height: 300, borderRadius:15 }}>
+
+                                <Textview styles={{alignSelf:'center'}}>
+                                    Please Sign IN or Sign Up First
+                                </Textview>
+                               
+                               
+                            <Container ContainerStyle={{flexDirection:'column', alignSelf:'center', alignItems:'center'}}>
+                                <Button title="Sign In" style={styles.ModalButton} textStyle={styles.ModalButtonText} onPress={()=>{this.onSavePressed()}} />
+                                <Button title="Sign Up" style={styles.ModalButton} textStyle={styles.ModalButtonText} onPress={()=>{this.onCancelPressed()}} />
+                            </Container>
+                            </Container>
+                        </Modal>
+                    
+
+                    
                     <Container ContainerStyle={{alignSelf:'center', justifyContent:'center', flexDirection:'row' ,marginTop:10,}}>
                         <Button textStyle={styles.loginButtonText} title="About Us" style={{marginRight:10,borderRadius:10,borderWidth:1.5, borderColor:'black',backgroundColor:'#EA2626', height:100,width:100, alignSelf:'center', marginBottom:20, justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onAboutUsPressed()}}>
                             <MaterialCommunityIcons name="information-outline" size={32} color="white"/>
@@ -305,5 +366,49 @@ const styles = {
         height: 100,
         width: 100,
         alignSelf:'center'
+    },
+    input: {
+        fontSize: 18,
+        color: '#000',
+        width: '100%',
+        paddingLeft: 10,
+        paddingRight: 10,
+        height:150,
+        alignSelf:'flex-start',
+        textAlignVertical: 'top'
+    },
+    titleStyles: {
+        fontSize:22, 
+        marginLeft:20,
+        alignSelf:'center'
+    },
+    inputModal:{
+        borderRadius:10,
+        marginBottom:15,
+        marginTop:15,
+        borderWidth: 1,
+        borderColor: '#000',
+        fontSize: 18,
+        color: '#000',
+        width: '100%',
+        paddingLeft: 10,
+        paddingRight: 10,
+        height:60,
+    },
+    ModalButton: {
+        marginTop: 30,
+        width: 90,
+        borderRadius: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#EA2626',
+        height: 40,
+        marginRight:10,
+        marginBottom:10
+    },
+    ModalButtonText: {
+        fontWeight: 'bold',
+        color: 'white',
+        fontSize: 18
     },
 }

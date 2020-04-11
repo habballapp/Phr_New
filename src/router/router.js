@@ -94,7 +94,13 @@ const ApplicationStackScreen = createStackNavigator({
     screen: AppointmentHistory,
     navigationOptions: NonHeaderProps
 
+  },
+  SignUp:{
+    screen: Signup,
+    navigationOptions: NonHeaderProps
+
   }
+
 })
 
 class Hidden extends React.Component {

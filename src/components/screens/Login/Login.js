@@ -34,11 +34,12 @@ export default class Login extends Component {
 
     onLoginPressed() {
         if(this.state.email!='' && this.state.password!=''){
-        firebase.auth().signInWithEmailAndPassword(this.state.email,this.state.password)
+            firebase.auth().signInWithEmailAndPassword(this.state.email,this.state.password)
             .then(()=>{
-                AsyncStorage.setItem(LOGIN_CHECK, 'true').then(() => {
-                    this.props.navigation.goBack();
-                  });      
+                this.onCheckStatuts();
+                // AsyncStorage.setItem(LOGIN_CHECK, 'true').then(() => {
+                //     this.props.navigation.goBack();
+                //   });      
             })
             .catch((error)=>{
                 Alert.alert("Error while logging in.")
@@ -46,6 +47,32 @@ export default class Login extends Component {
             })
         }
     }
+
+    onCheckStatuts(){
+              
+        console.log("Check Status");
+
+        let userID = firebase.auth().currentUser.uid;
+        var dbref = firebase.database().ref(`users/patients/${userID}/`);
+        dbref.on("value", (snapshot)=>{
+            // snapshot.forEach((data)=>{
+                console.log("pending_data", snapshot);
+                console.log("pending_data", snapshot._value);
+                 if(snapshot._value.status == 'pending') {
+                    Alert.alert("Your account is not Approved by the Admin yet.");
+                    console.log("pending", "status is pending");
+                } else {
+                    AsyncStorage.setItem(LOGIN_CHECK, 'true').then(() => {
+                        this.props.navigation.goBack();
+                    });      
+                }
+            // })  
+        })
+    }
+               
+           
+        
+    
 
     handleEmailChange(event) {
         this.setState({

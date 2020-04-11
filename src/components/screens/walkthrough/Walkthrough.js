@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {
   Text,
   TouchableOpacity,
+  PermissionsAndroid
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage'
 import {Statusbar, Container} from '../../default';

@@ -3,19 +3,25 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  Platform
+  Platform,
+  FlatList
 } from 'react-native';
 import {Header, Title, Icon} from 'native-base';
 import {Button as NavButton} from 'native-base';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import firebase from 'react-native-firebase';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {Statusbar, Container, Textview, ImageView} from '../../default';
 import Swiper from 'react-native-swiper'
+
+var arr_images = [];
+var s = [];
 
 export default class HealthTips extends Component{
     constructor(props){
         super(props);
         this.state={
+            urgentcareID: this.props.navigation.getParam('urgentcareID'), 
             swiperIndex: 0,
             imagesSlider:[
                 require('./tip01.jpg'),
@@ -24,7 +30,8 @@ export default class HealthTips extends Component{
                 require('./tip04.png') 
                 
            
-            ]
+            ],
+            images: []
         }
     }
     static navigationOptions = ({navigation}) => {
@@ -33,6 +40,23 @@ export default class HealthTips extends Component{
             <MaterialCommunityIcons name="lightbulb-on-outline" size={20} color="red"/> 
         )
         return {drawerLabel, drawerIcon};
+    }
+
+    componentDidMount(){
+        this.takeAppointments();
+    }
+
+    takeAppointments(){
+        let userID = firebase.auth().currentUser.uid;
+        var dbref = firebase.database().ref(`users/urgentcare/${this.state.urgentcareID}/splashImages/`);
+        dbref.on("value", (snapshot)=>{
+            arr_images = snapshot._value;
+            console.log("arr_images", arr_images);
+            this.setState({images: arr_images}, ()=>{
+                arr_images = [];
+                console.log("arr_images123", this.state.images);
+            })                        
+        })
     }
    
     render(){
@@ -59,7 +83,15 @@ export default class HealthTips extends Component{
                             autoplayTimeout={5}
                             activeDot={<Container></Container>}
                             >
-                            <Container ContainerStyle={{flex:1, backgroundColor:'white', alignItems:'center',width:'100%'}}>
+                            {
+                                this.state.images.map && this.state.images.map( (item, i) =>  (
+                                    <Container ContainerStyle={{flex:1, backgroundColor:'white', alignItems:'center',width:'100%'}}>
+                                        <ImageView imageStyle={{width:'100%',height:400}} imgSource={ { uri: item.URL } }/>
+                                    </Container>
+                                    )
+                                )
+                            }
+                            {/* <Container ContainerStyle={{flex:1, backgroundColor:'white', alignItems:'center',width:'100%'}}>
                                 <ImageView imageStyle={{width:'100%',height:400}} imgSource={require('./tip01.jpg')}/>
                             </Container>
                             <Container ContainerStyle={{flex:1, backgroundColor:'white', alignItems:'center',width:'100%'}}>
@@ -71,7 +103,7 @@ export default class HealthTips extends Component{
 
                             { <Container ContainerStyle={{flex:1, backgroundColor:'white', alignItems:'center',width:'100%'}}>
                                 <ImageView imageStyle={{width:'100%',height:400}} imgSource={require('./tip04.png')}/>
-                            </Container> }
+                            </Container> } */}
 
                         </Swiper>
                     </Container>

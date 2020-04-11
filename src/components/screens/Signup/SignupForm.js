@@ -1,7 +1,9 @@
 import React from "react";
 import { Container, Input, Textview } from "../../default";
-import { CheckBox, StyleSheet, Platform, Switch } from 'react-native';
-import { EMAIL_PLACEHOLDER, PASSWORD_PLACEHOLDER, CONFIRM_PASS_PLACEHOLDER, FIRST_NAME, LAST_NAME, TERMS_AND_CONDITIONS } from "../../../res/strings";
+import { CheckBox, StyleSheet, Platform, Switch, TouchableHighlightBase,TouchableOpacity } from 'react-native';
+import Modal from "react-native-modal";
+import { EMAIL_PLACEHOLDER, PASSWORD_PLACEHOLDER, CONFIRM_PASS_PLACEHOLDER, FIRST_NAME, LAST_NAME, TERMS_AND_CONDITIONS,SOCIAL_SECURITY_NO } from "../../../res/strings";
+import { View } from "native-base";
 
 export const FormOne = (props) => {
     const { emailChangeHandler, passwordChangeHandler, confirmPasswordHandler } = props;
@@ -35,17 +37,19 @@ export const FormOne = (props) => {
     )
 }
 
+
+
 export const FormTwo = (props) => {
-    const { firstNameChangeHandler, lastNameChangeHandler, agreementValue, onCheckHandler } = props;
+
+    this.state = {
+        isModalVisible: false, 
+    }
+
+    const { firstNameChangeHandler, lastNameChangeHandler, securityNoChangeHandler,agreementValue, onCheckHandler } = props;
     return (
         <Container ContainerStyle={styles.formContainer}>
-            <Input
-                placeholder={FIRST_NAME}
-                placeholderTextColor='rgba(0,0,0,0.7)'
-                returnKeyType={"next"}
-                blurOnSubmit={true}
-                inputStyle={styles.input}
-                onChangeText={firstNameChangeHandler} />
+
+            
             <Input
                 placeholder={LAST_NAME}
                 placeholderTextColor='rgba(0,0,0,0.7)'
@@ -53,15 +57,59 @@ export const FormTwo = (props) => {
                 inputStyle={styles.input}
                 blurOnSubmit={true}
                 onChangeText={lastNameChangeHandler} />
+            <Input
+                placeholder={FIRST_NAME}
+                placeholderTextColor='rgba(0,0,0,0.7)'
+                returnKeyType={"next"}
+                blurOnSubmit={true}
+                inputStyle={styles.input}
+                onChangeText={firstNameChangeHandler} />
+
+             <Input
+                placeholder={SOCIAL_SECURITY_NO }
+                placeholderTextColor='rgba(0,0,0,0.7)'
+                returnKeyType={"next"}
+                blurOnSubmit={true}
+                inputStyle={styles.input}
+                onChangeText={securityNoChangeHandler} />     
+
+   
             <Container ContainerStyle={styles.agreementsContainer}>
                 { Platform.OS === 'android' ? (
                         <CheckBox onValueChange={(val) => console.log('state', val)} />
                     ) : (
                         <Switch onValueChange = {onCheckHandler} value={agreementValue}/>
                     ) }
-                <Textview text={TERMS_AND_CONDITIONS} textStyle={styles.termsConditionText} />
+                       <Textview text={TERMS_AND_CONDITIONS} textStyle={styles.termsConditionText} /> 
+                   {/* <Modal
+                            isVisible={this.state.isModalVisible}
+                            style={{justifyContent: 'flex-end',}}
+                            animationIn="slideInUp"
+                            animationOut="slideOutDown"
+                            animationInTiming={1000}
+                            animationOutTiming={1000}
+                            backdropTransitionInTiming={800}
+                            backdropTransitionOutTiming={800}    
+                            >
+                            <Container ContainerStyle={{ backgroundColor: '#fff', padding: 20,height: 300, borderRadius:15 }}>
+                            <Container ContainerStyle={{flexDirection:'column', alignSelf:'center', alignItems:'center'}}>
+                          
+                            </Container>
+                            </Container>
+                        </Modal> */}
+
+                        
+                         
+
+                  
+                 
             </Container>
+
+           
         </Container>
+        
+            
+             
     )
 }
 
@@ -83,7 +131,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     agreementsContainer: {
-        marginTop: 30,
+        marginTop: 130,
         flexDirection: 'row',
         alignItems: 'center'
     },

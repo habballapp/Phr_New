@@ -11,12 +11,17 @@ import { LOGIN_CHECK } from '../../../constants/StorageConstans';
 
 var user = firebase.auth().currentUser;
 
+//var urgent_care_data = this.props.navigation.getParam('urgent_care_data');
+
 export default class Signup extends Component {
 
     constructor(props) {
         super(props);
         this.index = 0
+
         this.state = {
+            
+            urgentcareName: this.props.navigation.getParam('urgentcareName') ,
             swiperIndex: 0,
             agreementState: false,
             controls: {
@@ -54,7 +59,15 @@ export default class Signup extends Component {
                     validationRules: {
                         minLength: 3
                     }
+                },
+                securityNo: {
+                    value: "",
+                    valid: false,
+                    validationRules: {
+                        maxLength: 4
+                    }
                 }
+  
             }
         }
     }
@@ -92,6 +105,10 @@ export default class Signup extends Component {
             case 'lastName':
                 isValid = value.length >= 3;
                 break;
+
+            case 'securityNo':
+                isValid= value.maxLength === 4;
+
             default:
                 isValid = false;
         }
@@ -115,13 +132,18 @@ export default class Signup extends Component {
                     firebase.database().ref('users/').child('patients').child(userID).set({
                     firstname: this.state.controls.firstName.value,
                     lastname: this.state.controls.lastName.value,
-                    patientId: userID
+                    patientId: userID,
+                    status: 'pending',
+                    SSN:this.state.controls.securityNo.value,
+                    UName: this.state.urgentcareName
                 });
+
+
+                firebase.database().ref()
                     AsyncStorage.setItem(LOGIN_CHECK, 'true').then(() => {
                         this.props.navigation.navigate('HomeScreen')
                     });
-                })
-                .catch(console.log("fb promise"));
+                }).catch(console.log("fb promise"));
             }
         
     }
@@ -157,9 +179,11 @@ export default class Signup extends Component {
                                 emailChangeHandler={(email) => this.handleUpdateInput('email', email)}
                                 passwordChangeHandler={(password) => this.handleUpdateInput('password', password)}
                                 confirmPasswordHandler={(confirmPass) => this.handleUpdateInput('confirmPassword', confirmPass)} />
+                        
                             <FormTwo
                                 firstNameChangeHandler={(firstName) => this.handleUpdateInput('firstName', firstName)}
                                 lastNameChangeHandler={(lastName) => this.handleUpdateInput('lastName', lastName)}
+                                securityNoChangeHandler={(securityNo) => this.handleUpdateInput('securityNo', securityNo)}
                                 agreementValue={this.state.agreementState}
                                 onCheckHandler={(value) => {
                                     this.setState({agreementState: value})

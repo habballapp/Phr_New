@@ -80,6 +80,8 @@ class BookAppointment extends Component{
       timepicker = () => {
         this.show('time');
       }    
+
+
     render(){
         return(
             <ScrollView scrollEnabled={this.state.enableScrollViewScroll}>
