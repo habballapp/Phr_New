@@ -229,7 +229,7 @@ class Home extends Component {
 			if (value != null) {
                 this.props.navigation.navigate("Chat",{'urgentcareID':this.state.urgent_care_data.key})            }
             else{
-                this.props.navigation.navigate("LoginStackScreen")
+                this.setState({ isModalVisible: true });
             }
 		});
     }
@@ -258,7 +258,7 @@ class Home extends Component {
                         barStyle='dark-content'
                     />
                     <TouchableOpacity onPress={() => {this.props.navigation.openDrawer(); } }>
-                        <FontAwesome name="bars" style={{padding: 10, marginLeft:10}} size={22} color="#EA2626"/>
+                        <FontAwesome name="bars" style={{padding: 10, marginLeft:5}} size={22} color="#EA2626"/>
                     </TouchableOpacity>
                     <Title style={styles.titleStyles}>Home</Title>
                     <Menu
@@ -288,34 +288,7 @@ class Home extends Component {
                         <Button textStyle={styles.loginButtonText} title="View Health Tips" style={{borderWidth:1.5,borderRadius:10, borderColor:'black', backgroundColor:'#EA2626',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onHealthTipsPressed()}}>
                             <MaterialCommunityIcons name="lightbulb-on-outline" size={32} color="white"/>    
                         </Button>                        
-                    </Container>
-
-                    <Modal
-                            isVisible={this.state.isModalVisible}
-                            style={{justifyContent: 'flex-end',}}
-                            animationIn="slideInUp"
-                            animationOut="slideOutDown"
-                            animationInTiming={1000}
-                            animationOutTiming={1000}
-                            backdropTransitionInTiming={800}
-                            backdropTransitionOutTiming={800}    
-                            >
-                            <Container ContainerStyle={{ backgroundColor: '#fff', padding: 20,height: 300, borderRadius:15 }}>
-
-                                <Textview styles={{alignSelf:'center'}}>
-                                    Please Sign IN or Sign Up First
-                                </Textview>
-                               
-                               
-                            <Container ContainerStyle={{flexDirection:'column', alignSelf:'center', alignItems:'center'}}>
-                                <Button title="Sign In" style={styles.ModalButton} textStyle={styles.ModalButtonText} onPress={()=>{this.onSavePressed()}} />
-                                <Button title="Sign Up" style={styles.ModalButton} textStyle={styles.ModalButtonText} onPress={()=>{this.onCancelPressed()}} />
-                            </Container>
-                            </Container>
-                        </Modal>
-                    
-
-                    
+                    </Container>    
                     <Container ContainerStyle={{alignSelf:'center', justifyContent:'center', flexDirection:'row' ,marginTop:10,}}>
                         <Button textStyle={styles.loginButtonText} title="About Us" style={{marginRight:10,borderRadius:10,borderWidth:1.5, borderColor:'black',backgroundColor:'#EA2626', height:100,width:100, alignSelf:'center', marginBottom:20, justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onAboutUsPressed()}}>
                             <MaterialCommunityIcons name="information-outline" size={32} color="white"/>
@@ -338,8 +311,34 @@ class Home extends Component {
                             <Icon name="md-chatboxes" size={32} color="white"/>
                         </Button> 
                     </Container>
+
+                   
                 </Container>
                 <PushController/> 
+
+                <Modal
+                            isVisible={this.state.isModalVisible}
+                            style={{justifyContent: 'flex-end',}}
+                            animationIn="slideInUp"
+                            animationOut="slideOutDown"
+                            animationInTiming={1000}
+                            animationOutTiming={1000}
+                            backdropTransitionInTiming={800}
+                            backdropTransitionOutTiming={800}    
+                            >
+                            <Container ContainerStyle={{ backgroundColor: '#fff', padding: 20,height: 300, borderRadius:15 }}>
+
+                                <Textview styles={{alignSelf:'center'}}>
+                                    Please Sign IN or Sign Up First
+                                </Textview>
+                               
+                               
+                            <Container ContainerStyle={{flexDirection:'column', alignSelf:'center', alignItems:'center'}}>
+                                <Button title="Sign In" style={styles.ModalButton} textStyle={styles.ModalButtonText} onPress={()=>{this.onSavePressed()}} />
+                                <Button title="Sign Up" style={styles.ModalButton} textStyle={styles.ModalButtonText} onPress={()=>{this.onCancelPressed()}} />
+                            </Container>
+                            </Container>
+                        </Modal>
             </Container>
         )
     }

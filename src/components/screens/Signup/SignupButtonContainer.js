@@ -24,6 +24,7 @@ const styles = {
     buttonContainer: {
         marginLeft: 30,
         marginRight: 30,
+        marginTop:50,
         flexDirection: 'row',
     },
     signupNext: {

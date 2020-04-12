@@ -47,7 +47,7 @@ export default class HealthTips extends Component{
     }
 
     takeAppointments(){
-        let userID = firebase.auth().currentUser.uid;
+       // let userID = firebase.auth().currentUser.uid;
         var dbref = firebase.database().ref(`users/urgentcare/${this.state.urgentcareID}/splashImages/`);
         dbref.on("value", (snapshot)=>{
             arr_images = snapshot._value;

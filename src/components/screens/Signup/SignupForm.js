@@ -41,12 +41,12 @@ export const FormOne = (props) => {
 
 export const FormTwo = (props) => {
 
-    this.state = {
-        isModalVisible: false, 
-    }
+   
 
     const { firstNameChangeHandler, lastNameChangeHandler, securityNoChangeHandler,agreementValue, onCheckHandler } = props;
     return (
+
+        <Container  ContainerStyle={styles.formContainer}>
         <Container ContainerStyle={styles.formContainer}>
 
             
@@ -72,42 +72,21 @@ export const FormTwo = (props) => {
                 blurOnSubmit={true}
                 inputStyle={styles.input}
                 onChangeText={securityNoChangeHandler} />     
+               
+               </Container>
 
-   
-            <Container ContainerStyle={styles.agreementsContainer}>
-                { Platform.OS === 'android' ? (
-                        <CheckBox onValueChange={(val) => console.log('state', val)} />
-                    ) : (
-                        <Switch onValueChange = {onCheckHandler} value={agreementValue}/>
-                    ) }
-                       <Textview text={TERMS_AND_CONDITIONS} textStyle={styles.termsConditionText} /> 
-                   {/* <Modal
-                            isVisible={this.state.isModalVisible}
-                            style={{justifyContent: 'flex-end',}}
-                            animationIn="slideInUp"
-                            animationOut="slideOutDown"
-                            animationInTiming={1000}
-                            animationOutTiming={1000}
-                            backdropTransitionInTiming={800}
-                            backdropTransitionOutTiming={800}    
-                            >
-                            <Container ContainerStyle={{ backgroundColor: '#fff', padding: 20,height: 300, borderRadius:15 }}>
-                            <Container ContainerStyle={{flexDirection:'column', alignSelf:'center', alignItems:'center'}}>
-                          
-                            </Container>
-                            </Container>
-                        </Modal> */}
+                    <Container ContainerStyle={styles.agreementsContainer}>
+                    { Platform.OS === 'android' ? (
+                            <CheckBox onValueChange={(val) => console.log('state', val)} />
+                        ) : (
+                            <Switch onValueChange = {onCheckHandler} value={agreementValue}/>
+                        ) }
+                    <Textview text={TERMS_AND_CONDITIONS} textStyle={styles.termsConditionText} />
+                    </Container>
 
-                        
-                         
 
-                  
-                 
-            </Container>
-
-           
-        </Container>
-        
+                    </Container>         
+                            
             
              
     )
@@ -131,7 +110,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     agreementsContainer: {
-        marginTop: 130,
+        marginTop: 120,
         flexDirection: 'row',
         alignItems: 'center'
     },

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {Platform, } from 'react-native';
+import {Platform,Image } from 'react-native';
 import {Container, Statusbar, Textview, Button} from '../../default';
 import {Header, Title} from 'native-base';
 import {Button as NavButton} from 'native-base';
@@ -18,6 +18,7 @@ var i = 0;
 var uc_data = [];
 var urgentcares = [];
 var copyDoctorsList = [];
+var dotImage = require('./clinic.png');
 
 class Doctors extends Component{
 
@@ -232,12 +233,15 @@ class Doctors extends Component{
                     {
                         this.state.doctorsList[0] != null && this.state.doctorsList.map((marker, index) => (
                         <MapView.Marker
+                            // source={dotImage}
+                            // style={{height: 6, width: 6}}
                             key = {index}
                             coordinate = {{
                                 latitude: marker.lat,
                                 longitude: marker.lng
                             }}   
                         >
+                             <Image source={dotImage} style={{height: 35, width:35 }} />
                             <MapView.Callout tooltip={true} onPress={()=>{this.markerPressed(marker,index)}}>
                                 <Container ContainerStyle={{height:150, width:150, alignnItems:'center',borderWidth:3,borderColor:'#0080ff', justifyContent:'center', backgroundColor:'white', borderRadius:250}}>
                                     <Container ContainerStyle={{alignSelf:'center',alignItems:'center'}}>

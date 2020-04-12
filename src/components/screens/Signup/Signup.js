@@ -4,7 +4,7 @@ import Swiper from 'react-native-swiper'
 import { FormOne, FormTwo } from "./SignupForm";
 import { SignupHeader } from "./SignupHeader";
 import { SignupButtons } from "./SignupButtonContainer";
-import { StyleSheet, Platform } from 'react-native'
+import { StyleSheet, Platform,Alert } from 'react-native'
 import firebase from "react-native-firebase";
 import AsyncStorage from '@react-native-community/async-storage'
 import { LOGIN_CHECK } from '../../../constants/StorageConstans';
@@ -107,7 +107,7 @@ export default class Signup extends Component {
                 break;
 
             case 'securityNo':
-                isValid= value.maxLength === 4;
+                isValid= value.maxLength >5;
 
             default:
                 isValid = false;
@@ -137,9 +137,8 @@ export default class Signup extends Component {
                     SSN:this.state.controls.securityNo.value,
                     UName: this.state.urgentcareName
                 });
-
-
-                firebase.database().ref()
+                     
+                Alert.alert("Your account has been created.");
                     AsyncStorage.setItem(LOGIN_CHECK, 'true').then(() => {
                         this.props.navigation.navigate('HomeScreen')
                     });
