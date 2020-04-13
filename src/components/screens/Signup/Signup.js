@@ -140,7 +140,7 @@ export default class Signup extends Component {
                      
                 Alert.alert("Your account has been created.");
                     AsyncStorage.setItem(LOGIN_CHECK, 'true').then(() => {
-                        this.props.navigation.navigate('HomeScreen')
+                        this.props.navigation.goBack();
                     });
                 }).catch(console.log("fb promise"));
             }

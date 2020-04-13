@@ -22,7 +22,8 @@ class BookAppointment extends Component{
             selectedDate: null,
             enableScrollViewScroll: true,
             appointmentSubject:'',
-            mode: 'time',
+            mode: 'datetime',
+            minuteInterval:15,
             show: false,
             time: 'Select Appointment Time',
             defaultText:'Select Appointment Time',
@@ -79,7 +80,12 @@ class BookAppointment extends Component{
       }
       timepicker = () => {
         this.show('time');
-      }    
+      }  
+      
+      componentDidMount() {
+          
+        
+        this.setState({minuteInterval: 15}); }
 
 
     render(){
@@ -149,6 +155,8 @@ class BookAppointment extends Component{
                         </Text>
                     </Container>
                     { this.state.show && <DateTimePicker 
+                        // isVisible = {this.state.isVisible}
+                        minuteInterval={this.state.minuteInterval}
                         value={this.state.defaltTime}
                         mode={this.state.mode}
                         is24Hour={false}

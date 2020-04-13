@@ -250,7 +250,9 @@ class Home extends Component {
     render(){
         return(
             this.state.loading ? <ActivityIndicator size="large" color="#EA2626" style={{flex:1,alignSelf:'center'}} /> :
+           
             <Container ContainerStyle={{flex:1, backgroundColor:'#fff'}}>
+           <Container >
                 <Header style={{flexDirection:'row',alignItems:'center',backgroundColor:'#fff',height:70}}>
                     <Statusbar 
                         translucent 
@@ -312,7 +314,6 @@ class Home extends Component {
                         </Button> 
                     </Container>
 
-                   
                 </Container>
                 <PushController/> 
 
@@ -329,7 +330,7 @@ class Home extends Component {
                             <Container ContainerStyle={{ backgroundColor: '#fff', padding: 20,height: 300, borderRadius:15 }}>
 
                                 <Textview styles={{alignSelf:'center'}}>
-                                    Please Sign IN or Sign Up First
+                                    Please Sign In or Sign Up First
                                 </Textview>
                                
                                
@@ -339,6 +340,15 @@ class Home extends Component {
                             </Container>
                             </Container>
                         </Modal>
+         
+            </Container>
+
+            {/* <Container  style={{flex:1}}>
+                            <Textview >
+                                Powered by Matz Group
+                            </Textview>
+                        </Container> */}
+
             </Container>
         )
     }
@@ -410,4 +420,19 @@ const styles = {
         color: 'white',
         fontSize: 18
     },
+    // bottomView:{
+ 
+    //     width: '100%', 
+    //     height: 50, 
+    //     backgroundColor: '#FF9800', 
+    //     justifyContent: 'center', 
+    //     alignItems: 'center',
+    //     position: 'absolute',
+    //     bottom: 0
+    //   },
+    //   textStyle:{
+ 
+    //     color: '#fff',
+    //     fontSize:22
+    //   }
 }
