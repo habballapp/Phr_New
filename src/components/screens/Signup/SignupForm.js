@@ -70,6 +70,7 @@ export const FormTwo = (props) => {
                 placeholderTextColor='rgba(0,0,0,0.7)'
                 returnKeyType={"next"}
                 blurOnSubmit={true}
+                keyboardType="number-pad"
                 inputStyle={styles.input}
                 onChangeText={securityNoChangeHandler} />     
                

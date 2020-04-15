@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Textview, Statusbar, Button, ImageView,Input} from '../../default';
-import {Platform,ActivityIndicator,Alert,TouchableOpacity,PermissionsAndroid} from 'react-native';
+import {Platform,ActivityIndicator,Alert,Linking,TouchableOpacity,PermissionsAndroid} from 'react-native';
 import {Header, Title, } from 'native-base';
 import { connect } from 'react-redux';
 import {getUserLocation} from '../../../actions/UserLocationAction'
@@ -70,6 +70,27 @@ class Home extends Component {
     showMenu = () => {
       this._menu.show();
     };
+
+
+    onHomeIconPressed(){
+        let Number_ = 123456;
+        let phoneNumber = 123456;
+        if (Platform.OS !== 'android') {
+            phoneNumber = `telprompt:${Number_}`;
+        }
+        else  {
+            phoneNumber = `tel:${Number_}`;
+        }
+        Linking.canOpenURL(phoneNumber)
+            .then(supported => {
+            if (!supported) {
+                Alert.alert('Phone number is not available');
+            } 
+            else {
+                return Linking.openURL(phoneNumber);
+            }
+        })
+    }
 
     // takeData(){
     //     console.log("into takeData()")
@@ -205,7 +226,7 @@ class Home extends Component {
     onEmergencyPressed(){
         AsyncStorage.getItem(LOGIN_CHECK).then((value) => {
 			if (value != null) {
-				this.props.navigation.navigate("Emergency",{'urgentcareID':this.state.urgent_care_data.key})
+				this.props.navigation.navigate("Emergency",{'urgentcareID':this.state.urgent_care_data.first_name})
             }
             else{
                 this.setState({ isModalVisible: true });
@@ -215,7 +236,7 @@ class Home extends Component {
     onAppointmentHistoryPressed(){
         AsyncStorage.getItem(LOGIN_CHECK).then((value) => {
 			if (value != null) {
-				this.props.navigation.navigate("AppointmentHistory",{'urgentcareID':this.state.urgent_care_data.key})
+				this.props.navigation.navigate("AppointmentHistory",{'urgentcareID':this.state.urgent_care_data.urgentcareName})
             }
             else{
              //   this.props.navigation.navigate("LoginStackScreen")
@@ -284,7 +305,7 @@ class Home extends Component {
                         <Button textStyle={styles.loginButtonText} title="Book an Appointment" style={{marginRight:10,borderRadius:10,borderWidth:1.5, borderColor:'black',backgroundColor:'#EA2626', height:100,width:100, alignSelf:'center', marginBottom:20, justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onDoctorPress()}}>
                             <MaterialCommunityIcons name="calendar-clock" size={32} color="white"/>
                         </Button>
-                        <Button textStyle={styles.loginButtonText} title="Our Services" style={{marginRight:10,borderWidth:1.5,borderRadius:10, borderColor:'black',backgroundColor:'#EA2626',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{ this.props.navigation.navigate("LoginStackScreen")}}>
+                        <Button textStyle={styles.loginButtonText} title="Our Services" style={{marginRight:10,borderWidth:1.5,borderRadius:10, borderColor:'black',backgroundColor:'#EA2626',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{ this.onServicesPressed()}}>
                             <FontAwesome name="handshake-o" size={32} color="white"/>
                         </Button>
                         <Button textStyle={styles.loginButtonText} title="View Health Tips" style={{borderWidth:1.5,borderRadius:10, borderColor:'black', backgroundColor:'#EA2626',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onHealthTipsPressed()}}>
@@ -298,7 +319,7 @@ class Home extends Component {
                         <Button textStyle={styles.loginButtonText} title="Our Location" style={{marginRight:10,borderWidth:1.5,borderRadius:10, borderColor:'black',backgroundColor:'#EA2626',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onOurLocationPressed()}}>
                             <MaterialCommunityIcons name="map-marker" size={32} color="white"/>    
                         </Button>
-                        <Button textStyle={styles.loginButtonText} title="Contact Us" style={{borderWidth:1.5,borderRadius:10, borderColor:'black', backgroundColor:'#EA2626',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{}}>
+                        <Button textStyle={styles.loginButtonText} title="Contact Us" style={{borderWidth:1.5,borderRadius:10, borderColor:'black', backgroundColor:'#EA2626',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onHomeIconPressed()}}>
                             <FontAwesome name="phone" size={32} color="white"/>
                         </Button>                        
                     </Container>

@@ -7,13 +7,16 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 var arr_appointment = [];
+var arr_app = [];
 export default class AppointmentHistory extends Component{
     constructor(props){
         super(props);
         this.state = {
             loading:false,   
             appointments: [],
-            urgentcareID: this.props.navigation.getParam('urgentcareID')    
+            app: [],
+            urgentcareID: this.props.navigation.getParam('urgentcareID')  ,
+             
         }
     }
 
@@ -22,19 +25,27 @@ export default class AppointmentHistory extends Component{
     }
     takeAppointments(){
         let userID = firebase.auth().currentUser.uid;
-        var dbref = firebase.database().ref(`users/urgentcare/${this.state.urgentcareID}/appointments/`);
+    //    let key = firebase.database().ref(`users/urgentcare/${this.state.urgentcareID}/`).child('appointments').push().key;
+       
+        var dbref = firebase.database().ref(`users/urgentcare/${this.state.urgentcareID}/appointments/`)
+        
         dbref.on("value", (snapshot)=>{
             snapshot.forEach((data)=>{
                 if(userID === data.val().userID)
                     arr_appointment.push(data.val());
             })  
+          
+            arr_appointment = arr_appointment.reverse()
             console.log("Appointments array ... ", arr_appointment)
+            
+        //s    console.log("Key ... ", key)
             if(arr_appointment!==undefined || arr_appointment!=='' || arr_appointment!==null){    
                 this.setState({appointments: arr_appointment}, ()=>{
                     this.setState({loading:false})
                 })                        
             }
             arr_appointment = [];
+            
         })
     }
     render(){

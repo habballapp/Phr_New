@@ -130,22 +130,33 @@ export default class Signup extends Component {
                     console.log("asdnaskdnaskd", user);
                     let userID = firebase.auth().currentUser.uid;
                     firebase.database().ref('users/').child('patients').child(userID).set({
+                    email:this.state.controls.email.value,    
                     firstname: this.state.controls.firstName.value,
                     lastname: this.state.controls.lastName.value,
                     patientId: userID,
                     status: 'pending',
-                    SSN:this.state.controls.securityNo.value,
+                    Phone:this.state.controls.securityNo.value,
                     UName: this.state.urgentcareName
                 });
                      
                 Alert.alert("Your account has been created.");
-                    AsyncStorage.setItem(LOGIN_CHECK, 'true').then(() => {
-                        this.props.navigation.goBack();
-                    });
-                }).catch(console.log("fb promise"));
+                    // AsyncStorage.setItem(LOGIN_CHECK, 'true').then(() => {
+                    //     this.props.navigation.goBack();
+                    // });
+
+                  //  this.defaultEmergency();
+                    this.props.navigation.navigate("Home")
+                }) .catch(error => {   
+                    alert(error.message);
+                 })
+
+
+                
             }
         
     }
+
+  
 
     onBackHandler = () => {
         if (this.state.swiperIndex == 1) {

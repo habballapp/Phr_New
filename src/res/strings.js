@@ -12,5 +12,5 @@ export const CREATE_ACCOUNT = "Create Account";
 export const EMAIL_PLACEHOLDER = "Email";
 export const PASSWORD_PLACEHOLDER = "Password";
 export const CONFIRM_PASS_PLACEHOLDER = "Confirm Password";
-export const SOCIAL_SECURITY_NO = "Last Four Digits Of SSN";
+export const SOCIAL_SECURITY_NO = "Enter Phone No";
 

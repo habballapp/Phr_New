@@ -46,7 +46,7 @@ class BookAppointment extends Component{
         var dd = String(today.getDate()).padStart(2, '0');
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         var yyyy = today.getFullYear();
-        today = dd + '/' + mm + '/' + yyyy;
+        today = mm + '/' + dd + '/' + yyyy;
         console.log("time.. ", this.state.today)
         this.setState({
           selectedDate: today,
@@ -54,6 +54,10 @@ class BookAppointment extends Component{
       }
     onDonePressed(){
         let key = firebase.database().ref(`users/urgentcare/${this.state.urgentcareID}/`).child('appointments').push().key;
+        console.log("Key.. ", key);
+
+        
+
         let userID = firebase.auth().currentUser.uid;
         firebase.database().ref(`users/urgentcare/${this.state.urgentcareID}/`).child('appointments').child(key).set({
             time_slot: this.state.time,
@@ -64,6 +68,8 @@ class BookAppointment extends Component{
             userID:userID
         });
         Alert.alert("Your appointment has been scheduled.")
+      
+        this.props.navigation.navigate("Home")
     }
     onTimeChanged(event, time){
         console.log("time event picked.. ", event);

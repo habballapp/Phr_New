@@ -75,6 +75,11 @@ class Doctors extends Component{
       };
      
       updateSearch = (search) => {
+
+        // copyDoctorsList = copyDoctorsList.sort((a, b) => a - b)    
+        // this.setState({ copyDoctorsList });
+        
+        // console.log("CopyLisr ", copyDoctorsList)
         this.setState({close:false,search:search})
         let doctor = copyDoctorsList.filter((item) => {
             return String(item.first_name.toLowerCase()).includes(search.toLowerCase())
@@ -95,10 +100,13 @@ class Doctors extends Component{
                 uc_data.push(data.val())
                 console.log("snapshot urgent care... ", uc_data)
             })
-            urgentcares = uc_data;
+             uc_data.sort((a, b) => a - b);
+          
+            urgentcares = uc_data
+            
             uc_data = [];
             if(urgentcares != null || urgentcares != undefined || urgentcares != ''){
-                copyDoctorsList = urgentcares;
+                copyDoctorsList = urgentcares
                 this.setState({doctorsList:uc_data},()=>{
                     GetLocation.getCurrentPosition({
                         enableHighAccuracy: true,
@@ -113,10 +121,14 @@ class Doctors extends Component{
                 });
             }
         })
+
+        console.log("urgent care", urgentcares)
     }
     componentDidMount(){
         this.getUCdata();
         console.log("props... ", this.state.doctorsList)
+      //  doctorsList.sort();
+
         
     }
 
@@ -141,6 +153,8 @@ class Doctors extends Component{
     }
 
     filterMarkers(maxLatitude,minLatitude,maxLongitude,minLongitude){
+
+      
         let doctor = copyDoctorsList.filter((item) => {
             if(item.lat <= maxLatitude && item.lat >= minLatitude && item.lng <= maxLongitude && item.lng >= minLongitude){
                 return item;
@@ -150,7 +164,8 @@ class Doctors extends Component{
             doctorsList: doctor
         })
     }
-
+      
+    
     findList(search){
         if(search == ''){
             return [];

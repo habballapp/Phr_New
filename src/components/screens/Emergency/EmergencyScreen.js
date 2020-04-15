@@ -21,9 +21,15 @@ export default class EmergencyScreen extends Component{
             refresh:false,
             isModalVisible: false,
             message:'',
+            message1:'I need help',
             numbers: [],
             numberToBeAdded: 0,
-            relationToBeAdded:'default'
+            relationToBeAdded:'default',
+            defnumberToBeAdded: 555-22-33,
+            defrelationToBeAdded:'Rescue'
+            // UrgentCareNo:255-55-66,
+            // UrgentCareName:this.props.navigation.getParam('urgentcareName')
+
         }
     }
     static navigationOptions = ({navigation}) => {
@@ -36,6 +42,8 @@ export default class EmergencyScreen extends Component{
     componentDidMount(){
         // console.log("asdasdasd", this.props.navigation.state.params.emergencynumbers)
         this.takeEmergencyNumbers();
+        this. ondefNumberChange();
+        this.ondefRelationshipChange();
         // flag=1;
         // this.updateState(flag);
     }
@@ -48,6 +56,8 @@ export default class EmergencyScreen extends Component{
     }
     async takeEmergencyNumbers(){
         var tempVar = [];
+
+       
         if(flag==0){
             let userID = firebase.auth().currentUser.uid;
             var dbref = firebase.database().ref(`users/patients/${userID}/EmergencyContacts/`);
@@ -78,6 +88,7 @@ export default class EmergencyScreen extends Component{
             const newNumbers = {
                 relation: this.state.relationToBeAdded,
                 number: this.state.numberToBeAdded
+                
             }
             this.setState({isModalVisible:false})
             this.setState({loading:true})
@@ -86,7 +97,10 @@ export default class EmergencyScreen extends Component{
             let key = dbref.push().key;
             firebase.database().ref(`users/patients/${userID}/EmergencyContacts/`).child(key).set({
                 relation: this.state.relationToBeAdded,
-                number: this.state.numberToBeAdded
+                number: this.state.numberToBeAdded,
+                default: this.state.defrelationToBeAdded,
+                defno:this.state.defnumberToBeAdded
+
             }).then(()=>{
                 flag=0;
                 this.setState({ loading:false });
@@ -98,12 +112,63 @@ export default class EmergencyScreen extends Component{
     onNumberChange(event){
         this.setState({numberToBeAdded:event});
     }
+
     onRelationshipChange(event){
         this.setState({relationToBeAdded:event});
     }
+
+    ondefNumberChange(){
+        this.setState({defnumberToBeAdded:this.state.defrelationToBeAdded});
+    }
+
+    ondefRelationshipChange(){
+        this.setState({defrelationToBeAdded:this.state.defrelationToBeAdded});
+    }
+    
     onCallIconPressed(item){
         let Number_ = item.number;
         let phoneNumber = item.number;
+        if (Platform.OS !== 'android') {
+            phoneNumber = `telprompt:${Number_}`;
+        }
+        else  {
+            phoneNumber = `tel:${Number_}`;
+        }
+        Linking.canOpenURL(phoneNumber)
+            .then(supported => {
+            if (!supported) {
+                Alert.alert('Phone number is not available');
+            } 
+            else {
+                return Linking.openURL(phoneNumber);
+            }
+        })
+    }
+
+    onEmergencyIconPressed(){
+        let Number_ = 911;
+        let phoneNumber = 911;
+        if (Platform.OS !== 'android') {
+            phoneNumber = `telprompt:${Number_}`;
+        }
+        else  {
+            phoneNumber = `tel:${Number_}`;
+        }
+        Linking.canOpenURL(phoneNumber)
+            .then(supported => {
+            if (!supported) {
+                Alert.alert('Phone number is not available');
+            } 
+            else {
+                return Linking.openURL(phoneNumber);
+            }
+        })
+    }
+
+
+    onHomeIconPressed(){
+        let Number_ = 123456;
+        let phoneNumber = 123456;
         if (Platform.OS !== 'android') {
             phoneNumber = `telprompt:${Number_}`;
         }
@@ -149,6 +214,41 @@ export default class EmergencyScreen extends Component{
         this.setState({message:event});
     }
 
+    onTemplateMessageChanged(template){
+
+        let phoneNumber=[];
+        for(var i=0;i<this.state.numbers.length;i++){
+            console.log("numbers..",this.state.numbers[i].number)
+            phoneNumber.push(this.state.numbers[i].number.toString());
+            console.log("phoneNumber:", phoneNumber);
+        } 
+            SendSMS.send({
+                //Message body
+                body: template,
+                //Recipients Number
+                recipients: phoneNumber,
+                //An array of types that would trigger a "completed" response when using android
+                successTypes: ['sent', 'queued'],
+                allowAndroidSendWithoutReadPermission: true
+            }, (completed, cancelled, error) => {
+                if(completed){
+                console.log('SMS Sent Completed');
+                }else if(cancelled){
+                console.log('SMS Sent Cancelled');
+                }else if(error){
+                console.log('Some error occured');
+                }
+            });
+
+
+
+
+
+
+
+
+    }
+
     render(){
         if(this.state.loading){
             return(
@@ -170,14 +270,21 @@ export default class EmergencyScreen extends Component{
                     </Header>
                     <Container ContainerStyle={{padding:25}} >
                         <Textview text="Enter Text Message below to save:" textStyle={{fontSize:18, color:'black',marginBottom:10}}/>
-                        <Container ContainerStyle={{alignItems:'flex-start',height:150, borderColor:'#707070', borderWidth:0.5,}} >
+                        <Container ContainerStyle={{alignItems:'flex-start',height:230, borderColor:'#707070', borderWidth:0.5,}} >
                             <Input 
                                 placeholder="Text Message.."
                                 placeholderTextColor="#D3D3D3"
                                 inputStyle={styles.input}
                                 dense={true}
-                                onChangeText={(event) => {this.onMessageTextChanged(event)}}
+                                onChangeText={(event) => {this.onMessageTextChanged(event)}} 
                             />
+        
+                        <Container ContainerStyle={{flexDirection:'row', alignSelf:'center', alignItems:'center'}}>
+                        <Button title="I need help" style={styles.ModalButton1} textStyle={{fontSize:18, color:'black',marginBottom:10}} onPress={()=>{this.onTemplateMessageChanged('I need help')}}/>
+                        <Button title="Please Call!." style={styles.ModalButton2} textStyle={{fontSize:18, color:'black',marginBottom:10}} onPress={()=>{this.onTemplateMessageChanged('Please Call!')}}/>
+
+                        </Container>
+
                         </Container>
                         <Container ContainerStyle={{marginTop:20,height:200, borderColor:'#707070', borderWidth:0.5,}}>
                             <FlatList
@@ -233,6 +340,11 @@ export default class EmergencyScreen extends Component{
                             </Container>
                             </Container>
                         </Modal>
+                         
+                        <Container ContainerStyle={{flexDirection:'row', alignSelf:'center', alignItems:'center'}}>
+                        <Button title="Call 911" style={styles.ModalButton} textStyle={styles.ModalButtonText} onPress={()=>{this.onEmergencyIconPressed()}}/>
+                        <Button title="Call Us" style={styles.ModalButton} textStyle={styles.ModalButtonText} onPress={()=>{this.onHomeIconPressed()}}/>
+                        </Container>
                     
                     </Container>
                 </Container>
@@ -286,4 +398,29 @@ const styles = {
         color: 'white',
         fontSize: 18
     },
+
+    ModalButton2: {
+        marginTop: 15,
+        width: '30%',
+        borderRadius: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#FFF',
+        height: 40,
+        marginLeft:30,
+        marginRight:10,
+        marginBottom:10
+    },
+
+    ModalButton1: {
+        marginTop: 15,
+        width: '30%',
+        borderRadius: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#FFF',
+        height: 40,
+        marginRight:10,
+        marginBottom:10
+    }
 }
