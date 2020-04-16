@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Container, Textview, Button, Statusbar, Checkbox} from '../../default';
 import {Text, StyleSheet, Platform, FlatList, ScrollView, TouchableOpacity, Alert} from 'react-native'
+import TimePicker from "react-native-navybits-date-time-picker"
 import { Icon, Header, Title} from 'native-base';
 import {Button as NavButton} from 'native-base';
 import { connect } from 'react-redux';
@@ -13,13 +14,16 @@ import moment from 'moment';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
+var appointment_subject;
+var app_date;
+var app_time;
 
 
 class BookAppointment extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            selectedDate: null,
+            selectedDate: '',
             enableScrollViewScroll: true,
             appointmentSubject:'',
             mode: 'datetime',
@@ -53,29 +57,43 @@ class BookAppointment extends Component{
         });
       }
     onDonePressed(){
-        let key = firebase.database().ref(`users/urgentcare/${this.state.urgentcareID}/`).child('appointments').push().key;
-        console.log("Key.. ", key);
 
-        
 
-        let userID = firebase.auth().currentUser.uid;
-        firebase.database().ref(`users/urgentcare/${this.state.urgentcareID}/`).child('appointments').child(key).set({
-            time_slot: this.state.time,
-            date: this.state.selectedDate.toString(),
-            appointment_subject: this.state.appointmentSubject,
-            status:'pending',
-            key: key,
-            userID:userID
-        });
-        Alert.alert("Your appointment has been scheduled.")
-      
-        this.props.navigation.navigate("Home")
+        appointment_subject = this.state.appointmentSubject;
+        app_date= this.state.selectedDate;
+        app_time = this.state.time;
+
+       
+
+        if(appointment_subject == '' || app_date == '' || app_time == 'Select Appointment Time' ){
+            console.log("Under codition.. ");
+            console.log("Subject..",this.state.appointmentSubject)
+            Alert.alert("Please Input All Fileds.")  
+       }
+        else{
+            let key = firebase.database().ref(`users/urgentcare/${this.state.urgentcareID}/`).child('appointments').push().key;
+            console.log("Key.. ", key); 
+            let userID = firebase.auth().currentUser.uid;
+            firebase.database().ref(`users/urgentcare/${this.state.urgentcareID}/`).child('appointments').child(key).set({
+                time_slot: this.state.time,
+                date: this.state.selectedDate.toString(),
+                appointment_subject: this.state.appointmentSubject,
+                status:'pending',
+                key: key,
+                userID:userID
+            });
+            Alert.alert("Your appointment has been scheduled.")
+          
+            this.props.navigation.navigate("Home")
+        }
+       
     }
     onTimeChanged(event, time){
+        // time = time + 15;
         console.log("time event picked.. ", event);
         console.log("time picked.. ", time);
         console.log("time moment picked.. ", moment(time).format('HH:mm'));
-        this.setState({time: moment(time).format('HH:mm'), show:false})
+        this.setState({time: moment(time).add(15,'minutes').format('HH:mm'), show:false})
         console.log("time.. ", this.state.time)
     }
     show = mode => {
@@ -96,6 +114,7 @@ class BookAppointment extends Component{
 
     render(){
         return(
+            <Container  ContainerStyle={{flex:1}}>
             <ScrollView scrollEnabled={this.state.enableScrollViewScroll}>
                 <Container ContainerStyle={{flex:1}}>   
                     <Header style={{flexDirection:'row',alignItems:'center',backgroundColor:'#fff',height:70}}>
@@ -160,14 +179,14 @@ class BookAppointment extends Component{
                             {this.state.time}
                         </Text>
                     </Container>
-                    { this.state.show && <DateTimePicker 
+                    { this.state.show && <DateTimePicker
                         // isVisible = {this.state.isVisible}
-                        minuteInterval={this.state.minuteInterval}
                         value={this.state.defaltTime}
                         mode={this.state.mode}
                         is24Hour={false}
                         display="spinner"
-                        onChange={this.onTimeChanged} />
+                        onChange={this.onTimeChanged}
+                         />
                     }
                 </Container>
                 <Container ContainerStyle={{padding:10,borderColor:'#707070',borderWidth:0.5,width:'90%',height:250,alignSelf:'center', marginTop:20}}>
@@ -179,6 +198,15 @@ class BookAppointment extends Component{
                 </Container>
                 <Button title="Done" style={styles.loginButtonStyles} textStyle={styles.loginButtonText} onPress={this.onDonePressed} />
             </ScrollView>
+
+                         <Container ContainerStyle={{alignSelf:'center', justifyContent:'center', flexDirection:'row' ,marginTop:10,
+                                position:'absolute', bottom:0}}>
+                            <Textview >
+                                Powered by Matz Group©
+                            </Textview>
+                        </Container>
+
+            </Container>
         )
     }
 } 

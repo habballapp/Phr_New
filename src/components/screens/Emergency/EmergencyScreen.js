@@ -286,7 +286,7 @@ export default class EmergencyScreen extends Component{
                         </Container>
 
                         </Container>
-                        <Container ContainerStyle={{marginTop:20,height:200, borderColor:'#707070', borderWidth:0.5,}}>
+                        <Container ContainerStyle={{marginTop:20,height:150, borderColor:'#707070', borderWidth:0.5,}}>
                             <FlatList
                                 data={this.state.numbers}
                                 extraData={this.state.numbers}
@@ -347,6 +347,13 @@ export default class EmergencyScreen extends Component{
                         </Container>
                     
                     </Container>
+
+                    <Container ContainerStyle={{alignSelf:'center', justifyContent:'center', flexDirection:'row' ,marginTop:10,
+                                position:'absolute', bottom:0}}>
+                            <Textview >
+                                Powered by Matz Group©
+                            </Textview>
+                        </Container>
                 </Container>
             )
     

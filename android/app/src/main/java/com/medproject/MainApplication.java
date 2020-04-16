@@ -36,6 +36,7 @@ import io.invertase.firebase.database.RNFirebaseDatabasePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 import io.invertase.firebase.storage.RNFirebaseStoragePackage;
+import com.reactlibrary.RNNavybitsDateTimePickerPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -72,7 +73,8 @@ public class MainApplication extends Application implements ReactApplication {
             new MapsPackage(),
             new RNDateTimePickerPackage(),
             new RNFirebaseStoragePackage(),
-            new RNFileViewerPackage()
+            new RNFileViewerPackage(),
+            new RNNavybitsDateTimePickerPackage()
       );
     }
 

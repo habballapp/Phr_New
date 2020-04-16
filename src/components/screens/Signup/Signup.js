@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { SafeViewArea, Scrollview, Statusbar, Container } from "../../default";
+import { SafeViewArea, Scrollview, Statusbar, Container,Textview } from "../../default";
 import Swiper from 'react-native-swiper'
 import { FormOne, FormTwo } from "./SignupForm";
 import { SignupHeader } from "./SignupHeader";
@@ -139,7 +139,7 @@ export default class Signup extends Component {
                     UName: this.state.urgentcareName
                 });
                      
-                Alert.alert("Your account has been created.");
+                Alert.alert("Your account creation request has been posted to the admin.");
                     // AsyncStorage.setItem(LOGIN_CHECK, 'true').then(() => {
                     //     this.props.navigation.goBack();
                     // });
@@ -205,6 +205,13 @@ export default class Signup extends Component {
                             continueSignup={this.continueSignupHandler}
                             goBack={this.onBackHandler}/>
                 </Scrollview>
+
+                <Container ContainerStyle={{alignSelf:'center', justifyContent:'center', flexDirection:'row' ,marginTop:10,
+                                position:'absolute', bottom:0}}>
+                            <Textview >
+                                Powered by Matz Group©
+                            </Textview>
+                        </Container>
             </SafeViewArea>
         )
     }

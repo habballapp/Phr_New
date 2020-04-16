@@ -141,6 +141,13 @@ export default class Login extends Component {
                         <Button onPress={() => this.props.navigation.push('SignUp')} title={SIGNUP_TEXT} style={styles.signup} textStyle={styles.signuphere} />
                     </Container>
                 </Scrollview>
+
+                <Container ContainerStyle={{alignSelf:'center', justifyContent:'center', flexDirection:'row' ,marginTop:10,
+                                position:'absolute', bottom:0}}>
+                            <Textview >
+                                Powered by Matz Group©
+                            </Textview>
+                        </Container>
             </SafeViewArea>
         );
     }

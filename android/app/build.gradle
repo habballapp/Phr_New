@@ -169,6 +169,7 @@ dependencies {
     implementation "com.google.firebase:firebase-messaging:18.0.0"
     implementation "com.google.firebase:firebase-storage:17.0.0"
     implementation 'me.leolin:ShortcutBadger:1.1.21@aar'
+    compile project(':react-native-navybits-date-time-picker')
 
     // Firebase dependencies
     implementation "com.google.android.gms:play-services-base:16.1.0"

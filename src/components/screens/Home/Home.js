@@ -55,14 +55,17 @@ class Home extends Component {
                     AsyncStorage.setItem(LOGIN_CHECK, '').then(() => {
                         this.props.navigation.goBack();
                     });  
-                    this.props.navigation.navigate("HomeScreen")
+                 //   this.props.navigation.navigate("HomeScreen")
+                  
                 }).catch(()=>{
                     this._menu.hide();
                     Alert.alert("You are not signed in.")
+                    this.setState({ isModalVisible: true });
                 });
             }
             else{
                 this._menu.hide();
+                this.setState({ isModalVisible: true });
             }
 		});
     };
@@ -206,7 +209,8 @@ class Home extends Component {
         console.log("urgent care state..", this.state.urgentcares)
         AsyncStorage.getItem(LOGIN_CHECK).then((value) => {
 			if (value != null) {
-				this.props.navigation.navigate("BookAppointmentScreen",{'urgentcareID':this.state.urgent_care_data.key})
+                this.props.navigation.navigate("BookAppointmentScreen",{'urgentcareID':this.state.urgent_care_data.key})
+              //  this.setState({ isModalVisible: false });
             }
             else{
                
@@ -226,7 +230,8 @@ class Home extends Component {
     onEmergencyPressed(){
         AsyncStorage.getItem(LOGIN_CHECK).then((value) => {
 			if (value != null) {
-				this.props.navigation.navigate("Emergency",{'urgentcareID':this.state.urgent_care_data.first_name})
+                this.props.navigation.navigate("Emergency",{'urgentcareID':this.state.urgent_care_data.first_name})
+              //  this.setState({ isModalVisible: false });
             }
             else{
                 this.setState({ isModalVisible: true });
@@ -236,7 +241,8 @@ class Home extends Component {
     onAppointmentHistoryPressed(){
         AsyncStorage.getItem(LOGIN_CHECK).then((value) => {
 			if (value != null) {
-				this.props.navigation.navigate("AppointmentHistory",{'urgentcareID':this.state.urgent_care_data.urgentcareName})
+                this.props.navigation.navigate("AppointmentHistory",{'urgentcareID':this.state.urgent_care_data.key})
+             //   this.setState({ isModalVisible: false });
             }
             else{
              //   this.props.navigation.navigate("LoginStackScreen")
@@ -248,7 +254,9 @@ class Home extends Component {
     chatmenu = () => {
         AsyncStorage.getItem(LOGIN_CHECK).then((value) => {
 			if (value != null) {
-                this.props.navigation.navigate("Chat",{'urgentcareID':this.state.urgent_care_data.key})            }
+                this.props.navigation.navigate("Chat",{'urgentcareID':this.state.urgent_care_data.key})
+                this.setState({ isModalVisible: false });
+            }
             else{
                 this.setState({ isModalVisible: true });
             }
@@ -265,6 +273,12 @@ class Home extends Component {
         this.setState({isModalVisible: !this.state.isModalVisible});
       };
 
+
+      onClosePressed(){
+
+        this.setState({ isModalVisible: false});
+      }
+
     
    
 
@@ -273,7 +287,7 @@ class Home extends Component {
             this.state.loading ? <ActivityIndicator size="large" color="#EA2626" style={{flex:1,alignSelf:'center'}} /> :
            
             <Container ContainerStyle={{flex:1, backgroundColor:'#fff'}}>
-           <Container >
+           <Container stylesbutton = {{alignSelf:'baseline', backgroundColor:'#fed8b1'}} >
                 <Header style={{flexDirection:'row',alignItems:'center',backgroundColor:'#fff',height:70}}>
                     <Statusbar 
                         translucent 
@@ -301,7 +315,7 @@ class Home extends Component {
                         <Textview textStyle={{fontSize:30, color:'black', fontWeight:'bold',alignSelf:'center'}} text={this.state.urgent_care_data.first_name}/>
                     </Container>
                     
-                    <Container ContainerStyle={{alignSelf:'center', justifyContent:'center', flexDirection:'row' ,marginTop:20,}}>
+                    <Container ContainerStyle={{alignSelf:'center', justifyContent:'center', flexDirection:'row' ,marginTop:20,backgroundColor:'#fff'}}>
                         <Button textStyle={styles.loginButtonText} title="Book an Appointment" style={{marginRight:10,borderRadius:10,borderWidth:1.5, borderColor:'black',backgroundColor:'#EA2626', height:100,width:100, alignSelf:'center', marginBottom:20, justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onDoctorPress()}}>
                             <MaterialCommunityIcons name="calendar-clock" size={32} color="white"/>
                         </Button>
@@ -358,17 +372,19 @@ class Home extends Component {
                             <Container ContainerStyle={{flexDirection:'column', alignSelf:'center', alignItems:'center'}}>
                                 <Button title="Sign In" style={styles.ModalButton} textStyle={styles.ModalButtonText} onPress={()=>{this.onSavePressed()}} />
                                 <Button title="Sign Up" style={styles.ModalButton} textStyle={styles.ModalButtonText} onPress={()=>{this.onCancelPressed()}} />
+                                <Button title="Close" style={styles.ModalButton} textStyle={styles.ModalButtonText} onPress={()=>{this.onClosePressed()}} />
                             </Container>
                             </Container>
                         </Modal>
          
             </Container>
 
-            {/* <Container  style={{flex:1}}>
+                            <Container ContainerStyle={{alignSelf:'center', justifyContent:'center', flexDirection:'row' ,marginTop:10,
+                                position:'absolute', bottom:0}}>
                             <Textview >
-                                Powered by Matz Group
+                                Powered by Matz Group©
                             </Textview>
-                        </Container> */}
+                        </Container>
 
             </Container>
         )

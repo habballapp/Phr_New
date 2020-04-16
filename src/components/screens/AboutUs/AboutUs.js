@@ -38,6 +38,13 @@ export default class AboutUs extends Component{
                     />
                     </ScrollView>
                 </Container>
+
+                <Container ContainerStyle={{alignSelf:'center', justifyContent:'center', flexDirection:'row' ,marginTop:10,
+                                position:'absolute', bottom:0}}>
+                            <Textview >
+                                Powered by Matz Group©
+                            </Textview>
+                        </Container>
             </Container>
         )
     }

@@ -15,7 +15,7 @@ export default class AppointmentHistory extends Component{
             loading:false,   
             appointments: [],
             app: [],
-            urgentcareID: this.props.navigation.getParam('urgentcareID')  ,
+            urgentcareID: this.props.navigation.getParam('urgentcareID')
              
         }
     }
@@ -28,15 +28,17 @@ export default class AppointmentHistory extends Component{
     //    let key = firebase.database().ref(`users/urgentcare/${this.state.urgentcareID}/`).child('appointments').push().key;
        
         var dbref = firebase.database().ref(`users/urgentcare/${this.state.urgentcareID}/appointments/`)
-        
+        console.log("userid", this.state.urgentcareID);
+
         dbref.on("value", (snapshot)=>{
             snapshot.forEach((data)=>{
                 if(userID === data.val().userID)
                     arr_appointment.push(data.val());
             })  
           
-            arr_appointment = arr_appointment.reverse()
-            console.log("Appointments array ... ", arr_appointment)
+            // console.log("Appointments array before ... ", arr_appointment)
+          arr_appointment = arr_appointment.reverse()
+            
             
         //s    console.log("Key ... ", key)
             if(arr_appointment!==undefined || arr_appointment!=='' || arr_appointment!==null){    
@@ -65,7 +67,7 @@ export default class AppointmentHistory extends Component{
                         />
                         <Title style={styles.titleStyles}>Appointment History</Title>
                     </Header>
-                    <Container ContainerStyle={{marginTop:20,height:'85%',}}>
+                    <Container ContainerStyle={{marginTop:20,height:'80%',}}>
                         <FlatList
                             data={this.state.appointments}
                             extraData={this.state}

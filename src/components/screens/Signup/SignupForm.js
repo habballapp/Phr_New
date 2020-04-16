@@ -80,7 +80,7 @@ export const FormTwo = (props) => {
                     { Platform.OS === 'android' ? (
                             <CheckBox onValueChange={(val) => console.log('state', val)} />
                         ) : (
-                            <Switch onValueChange = {onCheckHandler} value={agreementValue}/>
+                            <Switch onValueChange = {onCheckHandler} value={this.state.agreementValue}/>
                         ) }
                     <Textview text={TERMS_AND_CONDITIONS} textStyle={styles.termsConditionText} />
                     </Container>
@@ -96,9 +96,12 @@ export const FormTwo = (props) => {
 const styles = StyleSheet.create({
     formContainer: {
         flex: 1,
-        marginTop: 10,
+        marginTop: 5,
         marginLeft: 30,
-        marginRight: 30,
+        marginRight: 30
+        
+        
+       
     },
     input: {
         fontSize: 18,
@@ -106,14 +109,16 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#ddd',
         width: '100%',
-        paddingLeft: 10,
-        paddingRight: 10,
+        padding:10,
         marginTop: 20,
     },
     agreementsContainer: {
-        marginTop: 120,
+        marginTop: 20,
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        position:'absolute',
+        bottom:0
+       
     },
     termsConditionText: {
         color: '#A9A9A9',
