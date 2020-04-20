@@ -3,7 +3,7 @@ import {Container, Textview, Button, Statusbar, Checkbox} from '../../default';
 import {Text, StyleSheet, Platform, FlatList, ScrollView, TouchableOpacity, Alert} from 'react-native'
 import TimePicker from "react-native-navybits-date-time-picker"
 import { Icon, Header, Title} from 'native-base';
-import {Button as NavButton} from 'native-base';
+
 import { connect } from 'react-redux';
 import RNPickerSelect from 'react-native-picker-select';
 import CalendarPicker from 'react-native-calendar-picker';
@@ -17,17 +17,19 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 var appointment_subject;
 var app_date;
 var app_time;
+const today = new Date();
+
 
 
 class BookAppointment extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            selectedDate: '',
+        
+            selectedDate: null,
             enableScrollViewScroll: true,
             appointmentSubject:'',
-            mode: 'datetime',
-            minuteInterval:15,
+            mode: 'time',
             show: false,
             time: 'Select Appointment Time',
             defaultText:'Select Appointment Time',
@@ -45,17 +47,25 @@ class BookAppointment extends Component{
         )
         return {drawerLabel, drawerIcon};
     }
-    onDateChange() {
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear();
-        today = mm + '/' + dd + '/' + yyyy;
-        console.log("time.. ", this.state.today)
+    onDateChange(date) {
+        console.log("DDDDD",date)
+       
+        date = moment(date).add(1, 'day');
+        date = new Date(date).toUTCString();
+        date = date.split(' ').slice(0, 4).join(' ');
+
+        console.log("GGGG",date)
+
+         date = moment(date).format('MM/DD/YYYY');
+
+       
+       
+        console.log("VVV",date)
         this.setState({
-          selectedDate: today,
+          selectedDate: date,
         });
       }
+      
     onDonePressed(){
 
 
@@ -63,12 +73,14 @@ class BookAppointment extends Component{
         app_date= this.state.selectedDate;
         app_time = this.state.time;
 
+
+        console.log("Date..",app_date)
+
        
 
-        if(appointment_subject == '' || app_date == '' || app_time == 'Select Appointment Time' ){
-            console.log("Under codition.. ");
-            console.log("Subject..",this.state.appointmentSubject)
-            Alert.alert("Please Input All Fileds.")  
+        if(appointment_subject == '' || app_date == null || app_time == 'Select Appointment Time' ){
+           
+            Alert.alert("Please Enter Missing Fileds.")  
        }
         else{
             let key = firebase.database().ref(`users/urgentcare/${this.state.urgentcareID}/`).child('appointments').push().key;
@@ -93,7 +105,8 @@ class BookAppointment extends Component{
         console.log("time event picked.. ", event);
         console.log("time picked.. ", time);
         console.log("time moment picked.. ", moment(time).format('HH:mm'));
-        this.setState({time: moment(time).add(15,'minutes').format('HH:mm'), show:false})
+        // this.setState({time: moment(time).add(15,'minutes').format('HH:mm'), show:false})
+        this.setState({time: moment(time).format('HH:mm'), show:false})
         console.log("time.. ", this.state.time)
     }
     show = mode => {
@@ -106,10 +119,7 @@ class BookAppointment extends Component{
         this.show('time');
       }  
       
-      componentDidMount() {
-          
-        
-        this.setState({minuteInterval: 15}); }
+
 
 
     render(){
@@ -185,6 +195,7 @@ class BookAppointment extends Component{
                         mode={this.state.mode}
                         is24Hour={false}
                         display="spinner"
+                      
                         onChange={this.onTimeChanged}
                          />
                     }
@@ -194,6 +205,9 @@ class BookAppointment extends Component{
                         onDateChange={this.onDateChange}
                         width={420}
                         height={310}
+                        minDate={today}
+                      
+                   
                     />
                 </Container>
                 <Button title="Done" style={styles.loginButtonStyles} textStyle={styles.loginButtonText} onPress={this.onDonePressed} />

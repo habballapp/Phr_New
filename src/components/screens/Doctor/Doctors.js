@@ -76,10 +76,7 @@ class Doctors extends Component{
      
       updateSearch = (search) => {
 
-        // copyDoctorsList = copyDoctorsList.sort((a, b) => a - b)    
-        // this.setState({ copyDoctorsList });
-        
-        // console.log("CopyLisr ", copyDoctorsList)
+       
         this.setState({close:false,search:search})
         let doctor = copyDoctorsList.filter((item) => {
             return String(item.first_name.toLowerCase()).includes(search.toLowerCase())
@@ -100,7 +97,7 @@ class Doctors extends Component{
                 uc_data.push(data.val())
                 console.log("snapshot urgent care... ", uc_data)
             })
-             uc_data.sort((a, b) => a - b);
+           //  uc_data
           
             urgentcares = uc_data
             
@@ -127,7 +124,7 @@ class Doctors extends Component{
     componentDidMount(){
         this.getUCdata();
         console.log("props... ", this.state.doctorsList)
-      //  doctorsList.sort();
+      
 
         
     }
@@ -188,6 +185,7 @@ class Doctors extends Component{
     markerPressed(marker,index){
         console.log("marker data",marker)
         this.props.navigation.navigate("Home",{'urgent_care_data':marker})
+       
     }
     
     render(){

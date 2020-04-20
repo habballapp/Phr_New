@@ -14,13 +14,16 @@ import { LOGIN_CHECK } from '../../../constants/StorageConstans';
 import AppLogo from "../../../assets/logo.png";
 import PushController from './PushController';
 import Modal from "react-native-modal";
-// this.props.navigation.getParam('urgent_care_data')
+
 var emergency_numbers = [];
 var flag_emergency=0;
 class Home extends Component {
     constructor(props){
         super(props);
-        
+        // global.urgentcareid = this.props.navigation.getParam('urgent_care_data').key;
+        // console.log("global.urgentcareid_1", this.props.navigation.getParam('urgent_care_data'));
+        // console.log("global.urgentcareid_2", this.props.navigation.getParam('urgent_care_data').key);
+        // console.log("global.urgentcareid_3", global.urgentcareid);
         this.state = {
             loading:false,
             urgentcares:'',
@@ -45,6 +48,8 @@ class Home extends Component {
     };
    
     hideMenu = () => {
+
+      
         AsyncStorage.getItem(LOGIN_CHECK).then((value) => {
             let userID = firebase.auth().currentUser.uid; 
             var ref = firebase.database().ref(`users/patients/${userID}/`).child('pushToken');
@@ -55,7 +60,7 @@ class Home extends Component {
                     AsyncStorage.setItem(LOGIN_CHECK, '').then(() => {
                         this.props.navigation.goBack();
                     });  
-                 //   this.props.navigation.navigate("HomeScreen")
+              
                   
                 }).catch(()=>{
                     this._menu.hide();
@@ -65,7 +70,7 @@ class Home extends Component {
             }
             else{
                 this._menu.hide();
-                this.setState({ isModalVisible: true });
+               this.setState({ isModalVisible: true });
             }
 		});
     };
@@ -127,6 +132,10 @@ class Home extends Component {
     // }
 
     componentDidMount(){
+        AsyncStorage.setItem("urgentcareid", this.state.urgent_care_data.key).then(() => {
+
+        });      
+
         // PermissionsAndroid.request(
         //     PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
         //     {
@@ -139,6 +148,8 @@ class Home extends Component {
         //         buttonPositive: 'OK',
         //     },
         // );
+
+
         AsyncStorage.getItem(LOGIN_CHECK).then((val)=>{
             if(val!=null){
                 let userID = firebase.auth().currentUser.uid; 
@@ -152,6 +163,9 @@ class Home extends Component {
                 //do nothing..
             }
         })
+
+        
+
     }
     componentWillUnmount() {
         flag=0;
@@ -231,7 +245,7 @@ class Home extends Component {
         AsyncStorage.getItem(LOGIN_CHECK).then((value) => {
 			if (value != null) {
                 this.props.navigation.navigate("Emergency",{'urgentcareID':this.state.urgent_care_data.first_name})
-              //  this.setState({ isModalVisible: false });
+              this.setState({ isModalVisible: false });
             }
             else{
                 this.setState({ isModalVisible: true });
@@ -263,7 +277,8 @@ class Home extends Component {
 		});
     }
     onAboutUsPressed(){
-        this.props.navigation.navigate("AboutUs");
+       this.props.navigation.navigate("AboutUs");
+      //  this.props.navigation.navigate("AboutUs",{'urgentcareAbout':this.state.urgent_care_data.about})
     }
     onOurLocationPressed(){
         this.props.navigation.navigate("OurLocation");
@@ -294,7 +309,7 @@ class Home extends Component {
                         backgroundColor='white'
                         barStyle='dark-content'
                     />
-                    <TouchableOpacity onPress={() => {this.props.navigation.openDrawer(); } }>
+                    <TouchableOpacity onPress={() => {this.props.navigation.openDrawer() } }>
                         <FontAwesome name="bars" style={{padding: 10, marginLeft:5}} size={22} color="#EA2626"/>
                     </TouchableOpacity>
                     <Title style={styles.titleStyles}>Home</Title>

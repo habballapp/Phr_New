@@ -5,6 +5,9 @@ import AppLogo from "../../../assets/logo.png";
 import { ScrollView } from 'react-native';
 
 export default class AboutUs extends Component{
+
+
+    
     static navigationOptions = ({navigation}) => {
         let drawerLabel = 'About Us';
         let drawerIcon= (                            

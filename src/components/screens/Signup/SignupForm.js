@@ -5,6 +5,7 @@ import Modal from "react-native-modal";
 import { EMAIL_PLACEHOLDER, PASSWORD_PLACEHOLDER, CONFIRM_PASS_PLACEHOLDER, FIRST_NAME, LAST_NAME, TERMS_AND_CONDITIONS,SOCIAL_SECURITY_NO } from "../../../res/strings";
 import { View } from "native-base";
 
+
 export const FormOne = (props) => {
     const { emailChangeHandler, passwordChangeHandler, confirmPasswordHandler } = props;
     return (
@@ -25,6 +26,7 @@ export const FormOne = (props) => {
                 inputStyle={styles.input}
                 blurOnSubmit={true}
                 onChangeText={passwordChangeHandler} />
+               
             <Input
                 placeholder={CONFIRM_PASS_PLACEHOLDER}
                 placeholderTextColor='rgba(0,0,0,0.7)'
@@ -40,8 +42,9 @@ export const FormOne = (props) => {
 
 
 export const FormTwo = (props) => {
-
-   
+    this.state = {
+        checked: false
+    }; 
 
     const { firstNameChangeHandler, lastNameChangeHandler, securityNoChangeHandler,agreementValue, onCheckHandler } = props;
     return (
@@ -78,9 +81,9 @@ export const FormTwo = (props) => {
 
                     <Container ContainerStyle={styles.agreementsContainer}>
                     { Platform.OS === 'android' ? (
-                            <CheckBox onValueChange={(val) => console.log('state', val)} />
+                            <CheckBox onValueChange = {onCheckHandler} value={agreementValue}/>
                         ) : (
-                            <Switch onValueChange = {onCheckHandler} value={this.state.agreementValue}/>
+                            <Switch onValueChange = {onCheckHandler} value={agreementValue}/>
                         ) }
                     <Textview text={TERMS_AND_CONDITIONS} textStyle={styles.termsConditionText} />
                     </Container>

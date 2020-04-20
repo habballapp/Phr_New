@@ -10,6 +10,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import { LOGIN_CHECK } from '../../../constants/StorageConstans';
 
 var user = firebase.auth().currentUser;
+var validatePass = '';
 
 //var urgent_care_data = this.props.navigation.getParam('urgent_care_data');
 
@@ -87,6 +88,11 @@ export default class Signup extends Component {
         })
     }
 
+    componentWillMount() {
+        
+        validatePass = '';
+    }
+
     validateInput(value, key) {
         let isValid = false;
         switch (key) {
@@ -107,7 +113,8 @@ export default class Signup extends Component {
                 break;
 
             case 'securityNo':
-                isValid= value.maxLength >5;
+                isValid= value.length >= 7;
+                break;
 
             default:
                 isValid = false;
@@ -116,43 +123,58 @@ export default class Signup extends Component {
     }
 
     continueSignupHandler = () => {
-        const { email, password, confirmPassword } = this.state.controls;
+        const { email, password, confirmPassword,securityNo} = this.state.controls;
         if (email.valid && password.valid && confirmPassword.valid) {
             console.log('validate', this.state.controls)
-        }
-        if (this.state.swiperIndex == 0) {
-            this.setState({ swiperIndex: 1 })
-            this.refs.swiper.scrollBy(1)
-        }
-        else if (this.state.swiperIndex == 1){
-            firebase.auth().createUserWithEmailAndPassword(email.value,password.value)
-                .then( (user) => {
-                    console.log("asdnaskdnaskd", user);
-                    let userID = firebase.auth().currentUser.uid;
-                    firebase.database().ref('users/').child('patients').child(userID).set({
-                    email:this.state.controls.email.value,    
-                    firstname: this.state.controls.firstName.value,
-                    lastname: this.state.controls.lastName.value,
-                    patientId: userID,
-                    status: 'pending',
-                    Phone:this.state.controls.securityNo.value,
-                    UName: this.state.urgentcareName
-                });
-                     
-                Alert.alert("Your account creation request has been posted to the admin.");
-                    // AsyncStorage.setItem(LOGIN_CHECK, 'true').then(() => {
-                    //     this.props.navigation.goBack();
-                    // });
 
-                  //  this.defaultEmergency();
-                    this.props.navigation.navigate("Home")
-                }) .catch(error => {   
-                    alert(error.message);
-                 })
-
-
-                
+            if (this.state.swiperIndex == 0) {
+                this.setState({ swiperIndex: 1 })
+                this.refs.swiper.scrollBy(1)
             }
+            else if (this.state.swiperIndex == 1){
+    
+                if(securityNo.valid){
+                
+                  if(this.state.agreementState == true){
+                    firebase.auth().createUserWithEmailAndPassword(email.value,password.value)
+                        .then( (user) => {
+                            console.log("asdnaskdnaskd", user);
+                            let userID = firebase.auth().currentUser.uid;
+                            firebase.database().ref('users/').child('patients').child(userID).set({
+                            email:this.state.controls.email.value,    
+                            firstname: this.state.controls.firstName.value,
+                            lastname: this.state.controls.lastName.value,
+                            patientId: userID,
+                            status: 'pending',
+                            Phone:this.state.controls.securityNo.value,
+                            UName: this.state.urgentcareName
+                        });
+                             
+                        Alert.alert("Your account creation request has been posted to the admin.");
+                            // AsyncStorage.setItem(LOGIN_CHECK, 'true').then(() => {
+                            //     this.props.navigation.goBack();
+                            // });
+        
+                          //  this.defaultEmergency();
+                            this.props.navigation.navigate("Home")
+                        }) .catch(error => {   
+                            alert(error.message);
+                         })   
+                        }
+                        else{
+        
+                            Alert.alert("Please Agree to the Terms and Condition First")
+                        }  
+                 }else{
+                             Alert.alert('Enter valid no');
+                 }
+                   
+                }
+            
+        }else {
+                Alert.alert('Password is not valid')   
+        }
+        
         
     }
 
@@ -198,6 +220,7 @@ export default class Signup extends Component {
                                 onCheckHandler={(value) => {
                                     this.setState({agreementState: value})
                                     console.log('Switch 1 is: ' + value)
+                                    console.log(value)
                                  }} />
                         </Swiper>
                         <SignupButtons
@@ -224,5 +247,10 @@ const styles = StyleSheet.create({
     },
     swipeWrapper: {
         height: 250,
+    },
+    invalidInputStyles: {
+        marginTop: 5,
+        alignSelf: 'center',
+        color: 'red'
     }
 })

@@ -4,12 +4,14 @@ import {
   TouchableOpacity,
   StyleSheet,
   Platform,
-  FlatList
+  FlatList,
+  ActivityIndicator
 } from 'react-native';
 import {Header, Title, Icon} from 'native-base';
 import {Button as NavButton} from 'native-base';
 import firebase from 'react-native-firebase';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import AsyncStorage from '@react-native-community/async-storage'
 
 import {Statusbar, Container, Textview, ImageView} from '../../default';
 import Swiper from 'react-native-swiper'
@@ -17,11 +19,16 @@ import Swiper from 'react-native-swiper'
 var arr_images = [];
 var s = [];
 
+
 export default class HealthTips extends Component{
     constructor(props){
         super(props);
+        // urgentcareid = this.props.navigation.getParam('urgentcareID');
+        // if(urgentcareid === undefined)
+        // urgentcareid = global.urgentcareid;
         this.state={
-            urgentcareID: this.props.navigation.getParam('urgentcareID'), 
+            loading:true,
+            // urgentcareID: urgentcareid, 
             swiperIndex: 0,
             imagesSlider:[
                 require('./tip01.jpg'),
@@ -33,6 +40,9 @@ export default class HealthTips extends Component{
             ],
             images: []
         }
+        
+        
+
     }
     static navigationOptions = ({navigation}) => {
         let drawerLabel = 'Health Tips';
@@ -43,24 +53,40 @@ export default class HealthTips extends Component{
     }
 
     componentDidMount(){
-        this.takeAppointments();
+        this.setState({loading:true});
+		AsyncStorage.getItem("urgentcareid").then((value) => {
+			if (value != null) {
+				this.setState({ urgentcareID: value })
+                this.takeAppointments();
+			}
+			this.setState({ loading: false })
+		});
+
+        
+
     }
 
     takeAppointments(){
        // let userID = firebase.auth().currentUser.uid;
+       console.log("arr_images",this.state.urgentcareID);
         var dbref = firebase.database().ref(`users/urgentcare/${this.state.urgentcareID}/splashImages/`);
         dbref.on("value", (snapshot)=>{
             arr_images = snapshot._value;
             console.log("arr_images", arr_images);
             this.setState({images: arr_images}, ()=>{
-                arr_images = [];
+               
                 console.log("arr_images123", this.state.images);
+                arr_images = [];
             })                        
         })
+        this.setState({loading:false});
+
+        
     }
    
     render(){
         return(
+            this.state.loading ? <ActivityIndicator size="large" color="#EA2626" style={{flex:1,alignSelf:'center'}} /> :
             <Container ContainerStyle={{flex:1}}>
                  <Header style={{flexDirection:'row',alignItems:'center',backgroundColor:'#fff',height:70}}>
                     <Statusbar 
@@ -84,7 +110,7 @@ export default class HealthTips extends Component{
                             activeDot={<Container></Container>}
                             >
                             {
-                                this.state.images.map && this.state.images.map( (item, i) =>  (
+                                this.state.images.map && this.state.images.map( (item) =>  (
                                     <Container ContainerStyle={{flex:1, backgroundColor:'white', alignItems:'center',width:'100%'}}>
                                         <ImageView imageStyle={{width:'100%',height:400}} imgSource={ { uri: item.URL } }/>
                                     </Container>
