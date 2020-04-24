@@ -71,7 +71,11 @@ export default class HealthTips extends Component{
        console.log("arr_images",this.state.urgentcareID);
         var dbref = firebase.database().ref(`users/urgentcare/${this.state.urgentcareID}/splashImages/`);
         dbref.on("value", (snapshot)=>{
-            arr_images = snapshot._value;
+            snapshot.forEach((data)=>{
+                arr_images.push(data.val())
+               // console.log("snapshot urgent care... ",arr_images)
+            })
+          //  arr_images = snapshot._value;
             console.log("arr_images", arr_images);
             this.setState({images: arr_images}, ()=>{
                

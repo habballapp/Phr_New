@@ -34,6 +34,8 @@ export default class Login extends Component {
 
     onLoginPressed() {
         if(this.state.email!='' && this.state.password!=''){
+            console.log("email", this.state.email);
+            console.log("password", this.state.password);
             firebase.auth().signInWithEmailAndPassword(this.state.email,this.state.password)
             .then(()=>{
                 this.onCheckStatuts();
@@ -140,14 +142,20 @@ export default class Login extends Component {
                         <Button onPress={() => { }} title="FORGET PASSWORD?" style={styles.forgetPasswordButton} textStyle={styles.forgetPasswordStyle} />
                         <Button onPress={() => this.props.navigation.push('SignUp')} title={SIGNUP_TEXT} style={styles.signup} textStyle={styles.signuphere} />
                     </Container>
-                </Scrollview>
-
-                <Container ContainerStyle={{alignSelf:'center', justifyContent:'center', flexDirection:'row' ,marginTop:10,
+ 
+                    
+                    <Container ContainerStyle={{alignSelf:'center', justifyContent:'center', flexDirection:'row' ,marginTop:30,bottom:0,
                                 position:'absolute', bottom:0}}>
                             <Textview >
                                 Powered by Matz Group©
                             </Textview>
                         </Container>
+
+                    
+                </Scrollview>
+
+             
+               
             </SafeViewArea>
         );
     }

@@ -9,6 +9,7 @@
     "dependencies": {
         "@react-native-community/async-storage": "^1.6.1",
         "@react-native-community/datetimepicker": "^2.1.0",
+        "@react-native-community/google-signin": "^4.0.0",
         "accordion-collapse-react-native": "^0.1.11",
         "moment": "^2.24.0",
         "native-base": "^2.13.5",

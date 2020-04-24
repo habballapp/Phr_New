@@ -44,7 +44,7 @@ export default class Walkthrough extends Component {
       title: 'Track your Appointments', 
       des: 'You can track the appointments history which you scheduled from any specific doctor.',
       imageSource: require('../../../assets/schedule_history.png'),
-      lastPageKey: false
+      lastPageKey: true
     },
     {
       lastPageKey: true
@@ -82,7 +82,7 @@ export default class Walkthrough extends Component {
     console.log("onIndexChanged>>> newIndex>>", newIndex);
     this.index = newIndex+1;
     if(newIndex > 0){ //middle page
-      if (newIndex == 5){ //end page
+      if (newIndex == 4){ //end page
         this.updateStates(false, true);
       }
       else{

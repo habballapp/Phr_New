@@ -20,10 +20,17 @@ var flag_emergency=0;
 class Home extends Component {
     constructor(props){
         super(props);
-        // global.urgentcareid = this.props.navigation.getParam('urgent_care_data').key;
-        // console.log("global.urgentcareid_1", this.props.navigation.getParam('urgent_care_data'));
-        // console.log("global.urgentcareid_2", this.props.navigation.getParam('urgent_care_data').key);
-        // console.log("global.urgentcareid_3", global.urgentcareid);
+        var urgentcareid = this.props.navigation.getParam('urgent_care_data').key;
+        // AsyncStorage.setItem("urgentcareid", urgentcareid).then(() => {
+
+        //     console.log("setKey", "urgent care id is set to be " + urgentcareid);
+        // });  
+
+        global.urgentcareid = this.props.navigation.getParam('urgent_care_data').key;
+        global.urgentname = this.props.navigation.getParam('urgent_care_data').first_name;
+        console.log("global.urgentcareid_1", this.props.navigation.getParam('urgent_care_data'));
+        console.log("global.urgentcareid_2", this.props.navigation.getParam('urgent_care_data').key);
+        console.log("global.urgentcareid_3", global.urgentcareid);
         this.state = {
             loading:false,
             urgentcares:'',
@@ -81,8 +88,8 @@ class Home extends Component {
 
 
     onHomeIconPressed(){
-        let Number_ = 123456;
-        let phoneNumber = 123456;
+        let Number_ = this.state.urgent_care_data.pnumber;
+        let phoneNumber = Number_;
         if (Platform.OS !== 'android') {
             phoneNumber = `telprompt:${Number_}`;
         }
@@ -239,7 +246,17 @@ class Home extends Component {
         this.props.navigation.navigate("HealthTips",{'urgentcareID':this.state.urgent_care_data.key})
     }
     onServicesPressed(){
-        this.props.navigation.navigate("Services")
+
+        AsyncStorage.getItem(LOGIN_CHECK).then((value) => {
+			if (value != null) {
+                this.props.navigation.navigate("Services")
+              this.setState({ isModalVisible: false });
+            }
+            else{
+                this.setState({ isModalVisible: true });
+            }
+		});
+      
     }
     onEmergencyPressed(){
         AsyncStorage.getItem(LOGIN_CHECK).then((value) => {
@@ -334,7 +351,7 @@ class Home extends Component {
                         <Button textStyle={styles.loginButtonText} title="Book an Appointment" style={{marginRight:10,borderRadius:10,borderWidth:1.5, borderColor:'black',backgroundColor:'#EA2626', height:100,width:100, alignSelf:'center', marginBottom:20, justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onDoctorPress()}}>
                             <MaterialCommunityIcons name="calendar-clock" size={32} color="white"/>
                         </Button>
-                        <Button textStyle={styles.loginButtonText} title="Our Services" style={{marginRight:10,borderWidth:1.5,borderRadius:10, borderColor:'black',backgroundColor:'#EA2626',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{ this.onServicesPressed()}}>
+                        <Button textStyle={styles.loginButtonText} title="Add Prescription" style={{marginRight:10,borderWidth:1.5,borderRadius:10, borderColor:'black',backgroundColor:'#EA2626',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{ this.onServicesPressed()}}>
                             <FontAwesome name="handshake-o" size={32} color="white"/>
                         </Button>
                         <Button textStyle={styles.loginButtonText} title="View Health Tips" style={{borderWidth:1.5,borderRadius:10, borderColor:'black', backgroundColor:'#EA2626',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onHealthTipsPressed()}}>

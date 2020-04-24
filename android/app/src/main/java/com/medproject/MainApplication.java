@@ -32,6 +32,8 @@ import java.util.List;
 
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.auth.RNFirebaseAuthPackage;
+import co.apptailor.googlesignin.RNGoogleSigninPackage;
+
 import io.invertase.firebase.database.RNFirebaseDatabasePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
@@ -51,6 +53,8 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new RNAudioRecordPackage(),
+            new RNGoogleSigninPackage(), // <-- this needs to be in the list
+
             new RNSoundPackage(),
             new ReactNativeAudioPackage(),
             new DocumentPickerPackage(),

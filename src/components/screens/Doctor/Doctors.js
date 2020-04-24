@@ -79,7 +79,8 @@ class Doctors extends Component{
        
         this.setState({close:false,search:search})
         let doctor = copyDoctorsList.filter((item) => {
-            return String(item.first_name.toLowerCase()).includes(search.toLowerCase())
+            // return String(item.first_name.toLowerCase()).includes(search.toLowerCase())
+            return String(item.first_name.toLowerCase()).startsWith(search.toLowerCase())
         })
         this.setState({
             doctorsList: doctor
@@ -99,7 +100,14 @@ class Doctors extends Component{
             })
            //  uc_data
           
-            urgentcares = uc_data
+           function compare(a, b) {
+            if (a.first_name.toLowerCase() > b.first_name.toLowerCase()) return 1;
+            if (b.first_name.toLowerCase() > a.first_name.toLowerCase()) return -1;
+          
+            return 0;
+          }
+
+            urgentcares = uc_data.sort(compare);
             
             uc_data = [];
             if(urgentcares != null || urgentcares != undefined || urgentcares != ''){

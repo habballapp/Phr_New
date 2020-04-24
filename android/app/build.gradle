@@ -191,6 +191,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.google.android.gms:play-services-maps:10.0.1'
     implementation project(':react-native-file-viewer')
+    implementation(project(":react-native-google-signin"))
+
 
 }
 
