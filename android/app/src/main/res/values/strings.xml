@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">UrgentCare</string>
+    <string name="facebook_app_id">660913461360311</string>
+    <string name="fb_login_protocol_scheme">fb660913461360311</string>
 </resources>

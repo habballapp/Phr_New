@@ -33,6 +33,8 @@ target 'medproject' do
 
     pod 'RNAudioRecord', :path => '../node_modules/react-native-audio-record'
 
+    pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
+
   end
 
   target 'medprojectTests' do
