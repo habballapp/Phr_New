@@ -55,6 +55,7 @@ export const styles = StyleSheet.create({
     },
     signup: {
         marginTop: 20,
+        marginBottom:100
     },
     signuphere:{
         fontSize: 18,

@@ -141,7 +141,9 @@ export default class Signup extends Component {
                                     Alert.alert(
                                         "Your account is not Approved by the Admin yet."
                                     );
+                                    
                                     console.log("pending", "status is pending");
+                                   
                                 } else {
                                     AsyncStorage.setItem(LOGIN_CHECK, "true").then(() => {
                                         this.props.navigation.goBack();
@@ -525,14 +527,14 @@ export default class Signup extends Component {
                             height: 50,
                             borderRadius: 10,
                             backgroundColor: "#EA2626",
-                            height: 45,
+                            height: 50,
                             width: 270,
                             alignItems: "center",
                             flexDirection: "row",
                             marginTop: 20,
                             marginBottom: 120,
-                            marginLeft: 100,
-                            marginRight: 30,
+                            marginLeft: 110,
+                            marginRight: 20,
                         }}
                         textStyle={{ fontSize: 18, color: "white", marginLeft: 15 }}
                         onPress={() => {
@@ -609,9 +611,11 @@ export default class Signup extends Component {
                                         marginRight: 10,
                                         marginLeft: 10,
                                         backgroundColor: "#EA2626",
-                                        borderRadius: 15
+                                        borderRadius: 15,
+                                        justifyContent: 'center'
+                                        
                                     }}
-                                    textStyle={{ fontSize: 18, color: "white", marginLeft: 15 }}
+                                    textStyle={{ fontSize: 16, color: "white", marginLeft: 15,fontWeight: 'bold'}}
                                     onPress={() => {
                                         this.onFacebookSignInPress();
                                     }}
@@ -675,14 +679,20 @@ const styles = StyleSheet.create({
         height: 60,
     },
     ModalButton: {
-        marginTop: 15,
-        width: "30%",
+        marginTop: 10,
+        width: 90,
         borderRadius: 15,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#EA2626",
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#EA2626',
         height: 40,
-        marginRight: 5,
-        marginBottom: 10,
+        alignSelf:'center',
+        marginRight:10,
+        marginBottom:10
     },
+    ModalButtonText: {
+        fontWeight: 'bold',
+        color: 'white',
+        fontSize: 16
+    }
 });
