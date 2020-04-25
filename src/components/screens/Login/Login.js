@@ -20,21 +20,25 @@ import {
     GoogleSignin,
     statusCodes,
 } from "@react-native-community/google-signin";
+import { LoginManager, AccessToken } from "react-native-fbsdk";
 
 var validateEmail = '';
 var validatePass = '';
+let that = this;
 
 export default class Login extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             email: '',
             password: '',
             isLoading: false,
             error: false,
         }
-        this.onLoginPressed = this.onLoginPressed.bind(this)
+        this.onLoginPressed = this.onLoginPressed.bind(this);
+        this.navigate = this.props.navigation.navigate.bind(this);
     }
 
     onLoginPressed() {
@@ -77,9 +81,137 @@ export default class Login extends Component {
         })
     }
 
+    onGoogleSignInPress = async () => {
+        try {
+            await GoogleSignin.hasPlayServices();
+            const userInfo = await GoogleSignin.signIn();
+            // setUserInfo(userInfo)
+            console.log("userInfo", userInfo);
+            const credential = firebase.auth.GoogleAuthProvider.credential(userInfo.idToken, userInfo.accessToken)
+            console.log("userInfo_credential", credential);
+
+            firebase
+                .auth()
+                .signInWithCredential(credential)
+                .then((user) => {
+                    console.log("user", user);
+                    console.log(user.user.uid);
+                    console.log("this.state.urgentcareName", this.state.urgentcareName);
+                    console.log("this.state.number", this.state.number);
+
+                    var dbref = firebase
+                        .database()
+                        .ref(`users/patients/${user.user.uid}/`);
+                    dbref.on("value", (snapshot) => {
+                        console.log("snapshot exist", snapshot.exists())
+                        if (!snapshot.exists()) {
+                            Alert.alert(
+                                "User does not exist, kindly register to login with this credentials."
+                            );
+                        } else {
+                            console.log("snapshot", snapshot);
+                            console.log(snapshot);
+                            if (snapshot._value.status !== undefined) {
+                                if (snapshot._value.status == "pending") {
+                                    Alert.alert(
+                                        "Your account is not Approved by the Admin yet."
+                                    );
+
+                                    console.log("pending", "status is pending");
+
+                                } else {
+                                    AsyncStorage.setItem(LOGIN_CHECK, "true").then(() => {
+                                        this.props.navigation.goBack();
+                                    });
+                                }
+                            }
+                        }
+                    });
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        } catch (error) {
+            if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+                // when user cancels sign in process,
+                Alert.alert("Process Cancelled");
+            } else if (error.code === statusCodes.IN_PROGRESS) {
+                // when in progress already
+                Alert.alert("Process in progress");
+            } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+                // when play services not available
+                Alert.alert("Play services are not available");
+            } else {
+                // some other error
+                Alert.alert("Something else went wrong... ", error.toString());
+                // setError(error)
+                console.log("error", error);
+            }
+        }
+    };
+
+    navigateBack() {
+        AsyncStorage.setItem(LOGIN_CHECK, 'true').then(() => {
+            this.props.navigation.goBack();
+        });
+    }
 
 
+    onFacebookSignInPress() {
+        LoginManager.logInWithPermissions(["public_profile", "email"]).then(
+            (result) => {
+                if (result.isCancelled) {
+                    console.log("Login cancelled");
+                } else {
+                    AccessToken.getCurrentAccessToken().then((data) => {
+                        const credential = firebase.auth.FacebookAuthProvider.credential(
+                            data.accessToken
+                        );
 
+                        firebase
+                            .auth()
+                            .signInWithCredential(credential)
+                            .then((user) => {
+                                console.log("user", user);
+
+                                var dbref = firebase
+                                    .database()
+                                    .ref(`users/patients/${user.user.uid}/`);
+                                dbref.on("value", (snapshot) => {
+                                    if (!snapshot.exists()) {
+                                        Alert.alert(
+                                            "User does not exist, kindly register to login with this credentials."
+                                        );
+
+                                        // this.props.navigation.navigate("Home");
+                                    } else {
+                                        console.log("snapshot", snapshot);
+                                        if (snapshot._value.status == "pending") {
+                                            Alert.alert(
+                                                "Your account is not Approved by the Admin yet."
+                                            );
+                                            console.log("pending", "status is pending");
+                                            // this.props.navigation.navigate("Home");
+                                        } else {
+                                            AsyncStorage.setItem(LOGIN_CHECK, 'true').then(() => {
+                                            this.props.navigation.navigate("Home");
+                                            // this.navigate('Home');
+                                            });
+                                        }
+                                    }
+                                });
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            });
+                    });
+                }
+            },
+            (error) => {
+                console.log("Login fail with error: " + error);
+            }
+        );
+    }
 
     handleEmailChange(event) {
         this.setState({
@@ -104,6 +236,14 @@ export default class Login extends Component {
         } else {
             validatePass = <Container></Container>;
         }
+    }
+
+    componentDidMount() {
+        GoogleSignin.configure({
+            webClientId:
+                "1094017099438-avdi1s0dt309v64k24m1qkj5bh1835nm.apps.googleusercontent.com",
+            scopes: ["profile", "email"],
+        });
     }
 
     componentWillMount() {
@@ -155,7 +295,7 @@ export default class Login extends Component {
                             }}
                             size={GoogleSigninButton.Size.Wide}
                             color={GoogleSigninButton.Color.Light}
-                            onPress={this.signIn}
+                            onPress={this.onGoogleSignInPress}
                         />
 
                         <Button

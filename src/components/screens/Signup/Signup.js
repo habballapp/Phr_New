@@ -156,44 +156,6 @@ export default class Signup extends Component {
                 .catch((error) => {
                     console.log(error);
                 });
-            //   let userID = userInfo.user.id;
-            //   console.log("userPass", this.state.password);
-            //   firebase
-            //     .auth()
-            //     .createUserWithEmailAndPassword(
-            //       userInfo.user.email,
-            //       this.state.password
-            //     )
-            //     .then((user) => {
-            //       console.log("Google uSER:", user);
-            //       let userID = firebase.auth().currentUser.uid;
-            //       firebase
-            //         .database()
-            //         .ref("users/")
-            //         .child("patients")
-            //         .child(userID)
-            //         .set({
-            //           email: userInfo.user.email,
-            //           firstname: userInfo.user.givenName,
-            //           lastname: userInfo.user.familyName,
-            //           patientId: userID,
-            //           status: "pending",
-            //           Phone: this.state.number,
-            //           UName: this.state.urgentcareName,
-            //           TypeOfUser: "GMAIL",
-            //         });
-
-            //       Alert.alert(
-            //         "Your account creation request has been posted to the admin."
-            //       );
-            //       this.props.navigation.navigate("Home");
-            //     })
-            //     .catch((error) => {
-            //       alert(error.message);
-            //     });
-
-            // setError(null)
-            // setIsLoggedIn(true)
         } catch (error) {
             if (error.code === statusCodes.SIGN_IN_CANCELLED) {
                 // when user cancels sign in process,
@@ -264,7 +226,7 @@ export default class Signup extends Component {
 
     onFacebookSignInPress() {
         LoginManager.logInWithPermissions(["public_profile", "email"]).then(
-            function (result) {
+            (result) => {
                 if (result.isCancelled) {
                     console.log("Login cancelled");
                 } else {
@@ -327,7 +289,7 @@ export default class Signup extends Component {
                     });
                 }
             },
-            function (error) {
+            (error) => {
                 console.log("Login fail with error: " + error);
             }
         );
