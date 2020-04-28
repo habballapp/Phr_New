@@ -26,9 +26,11 @@ export default class EmergencyScreen extends Component{
             numberToBeAdded: 0,
             relationToBeAdded:'default',
             defnumberToBeAdded: 555-22-33,
-            defrelationToBeAdded:'Rescue'
+            defrelationToBeAdded:'Rescue',
             // UrgentCareNo:255-55-66,
             // UrgentCareName:this.props.navigation.getParam('urgentcareName')
+            UrgentCare : this.props.navigation.getParam('urgentcare')
+            
 
         }
     }
@@ -167,8 +169,8 @@ export default class EmergencyScreen extends Component{
 
 
     onHomeIconPressed(){
-        let Number_ = 123456;
-        let phoneNumber = 123456;
+        let Number_ =this.state.UrgentCare.pnumber;
+        let phoneNumber = Number_;
         if (Platform.OS !== 'android') {
             phoneNumber = `telprompt:${Number_}`;
         }

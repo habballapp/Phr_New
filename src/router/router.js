@@ -14,14 +14,17 @@ import Signup from '../components/screens/Signup/Signup';
 import Doctors from '../components/screens/Doctor/Doctors';
 import BookAppointment from '../components/screens/Appointment/BookAppointment';
 import HealthTips from "../components/screens/HealthTips/Healthtips";
-import Services from "../components/screens/Services/Services";
+import Insurance from "../components/screens/Insurance/Insurance";
 import EmergencyScreen from "../components/screens/Emergency/EmergencyScreen";
+import Prescription from "../components/screens/Prescription/Prescription";
 
 // importing side drawer component props
 import { DrawerNavigationConfig } from "./SideDrawer";
+import Services from "../components/screens/Services/Services";
 import OurLocation from "../components/screens/OurLocation/OurLocation";
 import ContactUs from "../components/screens/ContactUs/ContactUs";
 import AboutUs from "../components/screens/AboutUs/AboutUs";
+
 import ChatScreen from "../components/screens/chat/ChatScreen";
 import AppointmentHistory from "../components/screens/Appointment/AppointmentHistory";
 
@@ -63,6 +66,14 @@ const ApplicationStackScreen = createStackNavigator({
   },
   AboutUs:{
     screen:AboutUs,
+    navigationOptions: NonHeaderProps
+  },
+  Prescription:{
+    screen:Prescription,
+    navigationOptions: NonHeaderProps
+  },
+  Insurance:{
+    screen:Insurance,
     navigationOptions: NonHeaderProps
   },
   OurLocation:{

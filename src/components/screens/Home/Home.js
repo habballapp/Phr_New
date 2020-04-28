@@ -25,12 +25,13 @@ class Home extends Component {
 
         //     console.log("setKey", "urgent care id is set to be " + urgentcareid);
         // });  
-
+        global.urgentcare_data = this.props.navigation.getParam('urgent_care_data');
         global.urgentcareid = this.props.navigation.getParam('urgent_care_data').key;
         global.urgentname = this.props.navigation.getParam('urgent_care_data').first_name;
-        console.log("global.urgentcareid_1", this.props.navigation.getParam('urgent_care_data'));
-        console.log("global.urgentcareid_2", this.props.navigation.getParam('urgent_care_data').key);
-        console.log("global.urgentcareid_3", global.urgentcareid);
+        // console.log("global.urgentcareid_1", this.props.navigation.getParam('urgent_care_data'));
+        // console.log("global.urgentcareid_2", this.props.navigation.getParam('urgent_care_data').key);
+        // console.log("global.urgentcareid_3", global.urgentcareid);
+      
         this.state = {
             loading:false,
             urgentcares:'',
@@ -39,6 +40,7 @@ class Home extends Component {
             
             urgent_care_data:this.props.navigation.getParam('urgent_care_data')
         }
+        console.log("UrgentCare",this.state.urgent_care_data)
     }
     static navigationOptions = ({navigation}) => {
         let drawerLabel = 'Home';
@@ -142,6 +144,9 @@ class Home extends Component {
         AsyncStorage.setItem("urgentcareid", this.state.urgent_care_data.key).then(() => {
 
         });      
+
+
+        
 
         // PermissionsAndroid.request(
         //     PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
@@ -249,7 +254,7 @@ class Home extends Component {
 
         AsyncStorage.getItem(LOGIN_CHECK).then((value) => {
 			if (value != null) {
-                this.props.navigation.navigate("Services")
+                this.props.navigation.navigate("Prescription")
               this.setState({ isModalVisible: false });
             }
             else{
@@ -261,7 +266,7 @@ class Home extends Component {
     onEmergencyPressed(){
         AsyncStorage.getItem(LOGIN_CHECK).then((value) => {
 			if (value != null) {
-                this.props.navigation.navigate("Emergency",{'urgentcareID':this.state.urgent_care_data.first_name})
+                this.props.navigation.navigate("Emergency",{'urgentcare':this.state.urgent_care_data})
               this.setState({ isModalVisible: false });
             }
             else{
@@ -294,11 +299,16 @@ class Home extends Component {
 		});
     }
     onAboutUsPressed(){
-       this.props.navigation.navigate("AboutUs");
+       
+        this.props.navigation.navigate("Insurance",{'urgentcareID':this.state.urgent_care_data.key})
+
+     //  this.props.navigation.navigate("AboutUs");
       //  this.props.navigation.navigate("AboutUs",{'urgentcareAbout':this.state.urgent_care_data.about})
     }
     onOurLocationPressed(){
-        this.props.navigation.navigate("OurLocation");
+       // this.props.navigation.navigate("OurLocation");
+        this.props.navigation.navigate("OurLocation",{'urgentcare':this.state.urgent_care_data})
+
     }
 
     toggleModal = () => {
@@ -352,15 +362,15 @@ class Home extends Component {
                             <MaterialCommunityIcons name="calendar-clock" size={32} color="white"/>
                         </Button>
                         <Button textStyle={styles.loginButtonText} title="Add Prescription" style={{marginRight:10,borderWidth:1.5,borderRadius:10, borderColor:'black',backgroundColor:'#EA2626',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{ this.onServicesPressed()}}>
-                            <FontAwesome name="handshake-o" size={32} color="white"/>
+                            <FontAwesome name="ambulance" size={32} color="white"/>
                         </Button>
                         <Button textStyle={styles.loginButtonText} title="View Health Tips" style={{borderWidth:1.5,borderRadius:10, borderColor:'black', backgroundColor:'#EA2626',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onHealthTipsPressed()}}>
                             <MaterialCommunityIcons name="lightbulb-on-outline" size={32} color="white"/>    
                         </Button>                        
                     </Container>    
                     <Container ContainerStyle={{alignSelf:'center', justifyContent:'center', flexDirection:'row' ,marginTop:10,}}>
-                        <Button textStyle={styles.loginButtonText} title="About Us" style={{marginRight:10,borderRadius:10,borderWidth:1.5, borderColor:'black',backgroundColor:'#EA2626', height:100,width:100, alignSelf:'center', marginBottom:20, justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onAboutUsPressed()}}>
-                            <MaterialCommunityIcons name="information-outline" size={32} color="white"/>
+                        <Button textStyle={styles.loginButtonText} title="View Insurance" style={{marginRight:10,borderRadius:10,borderWidth:1.5, borderColor:'black',backgroundColor:'#EA2626', height:100,width:100, alignSelf:'center', marginBottom:20, justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onAboutUsPressed()}}>
+                             <FontAwesome name="medkit" size={32} color="white"/>
                         </Button>
                         <Button textStyle={styles.loginButtonText} title="Our Location" style={{marginRight:10,borderWidth:1.5,borderRadius:10, borderColor:'black',backgroundColor:'#EA2626',  height:100,width:100, alignSelf:'center', marginBottom:20,justifyContent:'center',alignItems:'center'}} onPress={()=>{this.onOurLocationPressed()}}>
                             <MaterialCommunityIcons name="map-marker" size={32} color="white"/>    

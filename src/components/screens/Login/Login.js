@@ -21,6 +21,8 @@ import {
     statusCodes,
 } from "@react-native-community/google-signin";
 import { LoginManager, AccessToken } from "react-native-fbsdk";
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
+
 
 var validateEmail = '';
 var validatePass = '';
@@ -284,7 +286,7 @@ export default class Login extends Component {
                             validatePass ? validatePass : <Container></Container>
                         }
                         <Button onPress={this.onLoginPressed} title="Login" style={styles.loginButtonStyles} textStyle={styles.loginButtonText} />
-                        <GoogleSigninButton
+                        {/* <GoogleSigninButton
                             style={{
                                 width: 220,
                                 height: 48,
@@ -316,7 +318,27 @@ export default class Login extends Component {
                                 this.onFacebookSignInPress();
                             }}
                             title="SignIn with Facebook"
-                        ></Button>
+                        ></Button> */}
+                         <Container ContainerStyle={{padding:7}}></Container>
+                         <Button
+                                style={{ borderRadius: 5, backgroundColor: '#EA2626', height: 45, width: 300, alignItems: 'center', flexDirection: 'row' }}
+                                textStyle={{ fontSize: 18, color: 'white', marginLeft: 15 }}
+                                onPress={() => {
+                                    this.onGoogleSignInPress();
+                                }}
+                                title="Sign in with Google">
+                                <FontAwesomeIcon name='google' size={25} style={{ marginLeft: 12, color: '#fff' }} />
+                            </Button>
+                            <Container ContainerStyle={{padding:7}}></Container>
+                            <Button
+                                style={{ borderRadius: 5, backgroundColor: '#EA2626', height: 45, width: 300, alignItems: 'center', flexDirection: 'row' }}
+                                textStyle={{ fontSize: 18, color: 'white', marginLeft: 15 }}
+                                onPress={() => {
+                                    this.onFacebookSignInPress();
+                                }}
+                                title="Signin with Facebook">
+                                <FontAwesomeIcon name='facebook' size={25} style={{ marginLeft: 12, color: '#fff' }} />
+                            </Button>
                         <Button onPress={() => { }} title="FORGET PASSWORD?" style={styles.forgetPasswordButton} textStyle={styles.forgetPasswordStyle} />
                         <Button onPress={() => this.props.navigation.push('SignUp')} title={SIGNUP_TEXT} style={styles.signup} textStyle={styles.signuphere} />
                     </Container>

@@ -23,7 +23,7 @@ import {
     statusCodes,
 } from "@react-native-community/google-signin";
 import { LoginManager, AccessToken } from "react-native-fbsdk";
-
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 //var user = firebase.auth().currentUser;
 var validatePass = "";
 
@@ -105,6 +105,8 @@ export default class Signup extends Component {
                 .then((user) => {
                     console.log("user", user);
                     console.log(user.user.uid);
+                    console.log("First name", user.additionalUserInfo.profile.name);
+                    console.log("Last  name", user.additionalUserInfo.profile.family_name);
                     console.log("this.state.urgentcareName", this.state.urgentcareName);
                     console.log("this.state.number", this.state.number);
 
@@ -120,9 +122,9 @@ export default class Signup extends Component {
                                 .child("patients")
                                 .child(user.user.uid)
                                 .set({
-                                    email: user.additionalUserInfo.email,
-                                    firstname: user.additionalUserInfo.givenName,
-                                    lastname: user.additionalUserInfo.familyName,
+                                    email: user.additionalUserInfo.profile.email,
+                                    firstname: user.additionalUserInfo.profile.name,
+                                    lastname: user.additionalUserInfo.profile.family_name,
                                     patientId: user.user.uid,
                                     status: "pending",
                                     Phone: this.state.number,
@@ -141,9 +143,9 @@ export default class Signup extends Component {
                                     Alert.alert(
                                         "Your account is not Approved by the Admin yet."
                                     );
-                                    
+
                                     console.log("pending", "status is pending");
-                                   
+
                                 } else {
                                     AsyncStorage.setItem(LOGIN_CHECK, "true").then(() => {
                                         this.props.navigation.goBack();
@@ -265,7 +267,7 @@ export default class Signup extends Component {
                                         Alert.alert(
                                             "Your account creation request has been posted to the admin."
                                         );
-                                        
+
                                         this.props.navigation.navigate("Home");
                                     } else {
                                         console.log("snapshot", snapshot);
@@ -485,24 +487,21 @@ export default class Signup extends Component {
 
                     <Button
                         style={{
-                            justifyContent: "center",
-                            height: 50,
+                            width:"90%",
                             borderRadius: 10,
-                            backgroundColor: "#EA2626",
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            backgroundColor: '#EA2626',
                             height: 50,
-                            width: 270,
-                            alignItems: "center",
-                            flexDirection: "row",
+                            alignSelf:'center',
                             marginTop: 20,
-                            marginBottom: 120,
-                            marginLeft: 110,
-                            marginRight: 20,
+                            marginBottom:30
                         }}
                         textStyle={{ fontSize: 18, color: "white", marginLeft: 15 }}
                         onPress={() => {
                             this.onGoogleSignInPress();
                         }}
-                        title="Register with Google/FB"
+                        title="Register with Google/Facebook"
                     ></Button>
 
                     <Modal
@@ -551,7 +550,7 @@ export default class Signup extends Component {
                                     alignItems: "center",
                                 }}
                             > */}
-                                <GoogleSigninButton
+                            {/* <GoogleSigninButton
                                     style={{
                                         width: 220,
                                         height: 48,
@@ -563,34 +562,56 @@ export default class Signup extends Component {
                                     size={GoogleSigninButton.Size.Wide}
                                     color={GoogleSigninButton.Color.Light}
                                     onPress={this.signIn}
-                                />
-                                <Button
-                                    style={{
-                                        width: 220,
-                                        height: 48,
-                                        alignSelf: "center",
-                                        marginTop: 10,
-                                        marginRight: 10,
-                                        marginLeft: 10,
-                                        backgroundColor: "#EA2626",
-                                        borderRadius: 15,
-                                        justifyContent: 'center'
-                                        
-                                    }}
-                                    textStyle={{ fontSize: 16, color: "white", marginLeft: 15,fontWeight: 'bold'}}
-                                    onPress={() => {
-                                        this.onFacebookSignInPress();
-                                    }}
-                                    title="Register with Facebook"
-                                ></Button>
-                                <Button
-                                    title="Cancel"
-                                    style={styles.ModalButton}
-                                    textStyle={styles.ModalButtonText}
-                                    onPress={() => {
-                                        this.onCancelPressed();
-                                    }}
-                                />
+                                /> */}
+
+                            {/* <Button
+                                style={{
+                                    width: 220,
+                                    height: 48,
+                                    alignSelf: "center",
+                                    marginTop: 10,
+                                    marginRight: 10,
+                                    marginLeft: 10,
+                                    backgroundColor: "#EA2626",
+                                    borderRadius: 15,
+                                    justifyContent: 'center',
+
+                                }}
+                                textStyle={{ fontSize: 16, color: "white", marginLeft: 15, fontWeight: 'bold' }}
+                                onPress={() => {
+                                    this.signIn();
+                                }}
+                                title="Register with Google">
+                                <FontAwesomeIcon name='google' size={20} style={{ marginLeft: 12, color: '#fff' }} />
+                            </Button> */}
+
+                            <Button
+                                style={{ borderRadius: 5, backgroundColor: '#EA2626', height: 45,  width: "100%", alignItems: 'center', flexDirection: 'row' }}
+                                textStyle={{ fontSize: 18, color: 'white', marginLeft: 15 }}
+                                onPress={() => {
+                                    this.signIn();
+                                }}
+                                title="Register with Google">
+                                <FontAwesomeIcon name='google' size={25} style={{ marginLeft: 12, color: '#fff' }} />
+                            </Button>
+                            <Container ContainerStyle={{padding:7}}></Container>
+                            <Button
+                                style={{ borderRadius: 5, backgroundColor: '#EA2626', height: 45,  width: "100%", alignItems: 'center', flexDirection: 'row' }}
+                                textStyle={{ fontSize: 18, color: 'white', marginLeft: 15 }}
+                                onPress={() => {
+                                    this.onFacebookSignInPress();
+                                }}
+                                title="Register with Facebook">
+                                <FontAwesomeIcon name='facebook' size={25} style={{ marginLeft: 12, color: '#fff' }} />
+                            </Button>
+                            <Button
+                                title="Cancel"
+                                style={styles.ModalButton}
+                                textStyle={styles.ModalButtonText}
+                                onPress={() => {
+                                    this.onCancelPressed();
+                                }}
+                            />
                             {/* </Container> */}
                         </Container>
                     </Modal>
@@ -648,9 +669,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#EA2626',
         height: 40,
-        alignSelf:'center',
-        marginRight:10,
-        marginBottom:10
+        alignSelf: 'center',
+        marginRight: 10,
+        marginBottom: 10
     },
     ModalButtonText: {
         fontWeight: 'bold',

@@ -5,14 +5,26 @@ import MapView from 'react-native-maps';
 import AppLogo from "../../../assets/logo.png";
 import {StyleSheet,Platform,TouchableOpacity,Text,Linking, Alert} from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { ThemeProvider } from 'react-native-elements';
+
+var arr = [];
 export default class OurLocation extends Component{
     constructor(props){
         super(props);
+        
+        urgent_care = global.urgentcare_data;
         this.state = {
             latitude:24.858017,
-            longitude:66.995622
+            longitude:66.995622,
+            loading:true,
+           // urgent_care_data:this.props.navigation.getParam('urgentcare')
+            urgent_care_data:urgent_care
         }
+
+        
     }
+
+   
     static navigationOptions = ({navigation}) => {
         let drawerLabel = 'Our Location';
         let drawerIcon= (                            
@@ -22,10 +34,10 @@ export default class OurLocation extends Component{
     }
     openMap() {
         if(Platform.OS == 'android'){
-            Linking.openURL(`http://maps.google.com/maps?daddr=${this.state.latitude},${this.state.longitude}`);
+            Linking.openURL(`http://maps.google.com/maps?daddr=${this.state.urgent_care_data.lat},${this.state.urgent_care_data.lng}`);
         }
         else{
-            Linking.openURL(`http://maps.apple.com/maps?daddr=${this.state.latitude},${this.state.longitude}`);
+            Linking.openURL(`http://maps.apple.com/maps?daddr=${this.state.urgent_care_data.lat},${this.state.urgent_care_data.lng}`);
         }
     }
     render(){
@@ -43,8 +55,8 @@ export default class OurLocation extends Component{
                     <MapView
                         style={[{...StyleSheet.absoluteFillObject},{borderRadius: 10.4}]}
                         region={{
-                        latitude: this.state.latitude,
-                        longitude: this.state.longitude,
+                        latitude: this.state.urgent_care_data.lat,
+                        longitude: this.state.urgent_care_data.lng,
                         latitudeDelta: 0.015,
                         longitudeDelta: 0.0121
                         }}
@@ -54,8 +66,8 @@ export default class OurLocation extends Component{
                     >
                         <MapView.Marker
                             coordinate = {{
-                                latitude: this.state.latitude,
-                                longitude: this.state.longitude
+                                latitude: this.state.urgent_care_data.lat,
+                                longitude: this.state.urgent_care_data.lng
                             }}
                         >
                             <MapView.Callout onPress={()=>{this.openMap()}}>

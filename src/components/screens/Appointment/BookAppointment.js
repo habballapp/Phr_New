@@ -195,6 +195,7 @@ class BookAppointment extends Component{
                         mode={this.state.mode}
                         is24Hour={false}
                         display="spinner"
+                        
                       
                         onChange={this.onTimeChanged}
                          />
@@ -206,6 +207,7 @@ class BookAppointment extends Component{
                         width={420}
                         height={310}
                         minDate={today}
+                        
                       
                    
                     />

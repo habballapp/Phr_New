@@ -85,6 +85,12 @@ export default class AppointmentHistory extends Component{
                             keyExtractor={(item)=>item.key.toString()}
                         />
                     </Container>
+                    <Container ContainerStyle={{alignSelf:'center', justifyContent:'center', flexDirection:'row' ,marginTop:10,
+                                position:'absolute', bottom:0}}>
+                            <Textview >
+                                Powered by Matz Group©
+                            </Textview>
+                        </Container>
                 </Container>
             )
         }

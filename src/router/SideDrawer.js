@@ -16,7 +16,7 @@ const CustomHeaderContentComponent = (props) => {
                             imageStyle={styles.appLogo}
                             imgSource={AppLogo}
                         />
-                        <Textview textStyle={{fontSize:26, color:'black', fontWeight:'bold',alignSelf:'center'}} text="XYZ Urgent Care"/>
+                        <Textview textStyle={{fontSize:26, color:'black', fontWeight:'bold',alignSelf:'center'}} text={global.urgentname}/>
             </Container>
             <DrawerItems {...props} activeTintColor='#EA2626' />
         </View>
