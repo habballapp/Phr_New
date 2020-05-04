@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Input, Textview } from "../../default";
-import { CheckBox, StyleSheet, Platform, Switch, TouchableHighlightBase,TouchableOpacity } from 'react-native';
+import { CheckBox, StyleSheet, Platform, Switch, TouchableHighlightBase,TouchableOpacity,Alert} from 'react-native';
 import Modal from "react-native-modal";
 import { EMAIL_PLACEHOLDER, PASSWORD_PLACEHOLDER, CONFIRM_PASS_PLACEHOLDER, FIRST_NAME, LAST_NAME, TERMS_AND_CONDITIONS,SOCIAL_SECURITY_NO } from "../../../res/strings";
 import { View } from "native-base";
@@ -85,7 +85,12 @@ export const FormTwo = (props) => {
                         ) : (
                             <Switch onValueChange = {onCheckHandler} value={agreementValue}/>
                         ) }
+                    <TouchableOpacity
+                    onPress={() =>  Alert.alert("Terms and Conditions")}
+
+                    >
                     <Textview text={TERMS_AND_CONDITIONS} textStyle={styles.termsConditionText} />
+                    </TouchableOpacity>
                     </Container>
 
 

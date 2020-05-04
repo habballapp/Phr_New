@@ -337,10 +337,14 @@ class Home extends Component {
                         barStyle='dark-content'
                     />
                     <TouchableOpacity onPress={() => {this.props.navigation.openDrawer() } }>
-                        <FontAwesome name="bars" style={{padding: 10, marginLeft:5}} size={22} color="#EA2626"/>
+                        <FontAwesome name="bars" style={{padding: 10,marginRight:220}} size={20} color="#EA2626"/>
                     </TouchableOpacity>
                     <Title style={styles.titleStyles}>Home</Title>
                     <Menu
+                        style ={{ alignSelf: 'flex-end',
+                        marginTop: -10,
+                        position:'absolute'
+                       }}
                         ref={this.setMenuRef}
                         button={<Icon name='ios-more' size={35} color="#EA2626" onPress={this.showMenu}/>}
                         >
