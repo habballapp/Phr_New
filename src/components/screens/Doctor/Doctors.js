@@ -147,7 +147,7 @@ class Doctors extends Component{
     }
 
     geoDistance(userLatitude, userLongitude){
-        const searchingRadius = 5;
+        const searchingRadius = 4000;
         const earthRadius = 6371;
         const maxLatitude = userLatitude + this.radian2Degree(searchingRadius/earthRadius);
         const minLatitude = userLatitude - this.radian2Degree(searchingRadius/earthRadius);

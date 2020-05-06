@@ -69,6 +69,15 @@ export default class Login extends Component {
         var dbref = firebase.database().ref(`users/patients/${userID}/`);
         dbref.on("value", (snapshot) => {
             // snapshot.forEach((data)=>{
+            // let userID = firebase.auth().currentUser.uid; 
+            console.log("userID_Token", userID);
+            var FCM = firebase.messaging();
+            var ref = firebase.database().ref(`users/patients/`).child(`${userID}`);
+            FCM.getToken().then(token => {
+                console.log("token_Token", token);
+                ref.update({ pushToken: token });
+            });
+
             console.log("pending_data", snapshot);
             console.log("pending_data", snapshot._value);
             if (snapshot._value.status == 'pending') {
@@ -105,6 +114,13 @@ export default class Login extends Component {
                         .database()
                         .ref(`users/patients/${user.user.uid}/`);
                     dbref.on("value", (snapshot) => {
+
+                        var FCM = firebase.messaging();
+                        var ref = firebase.database().ref(`users/patients/`).child(`${user.user.uid}`);
+                        FCM.getToken().then(token => {
+                            console.log("token_Token", token);
+                            ref.update({ pushToken: token });
+                        });
                         console.log("snapshot exist", snapshot.exists())
                         if (!snapshot.exists()) {
                             Alert.alert(
@@ -180,6 +196,12 @@ export default class Login extends Component {
                                     .database()
                                     .ref(`users/patients/${user.user.uid}/`);
                                 dbref.on("value", (snapshot) => {
+                                    var FCM = firebase.messaging();
+                                    var ref = firebase.database().ref(`users/patients/`).child(`${user.user.uid}`);
+                                    FCM.getToken().then(token => {
+                                        console.log("token_Token", token);
+                                        ref.update({ pushToken: token });
+                                    });
                                     if (!snapshot.exists()) {
                                         Alert.alert(
                                             "User does not exist, kindly register to login with this credentials."
@@ -196,8 +218,8 @@ export default class Login extends Component {
                                             // this.props.navigation.navigate("Home");
                                         } else {
                                             AsyncStorage.setItem(LOGIN_CHECK, 'true').then(() => {
-                                            this.props.navigation.navigate("Home");
-                                            // this.navigate('Home');
+                                                this.props.navigation.navigate("Home");
+                                                // this.navigate('Home');
                                             });
                                         }
                                     }
@@ -319,26 +341,26 @@ export default class Login extends Component {
                             }}
                             title="SignIn with Facebook"
                         ></Button> */}
-                         <Container ContainerStyle={{padding:7}}></Container>
-                         <Button
-                                style={{ borderRadius: 5, backgroundColor: '#EA2626', height: 45, width: 300, alignItems: 'center', flexDirection: 'row' }}
-                                textStyle={{ fontSize: 18, color: 'white', marginLeft: 15 }}
-                                onPress={() => {
-                                    this.onGoogleSignInPress();
-                                }}
-                                title="Sign in with Google">
-                                <FontAwesomeIcon name='google' size={25} style={{ marginLeft: 12, color: '#fff' }} />
-                            </Button>
-                            <Container ContainerStyle={{padding:7}}></Container>
-                            <Button
-                                style={{ borderRadius: 5, backgroundColor: '#EA2626', height: 45, width: 300, alignItems: 'center', flexDirection: 'row' }}
-                                textStyle={{ fontSize: 18, color: 'white', marginLeft: 15 }}
-                                onPress={() => {
-                                    this.onFacebookSignInPress();
-                                }}
-                                title="Signin with Facebook">
-                                <FontAwesomeIcon name='facebook' size={25} style={{ marginLeft: 12, color: '#fff' }} />
-                            </Button>
+                        <Container ContainerStyle={{ padding: 7 }}></Container>
+                        <Button
+                            style={{ borderRadius: 5, backgroundColor: '#EA2626', height: 45, width: 300, alignItems: 'center', flexDirection: 'row' }}
+                            textStyle={{ fontSize: 18, color: 'white', marginLeft: 15 }}
+                            onPress={() => {
+                                this.onGoogleSignInPress();
+                            }}
+                            title="Sign in with Google">
+                            <FontAwesomeIcon name='google' size={25} style={{ marginLeft: 12, color: '#fff' }} />
+                        </Button>
+                        <Container ContainerStyle={{ padding: 7 }}></Container>
+                        <Button
+                            style={{ borderRadius: 5, backgroundColor: '#EA2626', height: 45, width: 300, alignItems: 'center', flexDirection: 'row' }}
+                            textStyle={{ fontSize: 18, color: 'white', marginLeft: 15 }}
+                            onPress={() => {
+                                this.onFacebookSignInPress();
+                            }}
+                            title="Signin with Facebook">
+                            <FontAwesomeIcon name='facebook' size={25} style={{ marginLeft: 12, color: '#fff' }} />
+                        </Button>
                         <Button onPress={() => { }} title="FORGET PASSWORD?" style={styles.forgetPasswordButton} textStyle={styles.forgetPasswordStyle} />
                         <Button onPress={() => this.props.navigation.push('SignUp')} title={SIGNUP_TEXT} style={styles.signup} textStyle={styles.signuphere} />
                     </Container>

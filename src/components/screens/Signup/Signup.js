@@ -103,6 +103,13 @@ export default class Signup extends Component {
                 .auth()
                 .signInWithCredential(credential)
                 .then((user) => {
+                    firebase.auth().signOut().then(function() {
+                        console.log("Sign-out successful.", error);
+                        // Sign-out successful.
+                      }).catch(function(error) {
+                          console.log("error while logging out", error);
+                        // An error happened.
+                      });
                     console.log("user", user);
                     console.log(user.user.uid);
                     console.log("First name", user.additionalUserInfo.profile.name);
@@ -135,6 +142,25 @@ export default class Signup extends Component {
                             Alert.alert(
                                 "Your account creation request has been posted to the admin."
                             );
+                           
+                            // let userID = firebase.auth().currentUser.uid; 
+                            // var ref = firebase.database().ref(`users/patients/${userID}/`).child('pushToken');
+                            // ref.remove();
+                           
+                            // firebase.auth().signOut().then(()=>{
+                            //     AsyncStorage.setItem(LOGIN_CHECK, '').then(() => {
+                            //         this.props.navigation.goBack();
+                            //     });  
+                          
+                              
+                            // }).catch(()=>{
+                            //     this._menu.hide();
+                            //     Alert.alert("You are not signed in.")
+                            //     this.setState({ isModalVisible: true });
+                            // });
+                            
+                            // this.props.navigation.goBack();
+                           
                         } else {
                             console.log("snapshot", snapshot);
                             console.log(snapshot);
@@ -143,13 +169,13 @@ export default class Signup extends Component {
                                     Alert.alert(
                                         "Your account is not Approved by the Admin yet."
                                     );
-
+                                
                                     console.log("pending", "status is pending");
 
                                 } else {
-                                    AsyncStorage.setItem(LOGIN_CHECK, "true").then(() => {
-                                        this.props.navigation.goBack();
-                                    });
+                                    // AsyncStorage.setItem(LOGIN_CHECK, "true").then(() => {
+                                    //     this.props.navigation.goBack();
+                                    // });
                                 }
                             }
                         }
@@ -241,6 +267,11 @@ export default class Signup extends Component {
                             .auth()
                             .signInWithCredential(credential)
                             .then((user) => {
+                                firebase.auth().signOut().then(function() {
+                                    // Sign-out successful.
+                                  }).catch(function(error) {
+                                    // An error happened.
+                                  });
                                 console.log("user", user);
 
                                 var dbref = firebase
@@ -268,7 +299,7 @@ export default class Signup extends Component {
                                             "Your account creation request has been posted to the admin."
                                         );
 
-                                        this.props.navigation.navigate("Home");
+                                        // this.props.navigation.navigate("Home");
                                     } else {
                                         console.log("snapshot", snapshot);
                                         if (snapshot._value.status == "pending") {
@@ -276,11 +307,11 @@ export default class Signup extends Component {
                                                 "Your account is not Approved by the Admin yet."
                                             );
                                             console.log("pending", "status is pending");
-                                            this.props.navigation.navigate("Home");
+                                            // this.props.navigation.navigate("Home");
                                         } else {
-                                            AsyncStorage.setItem(LOGIN_CHECK, "true").then(() => {
-                                                this.props.navigation.goBack();
-                                            });
+                                            // AsyncStorage.setItem(LOGIN_CHECK, "true").then(() => {
+                                            //     this.props.navigation.goBack();
+                                            // });
                                         }
                                     }
                                 });

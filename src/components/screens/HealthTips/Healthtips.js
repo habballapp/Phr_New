@@ -7,6 +7,7 @@ import {
   FlatList,
   ActivityIndicator
 } from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import {Header, Title, Icon} from 'native-base';
 import {Button as NavButton} from 'native-base';
 import firebase from 'react-native-firebase';
@@ -101,7 +102,11 @@ export default class HealthTips extends Component{
                     <NavButton transparent style={{position:'absolute', left:0}} onPress={()=>{this.props.navigation.goBack()}}>
                         <Icon name= {Platform.OS == 'ios' ? "ios-arrow-back" : "md-arrow-back"} color="#0080ff" />
                     </NavButton>
+                    <TouchableOpacity onPress={() => { this.props.navigation.openDrawer() }}>
+                        <FontAwesome name="bars" style={{ padding: 10, marginLeft: 10 }} size={20} color="#EA2626" />
+                    </TouchableOpacity>
                     <Title style={styles.titleStyles}>Health Tips</Title>
+                  
                 </Header>
                 <Container ContainerStyle={{marginTop:50,flex:1,backgroundColor:'#fff',justifyContent:'center',}}>
                     <Container ContainerStyle={{height:450,backgroundColor:'white',justifyContent:'center',width:'100%',alignSelf:'center'}}>

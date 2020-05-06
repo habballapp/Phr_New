@@ -45,10 +45,8 @@ export default class Walkthrough extends Component {
       des: 'You can track the appointments history which you scheduled from any specific doctor.',
       imageSource: require('../../../assets/schedule_history.png'),
       lastPageKey: true
-    },
-    {
-      lastPageKey: true
     }
+    
   ]
 
   constructor(props){

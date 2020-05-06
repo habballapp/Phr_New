@@ -1,12 +1,14 @@
 import React,{Component} from 'react';
 import {Textview, Container, ImageView,Statusbar, Scrollview,Input,Button} from '../../default';
-import {Text,View,Platform} from 'react-native'
+import {Text,View,Platform, TouchableOpacity} from 'react-native'
 import { Icon,Header, Title, } from 'native-base';
 import {Button as NavButton} from 'native-base';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { FlatList } from 'react-native-gesture-handler';
 import Modal from "react-native-modal";
 import firebase from 'react-native-firebase'
+
+
 
 
 var flag = 0;
@@ -134,7 +136,11 @@ async takeMedicines(){
                     <NavButton transparent style={{position:'absolute', left:0}} onPress={()=>{this.props.navigation.goBack()}}>
                         <Icon name= {Platform.OS == 'ios' ? "ios-arrow-back" : "md-arrow-back"} color="#0080ff" />
                     </NavButton>
+                    <TouchableOpacity onPress={() => { this.props.navigation.openDrawer() }}>
+                        <FontAwesome name="bars" style={{ padding: 10, marginLeft: 10 }} size={20} color="#EA2626" />
+                    </TouchableOpacity>
                     <Title style={styles.titleStyles}>Add Prescription</Title>
+                   
                 </Header>
                 <Container ContainerStyle={{marginTop:20,height:260, borderColor:'#707070', borderWidth:0.5,marginLeft:30,marginRight:30}}>
                        <FlatList

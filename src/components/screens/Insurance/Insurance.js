@@ -3,9 +3,11 @@ import { Container, Textview, Button, Statusbar, Checkbox, ImageView } from '../
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import AppLogo from "../../../assets/logo.png";
 import { Icon, Header, Title, Item } from 'native-base';
-import { FlatList, ActivityIndicator, ScrollView } from 'react-native';
+import { FlatList, ActivityIndicator, ScrollView , TouchableOpacity} from 'react-native';
 import firebase from 'react-native-firebase';
 import AsyncStorage from '@react-native-community/async-storage'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+
 
 
 
@@ -25,7 +27,7 @@ export default class AboutUs extends Component {
             loading: false,
             insurances: [],
             app: [],
-         //   urgentcareID: this.props.navigation.getParam('urgentcareID')
+            //   urgentcareID: this.props.navigation.getParam('urgentcareID')
 
         }
     }
@@ -33,19 +35,19 @@ export default class AboutUs extends Component {
     componentDidMount() {
 
 
-        this.setState({loading:true});
-		AsyncStorage.getItem("urgentcareid").then((value) => {
-			if (value != null) {
-				this.setState({ urgentcareID: value })
+        this.setState({ loading: true });
+        AsyncStorage.getItem("urgentcareid").then((value) => {
+            if (value != null) {
+                this.setState({ urgentcareID: value })
                 this.takeInsurances();
-			}
-			this.setState({ loading: false })
-		});
+            }
+            this.setState({ loading: false })
+        });
         // console.log("Here")
         // this.takeInsurances();
 
     }
-   
+
     takeInsurances() {
 
         //   let userID = firebase.auth().currentUser.uid;
@@ -81,19 +83,24 @@ export default class AboutUs extends Component {
                         backgroundColor='white'
                         barStyle='dark-content'
                     />
+                       <TouchableOpacity onPress={() => { this.props.navigation.openDrawer() }}>
+                        <FontAwesome name="bars" style={{ padding: 10, marginLeft: 10 }} size={20} color="#EA2626" />
+                    </TouchableOpacity>
                     <Title style={styles.titleStyles}>Insurances</Title>
+                 
                 </Header>
-                <Container ContainerStyle={{ marginTop: 20, height: '90%', }}>
+                <Container ContainerStyle={{ flexDirection: 'row', marginTop: 20, height: '90%', flexWrap: "wrap" }}>
                     <FlatList
                         data={this.state.insurances}
                         extraData={this.state}
                         renderItem={({ item, index }) => (
-                            <Container ContainerStyle={{alignItems: 'center', alignSelf: 'center', marginBottom: 20, height: 160, backgroundColor: '#EA2626', width: '90%', borderRadius: 10 }}>
-                                <Textview textStyle={{ fontSize: 18, color: 'white' }} text={item.Name} />
-                                <Container ContainerStyle={{flexDirection:'row',backgroundColor: '#EA2626', width:180,marginRight:'auto' }}>
+                            <Container ContainerStyle={{ alignSelf: 'center', marginBottom: 20, height: 400, backgroundColor: '#EA2626', width: '90%', borderRadius: 10 }}>
+                                <Textview textStyle={{ fontSize: 18, color: 'white', alignSelf: 'center' }} text={item.Name} />
+                                <Container ContainerStyle={{ height: 200, width: 180, flexDirection: 'row' }}>
                                     <Textview textStyle={{ fontSize: 20, color: 'white' }} text={item.Description} />
-                                    <ImageView imageStyle={{ width: '80%', height: '100%', flexGrow: 0 }} imgSource={{ uri: item.Logo }} />
+                                    <ImageView imageStyle={{ width: '90%', height: '50%', flexGrow: 0 }} imgSource={{ uri: item.Logo }} />
                                 </Container>
+
 
                             </Container>
                         )}
