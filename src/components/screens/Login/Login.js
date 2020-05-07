@@ -215,7 +215,8 @@ export default class Login extends Component {
                                                 "Your account is not Approved by the Admin yet."
                                             );
                                             console.log("pending", "status is pending");
-                                            // this.props.navigation.navigate("Home");
+                                             this.props.navigation.navigate("Home");
+                                           
                                         } else {
                                             AsyncStorage.setItem(LOGIN_CHECK, 'true').then(() => {
                                                 this.props.navigation.navigate("Home");

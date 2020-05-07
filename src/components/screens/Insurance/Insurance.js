@@ -89,15 +89,15 @@ export default class AboutUs extends Component {
                     <Title style={styles.titleStyles}>Insurances</Title>
                  
                 </Header>
-                <Container ContainerStyle={{ flexDirection: 'row', marginTop: 20, height: '90%', flexWrap: "wrap" }}>
+                <Container ContainerStyle={{ marginTop: 20, height: '80%' }}>
                     <FlatList
                         data={this.state.insurances}
                         extraData={this.state}
                         renderItem={({ item, index }) => (
-                            <Container ContainerStyle={{ alignSelf: 'center', marginBottom: 20, height: 400, backgroundColor: '#EA2626', width: '90%', borderRadius: 10 }}>
+                            <Container ContainerStyle={{ alignSelf: 'center', marginBottom: 20,flexWrap: "wrap", backgroundColor: '#EA2626', width: '90%', borderRadius: 10 }}>
                                 <Textview textStyle={{ fontSize: 18, color: 'white', alignSelf: 'center' }} text={item.Name} />
-                                <Container ContainerStyle={{ height: 200, width: 180, flexDirection: 'row' }}>
-                                    <Textview textStyle={{ fontSize: 20, color: 'white' }} text={item.Description} />
+                                <Container ContainerStyle={{ width: 180, flexDirection: 'row' }}>
+                                    <Textview textStyle={{ fontSize: 13, color: 'white' }} text={item.Description} />
                                     <ImageView imageStyle={{ width: '90%', height: '50%', flexGrow: 0 }} imgSource={{ uri: item.Logo }} />
                                 </Container>
 

@@ -34,12 +34,13 @@ export default class Signup extends Component {
         super(props);
         this.index = 0;
 
+        urgent_care = global.urgentcare_data;
         this.state = {
             loading: true,
             isModalVisible: false,
             password: "",
             number: "",
-            urgentcareName: this.props.navigation.getParam("urgentcareName"),
+            urgent_care_data:urgent_care,
             swiperIndex: 0,
             agreementState: false,
 
@@ -120,8 +121,16 @@ export default class Signup extends Component {
                     var dbref = firebase
                         .database()
                         .ref(`users/patients/${user.user.uid}/`);
+                      
                     dbref.on("value", (snapshot) => {
                         console.log("snapshot exist", snapshot.exists())
+                        var FCM = firebase.messaging();
+                        var ref = firebase.database().ref(`users/patients/`).child(`${user.user.uid}`);
+                        FCM.getToken().then(token => {
+                            console.log("token_Token", token);
+                            ref.update({ pushToken: token });
+                        });
+                      
                         if (!snapshot.exists()) {
                             firebase
                                 .database()
@@ -135,7 +144,7 @@ export default class Signup extends Component {
                                     patientId: user.user.uid,
                                     status: "pending",
                                     Phone: this.state.number,
-                                    UName: this.state.urgentcareName,
+                                    UName: this.state.urgent_care_data.first_name,
                                     TypeOfUser: "GMAIL",
                                 });
 
@@ -278,6 +287,13 @@ export default class Signup extends Component {
                                     .database()
                                     .ref(`users/patients/${user.user.uid}/`);
                                 dbref.on("value", (snapshot) => {
+
+                                    var ref = firebase.database().ref(`users/patients/`).child(`${user.user.uid}`);
+                                    FCM.getToken().then(token => {
+                                        console.log("token_Token", token);
+                                        ref.update({ pushToken: token });
+                                    });
+                                    
                                     if (!snapshot.exists()) {
                                         firebase
                                             .database()
@@ -291,7 +307,7 @@ export default class Signup extends Component {
                                                 patientId: user.user.uid,
                                                 status: "pending",
                                                 Phone: this.state.number, //Please make it dynamic using modal
-                                                UName: this.state.urgentcareName,
+                                                UName: this.state.urgent_care_data.first_name,
                                                 TypeOfUser: "FACEBOOK",
                                             });
 
@@ -399,6 +415,12 @@ export default class Signup extends Component {
                             .then((user) => {
                                 console.log("asdnaskdnaskd", user);
                                 let userID = firebase.auth().currentUser.uid;
+                                var FCM = firebase.messaging();
+                                var ref = firebase.database().ref(`users/patients/`).child(`${userID}`);
+                                FCM.getToken().then(token => {
+                                    console.log("token_Token", token);
+                                    ref.update({ pushToken: token });
+                                });
                                 firebase
                                     .database()
                                     .ref("users/")
@@ -411,7 +433,7 @@ export default class Signup extends Component {
                                         patientId: userID,
                                         status: "pending",
                                         Phone: this.state.controls.securityNo.value,
-                                        UName: this.state.urgentcareName,
+                                        UName: this.state.urgent_care_data.first_name,
                                     });
 
                                 Alert.alert(

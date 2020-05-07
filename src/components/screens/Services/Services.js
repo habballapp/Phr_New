@@ -91,6 +91,14 @@ export default class Services extends Component{
                     />
                 </Container>
                 </Scrollview>
+                <Container ContainerStyle={{
+                        alignSelf: 'center', justifyContent: 'center', flexDirection: 'row', marginTop: 30,
+                        position: 'absolute', bottom: 0
+                    }}>
+                        <Textview >
+                            Powered by Matz Group©
+                            </Textview>
+                </Container>
             </Container>
         )
     }

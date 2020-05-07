@@ -217,6 +217,7 @@ class BookAppointment extends Component {
                             ref={ref => {
                                 this.TimePicker = ref;
                             }}
+                            style={{height: '50%'}}
                             minuteInterval={15}
                             onCancel={() => this.onCancel()}
                             onConfirm={(hour, minute) => this.onConfirm(hour, minute)}
@@ -224,7 +225,7 @@ class BookAppointment extends Component {
                         
 
                     </Container>
-                    <Container ContainerStyle={{ padding: 10, borderColor: '#707070', borderWidth: 0.5, width: '90%', height: 250, alignSelf: 'center', marginTop: 20 }}>
+                    <Container ContainerStyle={{ padding: 10, borderColor: '#707070', borderWidth: 0.5, width: '90%',flexWrap: "wrap", alignSelf: 'center', marginTop: 20 }}>
                         <CalendarPicker
                             onDateChange={this.onDateChange}
                             width={420}

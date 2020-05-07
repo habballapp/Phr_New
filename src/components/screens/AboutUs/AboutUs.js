@@ -43,7 +43,7 @@ export default class AboutUs extends Component {
 
                     <Textview textStyle={{ fontSize: 30, color: 'black', fontWeight: 'bold', alignSelf: 'center' }} text="About Us" />
                 </Container>
-                <Container ContainerStyle={{ width: '85%', height: '70%', backgroundColor: '#EA2626', alignSelf: 'center', padding: 20, borderRadius: 15, marginBottom: 20 }}>
+                <Container ContainerStyle={{ flexWrap: "wrap", width: '85%', backgroundColor: '#EA2626', alignSelf: 'center', padding: 20, borderRadius: 15, marginBottom: 20 }}>
 
                     <ScrollView
                         showsVerticalScrollIndicator={false}>
@@ -51,6 +51,14 @@ export default class AboutUs extends Component {
                             text={this.state.urgent_care_data.about}
                         />
                     </ScrollView>
+                </Container>
+                <Container ContainerStyle={{
+                    alignSelf: 'center', justifyContent: 'center', flexDirection: 'row', marginTop: 10,
+                    position: 'absolute', bottom: 0
+                }}>
+                    <Textview >
+                        Powered by Matz Group©
+                            </Textview>
                 </Container>
             </Container>
         )
