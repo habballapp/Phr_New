@@ -355,7 +355,7 @@ class Home extends Component {
             console.log("LOGIN_CHECK", value)
             if (value != null && value != '') {
                 if (firebase.auth().currentUser != null && firebase.auth().currentUser.uid != null) {
-                     
+
                     this.props.navigation.navigate("Chat", { 'urgentcareID': this.state.urgent_care_data.key })
                 } else {
                     this.setState({ isModalVisible: true });
@@ -370,7 +370,7 @@ class Home extends Component {
             this._menu.hide();
             this.setState({ isModalVisible: true });
         });
-     
+
     }
     onAboutUsPressed() {
 
@@ -403,30 +403,26 @@ class Home extends Component {
             this.state.loading ? <ActivityIndicator size="large" color="#EA2626" style={{ flex: 1, alignSelf: 'center' }} /> :
 
                 <Container ContainerStyle={{ flex: 1, backgroundColor: '#fff' }}>
-                    <Container stylesbutton={{ alignSelf: 'baseline', backgroundColor: '#fed8b1' }} >
-                        <Header style={{flexDirection:'row', alignItems: 'center', backgroundColor: '#fff', height: 70}}>
-                            <Statusbar
-                                translucent
-                                backgroundColor='white'
-                                barStyle='dark-content'
-                            />
-                            <TouchableOpacity onPress={() => { this.props.navigation.openDrawer() }}>
-                                <FontAwesome name="bars" style={{ padding: 10, marginRight: 220 }} size={20} color="#EA2626" />
-                            </TouchableOpacity>
-                            <Title style={styles.titleStyles}>Home</Title>
-                            <Menu
-                                style={{
-                                    alignSelf: 'flex-end',
-                                    marginTop: -5,
-                                    position: 'absolute',
-                                
-                                }}
-                                ref={this.setMenuRef}
-                                button={<Icon name='ios-more' size={35} color="#EA2626" onPress={this.showMenu} />}
-                            >
-                                <MenuItem onPress={this.hideMenu}>Sign out</MenuItem>
-                            </Menu>
-                        </Header>
+                    <Header style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#fff', height: 70 }}>
+                        <Statusbar
+                            translucent
+                            backgroundColor='white'
+                            barStyle='dark-content'
+                        />
+                        <TouchableOpacity onPress={() => { this.props.navigation.openDrawer(); }}>
+                            <FontAwesome name="bars" style={{ padding: 10, marginLeft: 5, marginRight: 220 }} size={22} color="#EA2626" />
+                        </TouchableOpacity>
+                        <Title style={styles.titleStyles}>Home</Title>
+                        
+                        <Menu
+                            ref={this.setMenuRef}
+                            button={<Icon name='ios-more' size={35} color="#EA2626" onPress={this.showMenu} />}
+                        >
+                            <MenuItem onPress={this.hideMenu}>Sign out</MenuItem>
+                        </Menu>
+                        
+                    </Header>
+                    <Container stylesbutton={{ backgroundColor: '#fed8b1' }} >
                         <Container >
                             <Container ContainerStyle={{ justifyContent: 'center', alignSelf: 'center', padding: 20, }}>
                                 <ImageView

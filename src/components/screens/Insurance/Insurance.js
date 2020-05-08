@@ -3,7 +3,7 @@ import { Container, Textview, Button, Statusbar, Checkbox, ImageView } from '../
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import AppLogo from "../../../assets/logo.png";
 import { Icon, Header, Title, Item } from 'native-base';
-import { FlatList, ActivityIndicator, ScrollView , TouchableOpacity} from 'react-native';
+import { FlatList, ActivityIndicator, ScrollView, TouchableOpacity } from 'react-native';
 import firebase from 'react-native-firebase';
 import AsyncStorage from '@react-native-community/async-storage'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
@@ -83,18 +83,19 @@ export default class AboutUs extends Component {
                         backgroundColor='white'
                         barStyle='dark-content'
                     />
-                       <TouchableOpacity onPress={() => { this.props.navigation.openDrawer() }}>
+                    <TouchableOpacity onPress={() => { this.props.navigation.openDrawer() }}>
                         <FontAwesome name="bars" style={{ padding: 10, marginLeft: 10 }} size={20} color="#EA2626" />
                     </TouchableOpacity>
-                    <Title style={styles.titleStyles}>Insurances</Title>
-                 
+                    <Title style={styles.titleStyles}>Home</Title>
+
+
                 </Header>
                 <Container ContainerStyle={{ marginTop: 20, height: '80%' }}>
                     <FlatList
                         data={this.state.insurances}
                         extraData={this.state}
                         renderItem={({ item, index }) => (
-                            <Container ContainerStyle={{ alignSelf: 'center', marginBottom: 20,flexWrap: "wrap", backgroundColor: '#EA2626', width: '90%', borderRadius: 10 }}>
+                            <Container ContainerStyle={{ alignSelf: 'center', marginBottom: 20, flexWrap: "wrap", backgroundColor: '#EA2626', width: '90%', borderRadius: 10 }}>
                                 <Textview textStyle={{ fontSize: 18, color: 'white', alignSelf: 'center' }} text={item.Name} />
                                 <Container ContainerStyle={{ width: 180, flexDirection: 'row' }}>
                                     <Textview textStyle={{ fontSize: 13, color: 'white' }} text={item.Description} />
