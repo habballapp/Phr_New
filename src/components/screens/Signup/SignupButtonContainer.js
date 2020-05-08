@@ -35,7 +35,7 @@ const styles = {
         alignItems: 'center',
         backgroundColor: '#EA2626',
         height: 50,
-        marginTop: 50
+        marginTop: 20
     },
     backStyles: {
         flex: 1,
@@ -45,7 +45,7 @@ const styles = {
         backgroundColor: '#343434',//'red',
         marginRight: 5,
         height: 50,
-        marginTop: 50
+        marginTop: 20
     },
     nextButtonText: {
         color: '#fff',

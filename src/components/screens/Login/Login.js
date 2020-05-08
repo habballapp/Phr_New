@@ -278,7 +278,7 @@ export default class Login extends Component {
 
     render() {
         return (
-            <SafeViewArea style={{ flex: 1 }}>
+            <SafeViewArea style={{ flexWrap: "wrap" }}>
                 <Statusbar barStyle="dark-content" />
                 <Scrollview >
                     <Logintag />
@@ -368,7 +368,7 @@ export default class Login extends Component {
 
 
                     <Container ContainerStyle={{
-                        alignSelf: 'center', justifyContent: 'center', flexDirection: 'row', marginTop: 30, bottom: 0,
+                        alignSelf: 'center', justifyContent: 'center', flexDirection: 'row', marginTop: 15, bottom: 0,
                         position: 'absolute', bottom: 0
                     }}>
                         <Textview >

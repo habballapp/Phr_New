@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
         marginTop: 20,
     },
     loginButtonStyles: {
-        marginTop: 50,
+        marginTop: 25,
         width: '100%',
         borderRadius: 15,
         justifyContent: 'center',
@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
         marginTop: 10
     },
     forgetPasswordButton: {
-        marginTop: 20,
+        marginTop: 15,
     },
     forgetPasswordStyle: {
         marginTop:10,
@@ -54,8 +54,8 @@ export const styles = StyleSheet.create({
         fontWeight:'bold',
     },
     signup: {
-        marginTop: 20,
-        marginBottom:100
+        marginTop: 15,
+        marginBottom:50
     },
     signuphere:{
         fontSize: 18,

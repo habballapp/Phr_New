@@ -56,7 +56,7 @@ export default class OurLocation extends Component {
                     />
                     <Textview textStyle={{ fontSize: 30, color: 'black', fontWeight: 'bold', alignSelf: 'center' }} text="Our Location" />
                 </Container>
-                <Container ContainerStyle={{ borderColor: 'black', borderWidth: 1.5, overflow: 'hidden', justifyContent: 'center', width: '75%', height: '65%', alignSelf: 'center', padding: 20, borderRadius: 15, marginBottom: 20 }}>
+                <Container ContainerStyle={{ borderColor: 'black', borderWidth: 1.5, overflow: 'hidden', justifyContent: 'center', width: '75%', height: '55%', alignSelf: 'center', padding: 20, borderRadius: 15, marginBottom: 20 }}>
                     <MapView
                         style={[{ ...StyleSheet.absoluteFillObject }, { borderRadius: 10.4 }]}
                         region={{
@@ -88,7 +88,18 @@ export default class OurLocation extends Component {
                         </MapView.Marker>
                     </MapView>
                 </Container>
+
+                <Container ContainerStyle={{
+                        alignSelf: 'center', justifyContent: 'center', flexDirection: 'row', marginTop: 10,
+                        position: 'absolute', bottom: 0
+                    }}>
+                        <Textview >
+                            Powered by Matz Group©
+                            </Textview>
+                    </Container>
+                
             </Container>
+            
         )
     }
 }

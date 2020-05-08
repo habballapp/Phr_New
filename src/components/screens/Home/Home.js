@@ -187,7 +187,7 @@ class Home extends Component {
             else {
                 console.log("home check", "in catch");
                 this._menu.hide();
-                this.setState({ isModalVisible: true });
+                // this.setState({ isModalVisible: true });
             }
         }).catch(() => {
             console.log("home check", "in catch");
@@ -404,7 +404,7 @@ class Home extends Component {
 
                 <Container ContainerStyle={{ flex: 1, backgroundColor: '#fff' }}>
                     <Container stylesbutton={{ alignSelf: 'baseline', backgroundColor: '#fed8b1' }} >
-                        <Header style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#fff', height: 70 }}>
+                        <Header style={{flexDirection:'row', alignItems: 'center', backgroundColor: '#fff', height: 70}}>
                             <Statusbar
                                 translucent
                                 backgroundColor='white'
@@ -417,8 +417,9 @@ class Home extends Component {
                             <Menu
                                 style={{
                                     alignSelf: 'flex-end',
-                                    marginTop: -10,
-                                    position: 'absolute'
+                                    marginTop: -5,
+                                    position: 'absolute',
+                                
                                 }}
                                 ref={this.setMenuRef}
                                 button={<Icon name='ios-more' size={35} color="#EA2626" onPress={this.showMenu} />}

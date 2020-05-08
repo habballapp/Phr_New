@@ -272,7 +272,7 @@ export default class EmergencyScreen extends Component{
                     </Header>
                     <Container ContainerStyle={{padding:25}} >
                         <Textview text="Enter Text Message below to save:" textStyle={{fontSize:18, color:'black',marginBottom:10}}/>
-                        <Container ContainerStyle={{alignItems:'flex-start',height:230, borderColor:'#707070', borderWidth:0.5,}} >
+                        <Container ContainerStyle={{alignItems:'flex-start',height:200, borderColor:'#707070', borderWidth:0.5,}} >
                             <Input 
                                 placeholder="Text Message.."
                                 placeholderTextColor="#D3D3D3"
@@ -288,7 +288,7 @@ export default class EmergencyScreen extends Component{
                         </Container>
 
                         </Container>
-                        <Container ContainerStyle={{marginTop:20,height:150, borderColor:'#707070', borderWidth:0.5,}}>
+                        <Container ContainerStyle={{marginTop:20,height:100, borderColor:'#707070', borderWidth:0.5,}}>
                             <FlatList
                                 data={this.state.numbers}
                                 extraData={this.state.numbers}
@@ -305,13 +305,21 @@ export default class EmergencyScreen extends Component{
                                 keyExtractor={(item)=>item.number.toString()}
                             />
                         </Container>
-                        <Container ContainerStyle={{width:150,alignItems:'center',justifyContent:'center',marginTop:20,height:60, borderColor:'#707070', borderWidth:0.5,alignSelf:'center'}}>
+                        <Container ContainerStyle={{width:150,alignItems:'center',justifyContent:'center',marginTop:20,height:40, borderColor:'#707070', borderWidth:0.5,alignSelf:'center'}}>
                             <Button onPress={()=>{this.onAddNumberPressed()}} title="Add Number" textStyle={{fontSize:18, color:'black'}} style={{alignItems:'center',flexDirection:'row'}}>
                                 <Icon name="md-add" style={{fontSize:22,alignSelf:'center',marginRight:5}}/>
                             </Button>
                         </Container>
-                        <Button onPress={()=>{this.onMessageSendPressed()}} textStyle={{fontWeight: 'bold',color: 'white',fontSize: 22}} title="Send" style={{marginTop: 30,width: '100%',borderRadius: 15,justifyContent: 'center',alignItems: 'center',backgroundColor: '#EA2626',height: 50}}/>
+                        <Button onPress={()=>{this.onMessageSendPressed()}} textStyle={{fontWeight: 'bold',color: 'white',fontSize: 22}} title="Send" style={{marginTop: 20,width: '100%',borderRadius: 15,justifyContent: 'center',alignItems: 'center',backgroundColor: '#EA2626',height: 40}}/>
                     
+
+                        <Container ContainerStyle={{alignSelf:'center', justifyContent:'center', flexDirection:'row' ,marginTop:10,
+                                position:'absolute', bottom:0}}>
+                            <Textview >
+                                Powered by Matz Group©
+                            </Textview>
+                        </Container>
+
                         <Modal
                             isVisible={this.state.isModalVisible}
                             style={{justifyContent: 'flex-end',}}
@@ -350,12 +358,7 @@ export default class EmergencyScreen extends Component{
                     
                     </Container>
 
-                    <Container ContainerStyle={{alignSelf:'center', justifyContent:'center', flexDirection:'row' ,marginTop:10,
-                                position:'absolute', bottom:0}}>
-                            <Textview >
-                                Powered by Matz Group©
-                            </Textview>
-                        </Container>
+                    
                 </Container>
             )
     
@@ -418,7 +421,7 @@ const styles = {
         height: 40,
         marginLeft:30,
         marginRight:10,
-        marginBottom:10
+        marginBottom:60
     },
 
     ModalButton1: {
@@ -430,6 +433,6 @@ const styles = {
         backgroundColor: '#FFF',
         height: 40,
         marginRight:10,
-        marginBottom:10
+        marginBottom:60
     }
 }

@@ -98,7 +98,7 @@ export default class AboutUs extends Component {
                                 <Textview textStyle={{ fontSize: 18, color: 'white', alignSelf: 'center' }} text={item.Name} />
                                 <Container ContainerStyle={{ width: 180, flexDirection: 'row' }}>
                                     <Textview textStyle={{ fontSize: 13, color: 'white' }} text={item.Description} />
-                                    <ImageView imageStyle={{ width: '90%', height: '50%', flexGrow: 0 }} imgSource={{ uri: item.Logo }} />
+                                    <ImageView imageStyle={{ width: '75%', height: '50%', flexGrow: 0 }} imgSource={{ uri: item.Logo }} />
                                 </Container>
 
 
