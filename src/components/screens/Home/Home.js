@@ -402,7 +402,7 @@ class Home extends Component {
         return (
             this.state.loading ? <ActivityIndicator size="large" color="#EA2626" style={{ flex: 1, alignSelf: 'center' }} /> :
 
-                <Container ContainerStyle={{ flex: 1, backgroundColor: '#fff' }}>
+                <Container ContainerStyle={{ flex: 1 }}>
                     <Header style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#fff', height: 70 }}>
                         <Statusbar
                             translucent
@@ -410,10 +410,9 @@ class Home extends Component {
                             barStyle='dark-content'
                         />
                         <TouchableOpacity onPress={() => { this.props.navigation.openDrawer(); }}>
-                            <FontAwesome name="bars" style={{ padding: 10, marginLeft: 5, marginRight: 220 }} size={22} color="#EA2626" />
+                            <FontAwesome name="bars" style={{ padding: 10, marginLeft: 5, marginRight: 250 }} size={22} color="#EA2626" />
                         </TouchableOpacity>
-                        <Title style={styles.titleStyles}>Home</Title>
-                        
+                        {/* <Title style={styles.titleStyles}>Home</Title> */}
                         <Menu
                             ref={this.setMenuRef}
                             button={<Icon name='ios-more' size={35} color="#EA2626" onPress={this.showMenu} />}

@@ -6,8 +6,8 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import React, { Component } from 'react';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -16,7 +16,19 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-export default class App extends Component{
+
+
+export default class App extends Component {
+
+
+
+
+  // componentDidMount() {
+  //   console.log("function", "in function123");
+  //   this.notificationListener();
+  // }
+
+
   render() {
     return (
       <View style={styles.container}>

@@ -40,6 +40,9 @@
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
       <meta-data
+        android:name="com.google.firebase.messaging.default_notification_icon"
+        android:resource="@mipmap/logo" />
+      <meta-data
         android:name="com.google.android.geo.API_KEY"
         android:value="AIzaSyDCs8oMknfANgInvXUaXyZCg_Les_XkcB4"/>
       <service android:name="io.invertase.firebase.messaging.RNFirebaseMessagingService">
