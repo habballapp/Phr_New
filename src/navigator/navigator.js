@@ -43,6 +43,8 @@ class App extends Component {
 			localNotification.android
 			  .setPriority(firebase.notifications.Android.Priority.High)
 			  .android.setChannelId(localnotification.notificationId)
+			//   .android.setSmallIcon('R.mipmap.logo')
+			//   .android.setLargeIcon('R.mipmap.logo')
 			  .android.setVibrate(1000);
 		  }
 		  firebase

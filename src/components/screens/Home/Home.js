@@ -355,7 +355,6 @@ class Home extends Component {
             console.log("LOGIN_CHECK", value)
             if (value != null && value != '') {
                 if (firebase.auth().currentUser != null && firebase.auth().currentUser.uid != null) {
-
                     this.props.navigation.navigate("Chat", { 'urgentcareID': this.state.urgent_care_data.key })
                 } else {
                     this.setState({ isModalVisible: true });
