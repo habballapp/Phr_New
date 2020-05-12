@@ -15,6 +15,7 @@ import firebase from 'react-native-firebase';
 import { LOGIN_CHECK } from '../../../constants/StorageConstans';
 import AsyncStorage from '@react-native-community/async-storage'
 import { Alert } from 'react-native';
+import { Icon, Label } from 'native-base';
 import {
     GoogleSigninButton,
     GoogleSignin,
@@ -33,14 +34,25 @@ export default class Login extends Component {
     constructor(props) {
         super(props);
 
+
         this.state = {
             email: '',
             password: '',
             isLoading: false,
             error: false,
+            showPassword: true,
+            icon: "eye-off",
+
         }
         this.onLoginPressed = this.onLoginPressed.bind(this);
         this.navigate = this.props.navigation.navigate.bind(this);
+    }
+
+    _changeIcon() {
+        this.setState(prevState => ({
+            icon: prevState.icon === 'eye' ? 'eye-off' : 'eye',
+            showPassword: !prevState.showPassword
+        }));
     }
 
     onLoginPressed() {
@@ -215,8 +227,8 @@ export default class Login extends Component {
                                                 "Your account is not Approved by the Admin yet."
                                             );
                                             console.log("pending", "status is pending");
-                                             this.props.navigation.navigate("Home");
-                                           
+                                            this.props.navigation.navigate("Home");
+
                                         } else {
                                             AsyncStorage.setItem(LOGIN_CHECK, 'true').then(() => {
                                                 this.props.navigation.navigate("Home");
@@ -296,15 +308,20 @@ export default class Login extends Component {
                         {
                             validateEmail ? validateEmail : <Container></Container>
                         }
+
                         <Input
                             placeholder="Password"
                             placeholderTextColor="#000"
-                            secureTextEntry={true}
+                            secureTextEntry={this.state.showPassword}
                             returnKeyType={"next"}
                             inputStyle={styles.input}
                             blurOnSubmit={true}
                             onChangeText={(event) => this.handlePassChange(event)}
                         />
+
+                        <Icon style={{ marginTop:-40,alignSelf:'flex-end' }}
+                            name={this.state.icon} onPress={() => this._changeIcon()} />
+
                         {
                             validatePass ? validatePass : <Container></Container>
                         }
@@ -372,7 +389,7 @@ export default class Login extends Component {
                         position: 'absolute', bottom: 0
                     }}>
                         <Textview >
-                            Powered by Matz Group©
+                           Powered by Matz Pvt Ltd
                             </Textview>
                     </Container>
 

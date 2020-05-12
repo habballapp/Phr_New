@@ -22,6 +22,7 @@ import {
     GoogleSignin,
     statusCodes,
 } from "@react-native-community/google-signin";
+import { Icon, Label } from 'native-base';
 import { LoginManager, AccessToken } from "react-native-fbsdk";
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 //var user = firebase.auth().currentUser;
@@ -43,6 +44,8 @@ export default class Signup extends Component {
             urgent_care_data:urgent_care,
             swiperIndex: 0,
             agreementState: false,
+            showPassword: true,
+            icon: "eye-off",
 
             controls: {
                 email: {
@@ -89,6 +92,13 @@ export default class Signup extends Component {
                 },
             },
         };
+    }
+
+    _changeIcon() {
+        this.setState(prevState => ({
+            icon: prevState.icon === 'eye' ? 'eye-off' : 'eye',
+            showPassword: !prevState.showPassword
+        }));
     }
 
     signIn = async () => {
@@ -512,7 +522,12 @@ export default class Signup extends Component {
                             confirmPasswordHandler={(confirmPass) =>
                                 this.handleUpdateInput("confirmPassword", confirmPass)
                             }
+                            // TogglerHandler={(confirmPass) =>
+                            //     this.handleUpdateInput("confirmPassword", confirmPass)
+                            // }
                         />
+                          
+               
 
                         <FormTwo
                             firstNameChangeHandler={(firstName) =>
@@ -679,7 +694,7 @@ export default class Signup extends Component {
                             bottom: 0,
                         }}
                     >
-                        <Textview>Powered by Matz Group©</Textview>
+                        <Textview>Powered by Matz Pvt Ltd</Textview>
                     </Container>
                 </Scrollview>
             </SafeViewArea>

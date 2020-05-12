@@ -57,7 +57,7 @@ export default class AboutUs extends Component {
                     position: 'absolute', bottom: 0
                 }}>
                     <Textview >
-                        Powered by Matz Group©
+                       Powered by Matz Pvt Ltd
                             </Textview>
                 </Container>
             </Container>

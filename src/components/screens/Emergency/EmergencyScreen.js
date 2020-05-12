@@ -316,7 +316,7 @@ export default class EmergencyScreen extends Component{
                         <Container ContainerStyle={{alignSelf:'center', justifyContent:'center', flexDirection:'row' ,marginTop:10,
                                 position:'absolute', bottom:0}}>
                             <Textview >
-                                Powered by Matz Group©
+                               Powered by Matz Pvt Ltd
                             </Textview>
                         </Container>
 
