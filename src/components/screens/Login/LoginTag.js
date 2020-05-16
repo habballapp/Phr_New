@@ -19,7 +19,7 @@ export const Logintag = () => {
 
 const styles = {
     loginTagContainer: {
-        marginTop: 40,
+        marginTop: 60,
         marginLeft: 30
     },
     appLogo: {

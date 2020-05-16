@@ -259,7 +259,7 @@ export default class EmergencyScreen extends Component{
         }
         else{
             return(
-                <Container>
+                <Container ContainerStyle={{ height:'100%' }}>
                     <Header style={{flexDirection:'row',alignItems:'center',backgroundColor:'#F08080',marginBottom:10}}>
                         <Statusbar 
                             backgroundColor={'#F08080'}
@@ -313,12 +313,7 @@ export default class EmergencyScreen extends Component{
                         <Button onPress={()=>{this.onMessageSendPressed()}} textStyle={{fontWeight: 'bold',color: 'white',fontSize: 22}} title="Send" style={{marginTop: 20,width: '100%',borderRadius: 15,justifyContent: 'center',alignItems: 'center',backgroundColor: '#EA2626',height: 40}}/>
                     
 
-                        <Container ContainerStyle={{alignSelf:'center', justifyContent:'center', flexDirection:'row' ,marginTop:10,
-                                position:'absolute', bottom:0}}>
-                            <Textview >
-                               Powered by Matz Pvt Ltd
-                            </Textview>
-                        </Container>
+                       
 
                         <Modal
                             isVisible={this.state.isModalVisible}
@@ -357,7 +352,13 @@ export default class EmergencyScreen extends Component{
                         </Container>
                     
                     </Container>
-
+                      
+                    <Container ContainerStyle={{alignSelf:'center', justifyContent:'center', flexDirection:'row' ,
+                                position:'absolute', bottom:0}}>
+                            <Textview >
+                                Powered by Matz Solutions Pvt Ltd Ⓒ
+                            </Textview>
+                        </Container>
                     
                 </Container>
             )
@@ -403,7 +404,7 @@ const styles = {
         backgroundColor: '#EA2626',
         height: 40,
         marginRight:10,
-        marginBottom:10
+        marginBottom:180
     },
     ModalButtonText: {
         fontWeight: 'bold',

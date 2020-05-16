@@ -44,8 +44,8 @@ export default class OurLocation extends Component {
     }
     render() {
         return (
-            <Container>
-                <Container ContainerStyle={{ justifyContent: 'center', alignSelf: 'center', padding: 20, marginTop: 10, marginBottom: 20 }}>
+            <Container ContainerStyle={{ flex: 1 }}>
+                <Container ContainerStyle={{ justifyContent: 'center', alignSelf: 'center', padding: 20, marginTop: 5, marginBottom: 10 }}>
                     <TouchableOpacity onPress={() => { this.props.navigation.openDrawer() }}>
                         <FontAwesome name="bars" style={{ padding: 10, marginRight:"90%"}} size={20} color="#EA2626" />
                     </TouchableOpacity>
@@ -56,7 +56,7 @@ export default class OurLocation extends Component {
                     />
                     <Textview textStyle={{ fontSize: 30, color: 'black', fontWeight: 'bold', alignSelf: 'center' }} text="Our Location" />
                 </Container>
-                <Container ContainerStyle={{ borderColor: 'black', borderWidth: 1.5, overflow: 'hidden', justifyContent: 'center', width: '75%', height: '55%', alignSelf: 'center', padding: 20, borderRadius: 15, marginBottom: 20 }}>
+                <Container ContainerStyle={{ borderColor: 'black', borderWidth: 1.5, overflow: 'hidden', justifyContent: 'center', width: '75%', height: '62%', alignSelf: 'center', padding: 20, borderRadius: 15, marginBottom: 20 }}>
                     <MapView
                         style={[{ ...StyleSheet.absoluteFillObject }, { borderRadius: 10.4 }]}
                         region={{
@@ -90,11 +90,11 @@ export default class OurLocation extends Component {
                 </Container>
 
                 <Container ContainerStyle={{
-                        alignSelf: 'center', justifyContent: 'center', flexDirection: 'row', marginTop: 10,
+                        alignSelf: 'center', justifyContent: 'center', flexDirection: 'row', marginTop: 15,
                         position: 'absolute', bottom: 0
                     }}>
                         <Textview >
-                           Powered by Matz Pvt Ltd
+                            Powered by Matz Solutions Pvt Ltd Ⓒ
                             </Textview>
                     </Container>
                 

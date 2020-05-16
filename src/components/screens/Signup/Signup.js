@@ -41,7 +41,7 @@ export default class Signup extends Component {
             isModalVisible: false,
             password: "",
             number: "",
-            urgent_care_data:urgent_care,
+            urgent_care_data: urgent_care,
             swiperIndex: 0,
             agreementState: false,
             showPassword: true,
@@ -114,13 +114,13 @@ export default class Signup extends Component {
                 .auth()
                 .signInWithCredential(credential)
                 .then((user) => {
-                    firebase.auth().signOut().then(function() {
+                    firebase.auth().signOut().then(function () {
                         console.log("Sign-out successful.", error);
                         // Sign-out successful.
-                      }).catch(function(error) {
-                          console.log("error while logging out", error);
+                    }).catch(function (error) {
+                        console.log("error while logging out", error);
                         // An error happened.
-                      });
+                    });
                     console.log("user", user);
                     console.log(user.user.uid);
                     console.log("First name", user.additionalUserInfo.profile.name);
@@ -131,7 +131,7 @@ export default class Signup extends Component {
                     var dbref = firebase
                         .database()
                         .ref(`users/patients/${user.user.uid}/`);
-                      
+
                     dbref.on("value", (snapshot) => {
                         console.log("snapshot exist", snapshot.exists())
                         var FCM = firebase.messaging();
@@ -140,7 +140,7 @@ export default class Signup extends Component {
                             console.log("token_Token", token);
                             ref.update({ pushToken: token });
                         });
-                      
+
                         if (!snapshot.exists()) {
                             firebase
                                 .database()
@@ -161,25 +161,25 @@ export default class Signup extends Component {
                             Alert.alert(
                                 "Your account creation request has been posted to the admin."
                             );
-                           
+
                             // let userID = firebase.auth().currentUser.uid; 
                             // var ref = firebase.database().ref(`users/patients/${userID}/`).child('pushToken');
                             // ref.remove();
-                           
+
                             // firebase.auth().signOut().then(()=>{
                             //     AsyncStorage.setItem(LOGIN_CHECK, '').then(() => {
                             //         this.props.navigation.goBack();
                             //     });  
-                          
-                              
+
+
                             // }).catch(()=>{
                             //     this._menu.hide();
                             //     Alert.alert("You are not signed in.")
                             //     this.setState({ isModalVisible: true });
                             // });
-                            
+
                             // this.props.navigation.goBack();
-                           
+
                         } else {
                             console.log("snapshot", snapshot);
                             console.log(snapshot);
@@ -188,7 +188,7 @@ export default class Signup extends Component {
                                     Alert.alert(
                                         "Your account is not Approved by the Admin yet."
                                     );
-                                
+
                                     console.log("pending", "status is pending");
 
                                 } else {
@@ -286,11 +286,11 @@ export default class Signup extends Component {
                             .auth()
                             .signInWithCredential(credential)
                             .then((user) => {
-                                firebase.auth().signOut().then(function() {
+                                firebase.auth().signOut().then(function () {
                                     // Sign-out successful.
-                                  }).catch(function(error) {
+                                }).catch(function (error) {
                                     // An error happened.
-                                  });
+                                });
                                 console.log("user", user);
 
                                 var dbref = firebase
@@ -303,7 +303,7 @@ export default class Signup extends Component {
                                         console.log("token_Token", token);
                                         ref.update({ pushToken: token });
                                     });
-                                    
+
                                     if (!snapshot.exists()) {
                                         firebase
                                             .database()
@@ -498,101 +498,102 @@ export default class Signup extends Component {
 
     render() {
         return (
-            <SafeViewArea style={{ flex: 1 }}>
-                <Statusbar barStyle="dark-content" />
-                <Scrollview keyboardShouldPersistTaps="true">
-                    <SignupHeader />
-                    <Swiper
-                        style={styles.swipeWrapper}
-                        scrollEnabled={true}
-                        dot={<Container></Container>}
-                        activeDot={<Container></Container>}
-                        ref="swiper"
-                        index={this.state.swiperIndex}
-                        showsButtons={false}
-                        loop={false}
-                    >
-                        <FormOne
-                            emailChangeHandler={(email) =>
-                                this.handleUpdateInput("email", email)
-                            }
-                            passwordChangeHandler={(password) =>
-                                this.handleUpdateInput("password", password)
-                            }
-                            confirmPasswordHandler={(confirmPass) =>
-                                this.handleUpdateInput("confirmPassword", confirmPass)
-                            }
+            <Container ContainerStyle={{ flex: 1 }}>
+                <SafeViewArea style={{ flex: 1 }}>
+                    <Statusbar barStyle="dark-content" />
+                    <Scrollview keyboardShouldPersistTaps="true">
+                        <SignupHeader />
+                        <Swiper
+                            style={styles.swipeWrapper}
+                            scrollEnabled={true}
+                            dot={<Container></Container>}
+                            activeDot={<Container></Container>}
+                            ref="swiper"
+                            index={this.state.swiperIndex}
+                            showsButtons={false}
+                            loop={false}
+                        >
+                            <FormOne
+                                emailChangeHandler={(email) =>
+                                    this.handleUpdateInput("email", email)
+                                }
+                                passwordChangeHandler={(password) =>
+                                    this.handleUpdateInput("password", password)
+                                }
+                                confirmPasswordHandler={(confirmPass) =>
+                                    this.handleUpdateInput("confirmPassword", confirmPass)
+                                }
                             // TogglerHandler={(confirmPass) =>
                             //     this.handleUpdateInput("confirmPassword", confirmPass)
                             // }
+                            />
+
+
+
+                            <FormTwo
+                                firstNameChangeHandler={(firstName) =>
+                                    this.handleUpdateInput("firstName", firstName)
+                                }
+                                lastNameChangeHandler={(lastName) =>
+                                    this.handleUpdateInput("lastName", lastName)
+                                }
+                                securityNoChangeHandler={(securityNo) =>
+                                    this.handleUpdateInput("securityNo", securityNo)
+                                }
+                                agreementValue={this.state.agreementState}
+                                onCheckHandler={(value) => {
+                                    this.setState({ agreementState: value });
+                                    console.log("Switch 1 is: " + value);
+                                    console.log(value);
+                                }}
+                            />
+                        </Swiper>
+                        <SignupButtons
+                            swiperIndex={this.state.swiperIndex}
+                            continueSignup={this.continueSignupHandler}
+                            goBack={this.onBackHandler}
                         />
-                          
-               
 
-                        <FormTwo
-                            firstNameChangeHandler={(firstName) =>
-                                this.handleUpdateInput("firstName", firstName)
-                            }
-                            lastNameChangeHandler={(lastName) =>
-                                this.handleUpdateInput("lastName", lastName)
-                            }
-                            securityNoChangeHandler={(securityNo) =>
-                                this.handleUpdateInput("securityNo", securityNo)
-                            }
-                            agreementValue={this.state.agreementState}
-                            onCheckHandler={(value) => {
-                                this.setState({ agreementState: value });
-                                console.log("Switch 1 is: " + value);
-                                console.log(value);
+                        <Button
+                            style={{
+                                width: "90%",
+                                borderRadius: 10,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                backgroundColor: '#EA2626',
+                                height: 50,
+                                alignSelf: 'center',
+                                marginTop: 20,
+                               
                             }}
-                        />
-                    </Swiper>
-                    <SignupButtons
-                        swiperIndex={this.state.swiperIndex}
-                        continueSignup={this.continueSignupHandler}
-                        goBack={this.onBackHandler}
-                    />
-
-                    <Button
-                        style={{
-                            width:"90%",
-                            borderRadius: 10,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: '#EA2626',
-                            height: 50,
-                            alignSelf:'center',
-                            marginTop: 20,
-                            marginBottom:30
-                        }}
-                        textStyle={{ fontSize: 18, color: "white", marginLeft: 15 }}
-                        onPress={() => {
-                            this.onGoogleSignInPress();
-                        }}
-                        title="Register with Google/Facebook"
-                    ></Button>
-
-                    <Modal
-                        isVisible={this.state.isModalVisible}
-                        style={{ justifyContent: "flex-end" }}
-                        animationIn="slideInUp"
-                        animationOut="slideOutDown"
-                        animationInTiming={1000}
-                        animationOutTiming={1000}
-                        backdropTransitionInTiming={800}
-                        backdropTransitionOutTiming={800}
-                    >
-                        <Container
-                            ContainerStyle={{
-                                backgroundColor: "#fff",
-                                padding: 20,
-                                height: 320,
-                                borderRadius: 15,
-                                marginLeft: 15,
-                                marginRight: 15,
+                            textStyle={{ fontSize: 18, color: "white", marginLeft: 15 }}
+                            onPress={() => {
+                                this.onGoogleSignInPress();
                             }}
+                            title="Register with Google/Facebook"
+                        ></Button>
+
+                        <Modal
+                            isVisible={this.state.isModalVisible}
+                            style={{ justifyContent: "flex-end" }}
+                            animationIn="slideInUp"
+                            animationOut="slideOutDown"
+                            animationInTiming={1000}
+                            animationOutTiming={1000}
+                            backdropTransitionInTiming={800}
+                            backdropTransitionOutTiming={800}
                         >
-                            {/* <Input
+                            <Container
+                                ContainerStyle={{
+                                    backgroundColor: "#fff",
+                                    padding: 20,
+                                    height: 320,
+                                    borderRadius: 15,
+                                    marginLeft: 15,
+                                    marginRight: 15,
+                                }}
+                            >
+                                {/* <Input
                                 placeholder="Enter Password"
                                 placeholderTextColor="#D3D3D3"
                                 inputStyle={styles.inputModal}
@@ -602,23 +603,23 @@ export default class Signup extends Component {
                                 }}
                             /> */}
 
-                            <Input
-                                placeholder="Enter Number"
-                                placeholderTextColor="#D3D3D3"
-                                inputStyle={styles.inputModal}
-                                onChangeText={(event) => {
-                                    this.onNumber(event);
-                                }}
-                            />
+                                <Input
+                                    placeholder="Enter Number"
+                                    placeholderTextColor="#D3D3D3"
+                                    inputStyle={styles.inputModal}
+                                    onChangeText={(event) => {
+                                        this.onNumber(event);
+                                    }}
+                                />
 
-                            {/* <Container
+                                {/* <Container
                                 ContainerStyle={{
                                     flexDirection: "column",
                                     alignSelf: "center",
                                     alignItems: "center",
                                 }}
                             > */}
-                            {/* <GoogleSigninButton
+                                {/* <GoogleSigninButton
                                     style={{
                                         width: 220,
                                         height: 48,
@@ -632,7 +633,7 @@ export default class Signup extends Component {
                                     onPress={this.signIn}
                                 /> */}
 
-                            {/* <Button
+                                {/* <Button
                                 style={{
                                     width: 220,
                                     height: 48,
@@ -653,37 +654,37 @@ export default class Signup extends Component {
                                 <FontAwesomeIcon name='google' size={20} style={{ marginLeft: 12, color: '#fff' }} />
                             </Button> */}
 
-                            <Button
-                                style={{ borderRadius: 5, backgroundColor: '#EA2626', height: 45,  width: "100%", alignItems: 'center', flexDirection: 'row' }}
-                                textStyle={{ fontSize: 18, color: 'white', marginLeft: 15 }}
-                                onPress={() => {
-                                    this.signIn();
-                                }}
-                                title="Register with Google">
-                                <FontAwesomeIcon name='google' size={25} style={{ marginLeft: 12, color: '#fff' }} />
-                            </Button>
-                            <Container ContainerStyle={{padding:7}}></Container>
-                            <Button
-                                style={{ borderRadius: 5, backgroundColor: '#EA2626', height: 45,  width: "100%", alignItems: 'center', flexDirection: 'row' }}
-                                textStyle={{ fontSize: 18, color: 'white', marginLeft: 15 }}
-                                onPress={() => {
-                                    this.onFacebookSignInPress();
-                                }}
-                                title="Register with Facebook">
-                                <FontAwesomeIcon name='facebook' size={25} style={{ marginLeft: 12, color: '#fff' }} />
-                            </Button>
-                            <Button
-                                title="Cancel"
-                                style={styles.ModalButton}
-                                textStyle={styles.ModalButtonText}
-                                onPress={() => {
-                                    this.onCancelPressed();
-                                }}
-                            />
-                            {/* </Container> */}
-                        </Container>
-                    </Modal>
-
+                                <Button
+                                    style={{ borderRadius: 5, backgroundColor: '#EA2626', height: 45, width: "100%", alignItems: 'center', flexDirection: 'row' }}
+                                    textStyle={{ fontSize: 18, color: 'white', marginLeft: 15 }}
+                                    onPress={() => {
+                                        this.signIn();
+                                    }}
+                                    title="Register with Google">
+                                    <FontAwesomeIcon name='google' size={25} style={{ marginLeft: 12, color: '#fff' }} />
+                                </Button>
+                                <Container ContainerStyle={{ padding: 7 }}></Container>
+                                <Button
+                                    style={{ borderRadius: 5, backgroundColor: '#EA2626', height: 45, width: "100%", alignItems: 'center', flexDirection: 'row' }}
+                                    textStyle={{ fontSize: 18, color: 'white', marginLeft: 15 }}
+                                    onPress={() => {
+                                        this.onFacebookSignInPress();
+                                    }}
+                                    title="Register with Facebook">
+                                    <FontAwesomeIcon name='facebook' size={25} style={{ marginLeft: 12, color: '#fff' }} />
+                                </Button>
+                                <Button
+                                    title="Cancel"
+                                    style={styles.ModalButton}
+                                    textStyle={styles.ModalButtonText}
+                                    onPress={() => {
+                                        this.onCancelPressed();
+                                    }}
+                                />
+                                {/* </Container> */}
+                            </Container>
+                        </Modal>
+                    </Scrollview>
                     <Container
                         ContainerStyle={{
                             alignSelf: "center",
@@ -694,10 +695,10 @@ export default class Signup extends Component {
                             bottom: 0,
                         }}
                     >
-                        <Textview>Powered by Matz Pvt Ltd</Textview>
+                        <Textview>  Powered by Matz Solutions Pvt Ltd Ⓒ </Textview>
                     </Container>
-                </Scrollview>
-            </SafeViewArea>
+                </SafeViewArea>
+            </Container>
         );
     }
 }

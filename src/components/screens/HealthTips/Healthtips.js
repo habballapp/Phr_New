@@ -147,7 +147,7 @@ export default class HealthTips extends Component{
                 <Container ContainerStyle={{alignSelf:'center', justifyContent:'center', flexDirection:'row' ,marginTop:10,
                                 position:'absolute', bottom:0}}>
                             <Textview >
-                               Powered by Matz Pvt Ltd
+                              Powered by Matz Solutions Pvt Ltd Ⓒ
                             </Textview>
                         </Container>
             </Container>

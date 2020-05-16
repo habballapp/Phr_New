@@ -96,7 +96,7 @@ export default class Services extends Component{
                         position: 'absolute', bottom: 0
                     }}>
                         <Textview >
-                           Powered by Matz Pvt Ltd
+                            Powered by Matz Solutions Pvt Ltd Ⓒ
                             </Textview>
                 </Container>
             </Container>

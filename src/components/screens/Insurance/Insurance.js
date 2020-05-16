@@ -86,7 +86,7 @@ export default class AboutUs extends Component {
                     <TouchableOpacity onPress={() => { this.props.navigation.openDrawer() }}>
                         <FontAwesome name="bars" style={{ padding: 10, marginLeft: 10 }} size={20} color="#EA2626" />
                     </TouchableOpacity>
-                    <Title style={styles.titleStyles}>Home</Title>
+                    <Title style={styles.titleStyles}>View Insurances</Title>
 
 
                 </Header>
@@ -108,6 +108,14 @@ export default class AboutUs extends Component {
                     //    keyExtractor={(item)=>item.key.toString()}
                     />
                 </Container>
+                <Container ContainerStyle={{
+                        alignSelf: 'center', justifyContent: 'center', flexDirection: 'row', marginTop: 10,
+                        position: 'absolute', bottom: 0
+                    }}>
+                        <Textview >
+                           Powered by Matz Solutions Pvt Ltd Ⓒ
+                            </Textview>
+                    </Container>
             </Container>
         )
     }

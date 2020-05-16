@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     },
     formContainer: {
         flex: 1,
-        marginTop: 20,
+        marginTop: 10,
         marginLeft: 30,
         marginRight: 30,
         alignItems: 'center',
@@ -55,7 +55,7 @@ export const styles = StyleSheet.create({
     },
     signup: {
         marginTop: 15,
-        marginBottom:50
+       // marginBottom:70
     },
     signuphere:{
         fontSize: 18,

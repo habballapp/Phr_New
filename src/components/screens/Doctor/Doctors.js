@@ -264,7 +264,7 @@ class Doctors extends Component{
                         >
                              <Image source={dotImage} style={{height: 50, width:50 }} />
                             <MapView.Callout tooltip={true} onPress={()=>{this.markerPressed(marker,index)}}>
-                                <Container ContainerStyle={{height:200, width:200, alignnItems:'center',borderWidth:3,borderColor:'#0080ff', justifyContent:'center', backgroundColor:'white', borderRadius:250}}>
+                                <Container ContainerStyle={{height:230, width:230, alignnItems:'center',borderWidth:3,borderColor:'#0080ff', justifyContent:'center', backgroundColor:'white', borderRadius:250}}>
                                     <Container ContainerStyle={{alignSelf:'center',alignItems:'center'}}>
                                         <Textview textStyle={{fontSize:16, marginBottom:10}} text={marker.first_name}/>
                                         <Textview textStyle={{fontSize:16, marginBottom:10}} text={marker.pnumber}/>

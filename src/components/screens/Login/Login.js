@@ -14,7 +14,8 @@ import { SIGNUP_TEXT } from "../../../res/strings";
 import firebase from 'react-native-firebase';
 import { LOGIN_CHECK } from '../../../constants/StorageConstans';
 import AsyncStorage from '@react-native-community/async-storage'
-import { Alert } from 'react-native';
+import { Alert} from 'react-native';
+import Modal from "react-native-modal";
 import { Icon, Label } from 'native-base';
 import {
     GoogleSigninButton,
@@ -36,6 +37,7 @@ export default class Login extends Component {
 
 
         this.state = {
+            isModalVisible: false,
             email: '',
             password: '',
             isLoading: false,
@@ -288,45 +290,67 @@ export default class Login extends Component {
         validatePass = '';
     }
 
+    forgotPassword = () => {
+
+        var mail = this.state.email;
+        console.log("Reset Email",mail)
+
+        firebase.auth().sendPasswordResetEmail(this.state.email)
+          .then(function (user) {
+            alert('Please check your email...')
+          }).catch(function (e) {
+            console.log(e)
+          })
+      }
+
+      
+    onCancelPressed() {
+        this.setState({ isModalVisible: false });
+    }
+
     render() {
         return (
-            <SafeViewArea style={{ flexWrap: "wrap" }}>
-                <Statusbar barStyle="dark-content" />
-                <Scrollview >
-                    <Logintag />
-                    <Container ContainerStyle={styles.lineStyle} />
-                    <Container ContainerStyle={styles.formContainer}>
-                        <Input
-                            placeholder="Email"
-                            placeholderTextColor="#000"
-                            keyboardType="email-address"
-                            returnKeyType={"next"}
-                            blurOnSubmit={true}
-                            inputStyle={styles.input}
-                            onChangeText={(event) => this.handleEmailChange(event)}
-                        />
-                        {
-                            validateEmail ? validateEmail : <Container></Container>
-                        }
 
-                        <Input
-                            placeholder="Password"
-                            placeholderTextColor="#000"
-                            secureTextEntry={this.state.showPassword}
-                            returnKeyType={"next"}
-                            inputStyle={styles.input}
-                            blurOnSubmit={true}
-                            onChangeText={(event) => this.handlePassChange(event)}
-                        />
+            <Container ContainerStyle={{ flex: 1 }}>
+                <SafeViewArea style={{ height: '100%' }}>
 
-                        <Icon style={{ marginTop:-40,alignSelf:'flex-end' }}
-                            name={this.state.icon} onPress={() => this._changeIcon()} />
+                    <Statusbar barStyle="dark-content" />
 
-                        {
-                            validatePass ? validatePass : <Container></Container>
-                        }
-                        <Button onPress={this.onLoginPressed} title="Login" style={styles.loginButtonStyles} textStyle={styles.loginButtonText} />
-                        {/* <GoogleSigninButton
+                    <Scrollview style={{ height: '100%' }}>
+                        <Logintag />
+                        <Container ContainerStyle={styles.lineStyle} />
+                        <Container ContainerStyle={styles.formContainer}>
+                            <Input
+                                placeholder="Email"
+                                placeholderTextColor="#000"
+                                keyboardType="email-address"
+                                returnKeyType={"next"}
+                                blurOnSubmit={true}
+                                inputStyle={styles.input}
+                                onChangeText={(event) => this.handleEmailChange(event)}
+                            />
+                            {
+                                validateEmail ? validateEmail : <Container></Container>
+                            }
+
+                            <Input
+                                placeholder="Password"
+                                placeholderTextColor="#000"
+                                secureTextEntry={this.state.showPassword}
+                                returnKeyType={"next"}
+                                inputStyle={styles.input}
+                                blurOnSubmit={true}
+                                onChangeText={(event) => this.handlePassChange(event)}
+                            />
+
+                            <Icon style={{ marginTop: -40, alignSelf: 'flex-end' }}
+                                name={this.state.icon} onPress={() => this._changeIcon()} />
+
+                            {
+                                validatePass ? validatePass : <Container></Container>
+                            }
+                            <Button onPress={this.onLoginPressed} title="Login" style={styles.loginButtonStyles} textStyle={styles.loginButtonText} />
+                            {/* <GoogleSigninButton
                             style={{
                                 width: 220,
                                 height: 48,
@@ -359,46 +383,127 @@ export default class Login extends Component {
                             }}
                             title="SignIn with Facebook"
                         ></Button> */}
+                            <Container ContainerStyle={{ padding: 7 }}></Container>
+                            <Button
+                                style={{ borderRadius: 5, backgroundColor: '#EA2626', height: 45, width: 300, alignItems: 'center', flexDirection: 'row' }}
+                                textStyle={{ fontSize: 18, color: 'white', marginLeft: 15 }}
+                                onPress={() => {
+                                    this.onGoogleSignInPress();
+                                }}
+                                title="Sign in with Google">
+                                <FontAwesomeIcon name='google' size={25} style={{ marginLeft: 12, color: '#fff' }} />
+                            </Button>
+                            <Container ContainerStyle={{ padding: 7 }}></Container>
+                            <Button
+                                style={{ borderRadius: 5, backgroundColor: '#EA2626', height: 45, width: 300, alignItems: 'center', flexDirection: 'row' }}
+                                textStyle={{ fontSize: 18, color: 'white', marginLeft: 15 }}
+                                onPress={() => {
+                                    this.onFacebookSignInPress();
+                                }}
+                                title="Signin with Facebook">
+                                <FontAwesomeIcon name='facebook' size={25} style={{ marginLeft: 12, color: '#fff' }} />
+                            </Button>
+                            <Button onPress={() => { this.setState({ isModalVisible: true })}} title="FORGET PASSWORD?" style={styles.forgetPasswordButton} textStyle={styles.forgetPasswordStyle}
+                               
+                            />
+                            <Button onPress={() => this.props.navigation.push('SignUp')} title={SIGNUP_TEXT} style={styles.signup} textStyle={styles.signuphere} />
+                        </Container>
+
+                    </Scrollview>
+                </SafeViewArea>
+
+                <Modal
+                    isVisible={this.state.isModalVisible}
+                    style={{ justifyContent: "flex-end" }}
+                    animationIn="slideInUp"
+                    animationOut="slideOutDown"
+                    animationInTiming={1000}
+                    animationOutTiming={1000}
+                    backdropTransitionInTiming={800}
+                    backdropTransitionOutTiming={800}
+                >
+                    <Container
+                        ContainerStyle={{
+                            backgroundColor: "#fff",
+                            padding: 20,
+                            height: 320,
+                            borderRadius: 15,
+                            marginLeft: 15,
+                            marginRight: 15,
+                        }}
+                    >
+                        <Input
+                            placeholder="Email"
+                            placeholderTextColor="#000"
+                            keyboardType="email-address"
+                            returnKeyType={"next"}
+                            blurOnSubmit={true}
+                            inputStyle={{ borderRadius: 10,
+                                marginBottom: 15,
+                                marginTop: 15,
+                                borderWidth: 1,
+                                borderColor: "#000",
+                                fontSize: 18,
+                                color: "#000",
+                                width: "100%",
+                                paddingLeft: 10,
+                                paddingRight: 10,
+                                height: 60}}
+                            onChangeText={(event) => this.handleEmailChange(event)}
+                        />
                         <Container ContainerStyle={{ padding: 7 }}></Container>
+
                         <Button
-                            style={{ borderRadius: 5, backgroundColor: '#EA2626', height: 45, width: 300, alignItems: 'center', flexDirection: 'row' }}
+                            style={{ borderRadius: 5, backgroundColor: '#EA2626', height: 45, width: "100%", alignItems: 'center', flexDirection: 'row' }}
                             textStyle={{ fontSize: 18, color: 'white', marginLeft: 15 }}
                             onPress={() => {
-                                this.onGoogleSignInPress();
+                                this.forgotPassword();
                             }}
-                            title="Sign in with Google">
-                            <FontAwesomeIcon name='google' size={25} style={{ marginLeft: 12, color: '#fff' }} />
+                            title="Send Email">
+                            {/* <FontAwesomeIcon name='email' size={25} style={{ marginLeft: 12, color: '#fff' }} /> */}
                         </Button>
                         <Container ContainerStyle={{ padding: 7 }}></Container>
                         <Button
-                            style={{ borderRadius: 5, backgroundColor: '#EA2626', height: 45, width: 300, alignItems: 'center', flexDirection: 'row' }}
-                            textStyle={{ fontSize: 18, color: 'white', marginLeft: 15 }}
-                            onPress={() => {
-                                this.onFacebookSignInPress();
+                            title="Cancel"
+                            style={{
+                                marginTop: 10,
+                                width: 90,
+                                borderRadius: 15,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                backgroundColor: '#EA2626',
+                                height: 40,
+                                alignSelf: 'center',
+                                marginRight: 10,
+                                marginBottom: 10
                             }}
-                            title="Signin with Facebook">
-                            <FontAwesomeIcon name='facebook' size={25} style={{ marginLeft: 12, color: '#fff' }} />
-                        </Button>
-                        <Button onPress={() => { }} title="FORGET PASSWORD?" style={styles.forgetPasswordButton} textStyle={styles.forgetPasswordStyle} />
-                        <Button onPress={() => this.props.navigation.push('SignUp')} title={SIGNUP_TEXT} style={styles.signup} textStyle={styles.signuphere} />
+                            textStyle={{ fontWeight: 'bold',
+                            color: 'white',
+                            fontSize: 16}}
+                            onPress={() => {
+                                this.onCancelPressed();
+                            }}
+                        />
                     </Container>
+                </Modal>
 
-
-                    <Container ContainerStyle={{
-                        alignSelf: 'center', justifyContent: 'center', flexDirection: 'row', marginTop: 15, bottom: 0,
-                        position: 'absolute', bottom: 0
-                    }}>
-                        <Textview >
-                           Powered by Matz Pvt Ltd
+                <Container ContainerStyle={{
+                    alignSelf: 'center', justifyContent: 'center', flexDirection: 'row', marginTop: 10,
+                    position: 'absolute', bottom: 0, left: 0, right: 0,
+                }}>
+                    <Textview >
+                        Powered by Matz Solutions Pvt Ltd Ⓒ
                             </Textview>
-                    </Container>
+                </Container>
+            </Container>
 
 
-                </Scrollview>
 
 
 
-            </SafeViewArea>
         );
     }
 }
+
+
+

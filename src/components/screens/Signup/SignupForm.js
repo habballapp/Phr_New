@@ -104,7 +104,7 @@ export const FormTwo = (props) => {
                         <Switch onValueChange={onCheckHandler} value={agreementValue} />
                     )}
                 <TouchableOpacity
-                    onPress={() => Alert.alert(urgent_care)}
+                    onPress={() => Alert.alert("TERMS AND CONDITIONS",urgent_care)}
 
                 >
                     <Textview text={TERMS_AND_CONDITIONS} textStyle={styles.termsConditionText} />

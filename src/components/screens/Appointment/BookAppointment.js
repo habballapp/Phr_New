@@ -108,7 +108,7 @@ class BookAppointment extends Component {
                 key: key,
                 userID: userID
             });
-            Alert.alert("Your appointment has been scheduled.")
+            Alert.alert("Appointment Booked!","Your Appointment has been sent for confirmation. Once your Appointment is confirmed you will be notified")
 
             this.props.navigation.navigate("Home")
         }
@@ -244,7 +244,7 @@ class BookAppointment extends Component {
                     position: 'absolute', bottom: 0
                 }}>
                     <Textview >
-                       Powered by Matz Pvt Ltd
+                        Powered by Matz Solutions Pvt Ltd Ⓒ
                             </Textview>
                 </Container>
 

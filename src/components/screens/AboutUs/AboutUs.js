@@ -30,8 +30,9 @@ export default class AboutUs extends Component {
 
     render() {
         return (
-            <Container>
-                <Container ContainerStyle={{ justifyContent: 'center', alignSelf: 'center', padding: 20, marginTop: 10 }}>
+           
+            <Container ContainerStyle={{ height:'100%' }}>
+                <Container ContainerStyle={{ justifyContent: 'center', alignSelf: 'center', padding: 20}}>
                     <TouchableOpacity onPress={() => { this.props.navigation.openDrawer() }}>
                         <FontAwesome name="bars" style={{ padding: 10, marginRight: "90%" }} size={20} color="#EA2626" />
                     </TouchableOpacity>
@@ -43,7 +44,7 @@ export default class AboutUs extends Component {
 
                     <Textview textStyle={{ fontSize: 30, color: 'black', fontWeight: 'bold', alignSelf: 'center' }} text="About Us" />
                 </Container>
-                <Container ContainerStyle={{ flexWrap: "wrap", width: '85%', backgroundColor: '#EA2626', alignSelf: 'center', padding: 20, borderRadius: 15, marginBottom: 20 }}>
+                <Container ContainerStyle={{ flexWrap: "wrap", width: '85%', backgroundColor: '#EA2626', alignSelf: 'center', padding: 20, borderRadius: 15, marginBottom: 200 }}>
 
                     <ScrollView
                         showsVerticalScrollIndicator={false}>
@@ -57,10 +58,11 @@ export default class AboutUs extends Component {
                     position: 'absolute', bottom: 0
                 }}>
                     <Textview >
-                       Powered by Matz Pvt Ltd
+                        Powered by Matz Solutions Pvt Ltd Ⓒ
                             </Textview>
                 </Container>
-            </Container>
+             </Container>   
+           
         )
     }
 }
