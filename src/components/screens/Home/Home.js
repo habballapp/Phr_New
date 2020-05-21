@@ -20,7 +20,7 @@ var flag_emergency = 0;
 class Home extends Component {
     constructor(props) {
         super(props);
-        var urgentcareid = this.props.navigation.getParam('urgent_care_data').key;
+     //   var urgentcareid = this.props.navigation.getParam('urgent_care_data').key;
         // AsyncStorage.setItem("urgentcareid", urgentcareid).then(() => {
 
         //     console.log("setKey", "urgent care id is set to be " + urgentcareid);
@@ -28,8 +28,9 @@ class Home extends Component {
         global.urgentcare_data = this.props.navigation.getParam('urgent_care_data');
         global.urgentcareid = this.props.navigation.getParam('urgent_care_data').key;
         global.urgentname = this.props.navigation.getParam('urgent_care_data').first_name;
+
         // console.log("global.urgentcareid_1", this.props.navigation.getParam('urgent_care_data'));
-        // console.log("global.urgentcareid_2", this.props.navigation.getParam('urgent_care_data').key);
+        console.log("global.urgentcareid_2", this.props.navigation.getParam('urgent_care_data').key);
         // console.log("global.urgentcareid_3", global.urgentcareid);
 
         this.state = {
@@ -57,8 +58,6 @@ class Home extends Component {
     };
 
     hideMenu = () => {
-
-
         AsyncStorage.getItem(LOGIN_CHECK).then((value) => {
             console.log("home check", "in then");
             let userID = firebase.auth().currentUser.uid;
@@ -71,8 +70,11 @@ class Home extends Component {
                         AsyncStorage.getItem(LOGIN_CHECK).then((value) => {
                             console.log("async_storage", "should be empty");
                             console.log("async_storage", value);
+                            // console.log("async_storage", urgentcareid);
+                            setTimeout(() => {
+                                this.props.navigation.goBack();
+                            }, 10000);
                         })
-                        this.props.navigation.goBack();
                         // this.setState({ isModalVisible: true });
 
                     });
@@ -152,9 +154,15 @@ class Home extends Component {
     // }
 
     componentDidMount() {
-        AsyncStorage.setItem("urgentcareid", this.state.urgent_care_data.key).then(() => {
+        // if(this.state.urgent_care_data.key != undefined && this.state.urgent_care_data.key != null && this.state.urgent_care_data.key != '') {
+            AsyncStorage.setItem("urgentcareid", this.state.urgent_care_data.key).then(() => {
+                console.log("key",this.state.urgent_care_data.key)
+    
+            });
+        // } else {
+        //     this.props.navigation.goBack();
 
-        });
+        // }
 
 
 
@@ -409,7 +417,7 @@ class Home extends Component {
                             barStyle='dark-content'
                         />
                         <TouchableOpacity onPress={() => { this.props.navigation.openDrawer(); }}>
-                            <FontAwesome name="bars" style={{ padding: 10, marginLeft: 5, marginRight: 250 }} size={22} color="#EA2626" />
+                            <FontAwesome name="bars" style={{ padding: 10, marginLeft: 5, marginRight:'75%' }} size={22} color="#EA2626" />
                         </TouchableOpacity>
                         {/* <Title style={styles.titleStyles}>Home</Title> */}
                         <Menu

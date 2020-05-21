@@ -292,15 +292,23 @@ export default class Login extends Component {
 
     forgotPassword = () => {
 
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,15})+$/;
         var mail = this.state.email;
         console.log("Reset Email",mail)
-
-        firebase.auth().sendPasswordResetEmail(this.state.email)
-          .then(function (user) {
-            alert('Please check your email...')
-          }).catch(function (e) {
-            console.log(e)
-          })
+        if (this.state.email != ''){
+            firebase.auth().sendPasswordResetEmail(this.state.email)
+            .then(function (user) {
+              alert('Please check your Email...')
+            }).catch(function (e) {
+                alert(e)
+            })
+           
+        }
+        else{
+            alert('Enter valid Email.')
+        }
+        
+       
       }
 
       
@@ -454,7 +462,7 @@ export default class Login extends Component {
                         <Container ContainerStyle={{ padding: 7 }}></Container>
 
                         <Button
-                            style={{ borderRadius: 5, backgroundColor: '#EA2626', height: 45, width: "100%", alignItems: 'center', flexDirection: 'row' }}
+                            style={{ borderRadius: 15, backgroundColor: '#EA2626', height: 45, width: "100%", alignItems: 'center', flexDirection: 'row',justifyContent:'center' }}
                             textStyle={{ fontSize: 18, color: 'white', marginLeft: 15 }}
                             onPress={() => {
                                 this.forgotPassword();

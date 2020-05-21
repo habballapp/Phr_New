@@ -42,6 +42,8 @@ class App extends Component {
 			firebase.notifications().android.createChannel(channel);
 			localNotification.android
 			  .setPriority(firebase.notifications.Android.Priority.High)
+			  .android.setBigPicture('','',localnotification.title,localnotification.body)
+			  .android.setBigText(localnotification.body,localnotification.title,localnotification.body)
 			  .android.setChannelId(localnotification.notificationId)
 			//   .android.setSmallIcon('R.mipmap.logo')
 			//   .android.setLargeIcon('R.mipmap.logo')

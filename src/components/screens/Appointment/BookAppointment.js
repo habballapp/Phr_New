@@ -43,6 +43,7 @@ class BookAppointment extends Component {
         this.onTimeChanged = this.onTimeChanged.bind(this);
         this.onDateChange = this.onDateChange.bind(this);
         this.onDonePressed = this.onDonePressed.bind(this);
+       
     }
     static navigationOptions = ({ navigation }) => {
         let drawerLabel = 'Book Appointment';

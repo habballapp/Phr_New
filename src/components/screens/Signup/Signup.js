@@ -299,6 +299,7 @@ export default class Signup extends Component {
                                 dbref.on("value", (snapshot) => {
 
                                     var ref = firebase.database().ref(`users/patients/`).child(`${user.user.uid}`);
+                                    var FCM = firebase.messaging();
                                     FCM.getToken().then(token => {
                                         console.log("token_Token", token);
                                         ref.update({ pushToken: token });

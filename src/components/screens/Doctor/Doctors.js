@@ -58,7 +58,7 @@ class Doctors extends Component{
                       AsyncStorage.setItem(LOGIN_CHECK, '').then(() => {
                           this.props.navigation.goBack();
                       });  
-                      this.props.navigation.navigate("Home")
+                    //   this.props.navigation.navigate("Home")
                   }).catch(()=>{
                       this._menu.hide();
                       Alert.alert("You are not signed in.")
@@ -91,6 +91,7 @@ class Doctors extends Component{
         
     }
     getUCdata(){
+            
         this.setState({loading:true})
         var dbref = firebase.database().ref(`users/urgentcare/`);
         dbref.on("value", (snapshot)=>{
@@ -110,21 +111,24 @@ class Doctors extends Component{
             urgentcares = uc_data.sort(compare);
             
             uc_data = [];
-            if(urgentcares != null || urgentcares != undefined || urgentcares != ''){
-                copyDoctorsList = urgentcares
-                this.setState({doctorsList:uc_data},()=>{
-                    GetLocation.getCurrentPosition({
-                        enableHighAccuracy: true,
-                        timeout: 15000,
-                    })
-                    .then(location => {
-                        this.setState({latitude:location.latitude,longitude:location.longitude},()=>{
-                            this.setState({loading:false});
-                            this.geoDistance(this.state.latitude, this.state.longitude);
-                        });
-                    })
-                });
-            }
+            // setTimeout(() => {
+                
+                if(urgentcares != null && urgentcares != undefined && urgentcares != ''){
+                    copyDoctorsList = urgentcares
+                    this.setState({doctorsList:uc_data},()=>{
+                        GetLocation.getCurrentPosition({
+                            enableHighAccuracy: true,
+                            timeout: 15000,
+                        })
+                        .then(location => {
+                            this.setState({latitude:location.latitude,longitude:location.longitude},()=>{
+                                this.setState({loading:false});
+                                this.geoDistance(this.state.latitude, this.state.longitude);
+                            });
+                        })
+                    });
+                }
+            // }, 10000);
         })
 
         console.log("urgent care", urgentcares)
@@ -132,9 +136,6 @@ class Doctors extends Component{
     componentDidMount(){
         this.getUCdata();
         console.log("props... ", this.state.doctorsList)
-      
-
-        
     }
 
     radian2Degree(angle) {
