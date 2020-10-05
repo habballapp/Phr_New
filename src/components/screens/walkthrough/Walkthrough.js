@@ -25,25 +25,25 @@ export default class Walkthrough extends Component {
     { 
       title: 'Find the Best Doctors', 
       des: 'We will provide you the best available professionals in your town. Which will eventually save your time.', 
-      imageSource: require('../../../assets/doctor.png'),
+      imageSource: require('../../../../assets/doctor.png'),
       lastPageKey: false
     },
     {
       title: 'Find the Best Medical Centers', 
       des: 'We will provide you the best available professionals in your town. Which will eventually save your time.',
-      imageSource: require('../../../assets/hospital.png'),
+      imageSource: require('../../../../assets/hospital.png'),
       lastPageKey: false
     },
     { 
       title: 'Schedule your Appointment', 
       des: 'You can schedule your appointment anytime from any doctor you may feel comfortable with.',
-      imageSource: require('../../../assets/schedule_appointment.png'),
+      imageSource: require('../../../../assets/schedule_appointment.png'),
       lastPageKey: false
     },
     { 
       title: 'Track your Appointments', 
       des: 'You can track the appointments history which you scheduled from any specific doctor.',
-      imageSource: require('../../../assets/schedule_history.png'),
+      imageSource: require('../../../../assets/schedule_history.png'),
       lastPageKey: true
     }
     

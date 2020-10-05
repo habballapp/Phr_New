@@ -74,7 +74,7 @@ export default class Services extends Component{
                         <Icon name= {Platform.OS == 'ios' ? "ios-arrow-back" : "md-arrow-back"} color="#0080ff" />
                     </NavButton>
                     <TouchableOpacity onPress={() => { this.props.navigation.openDrawer() }}>
-                        <FontAwesome name="bars" style={{ padding: 10, marginLeft: 10 }} size={20} color="#EA2626" />
+                        <FontAwesome name="bars" style={{ padding: 10, marginLeft: 10 }} size={20} color='#653dd6' />
                     </TouchableOpacity>
                     <Title style={styles.titleStyles}>Our Services</Title>
                 </Header>

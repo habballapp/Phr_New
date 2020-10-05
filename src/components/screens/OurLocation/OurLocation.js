@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Textview, ImageView } from '../../default';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import MapView from 'react-native-maps';
-import AppLogo from "../../../assets/logo.png";
+import AppLogo from "../../../../assets/logo.png";
 import { StyleSheet, Platform, TouchableOpacity, Text, Linking, Alert } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { ThemeProvider } from 'react-native-elements';
@@ -47,7 +47,7 @@ export default class OurLocation extends Component {
             <Container ContainerStyle={{ flex: 1 }}>
                 <Container ContainerStyle={{ justifyContent: 'center', alignSelf: 'center', padding: 20, marginTop: 5, marginBottom: 10 }}>
                     <TouchableOpacity onPress={() => { this.props.navigation.openDrawer() }}>
-                        <FontAwesome name="bars" style={{ padding: 10, marginRight:"90%"}} size={20} color="#EA2626" />
+                        <FontAwesome name="bars" style={{ padding: 10, marginRight:"90%"}} size={20} color='#653dd6' />
                     </TouchableOpacity>
                     <ImageView
                         resizeMode="center"

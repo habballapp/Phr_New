@@ -1,6 +1,6 @@
 import React from "react";
 import { Textview, ImageView, Container } from "../../default";
-import AppLogo from "../../../assets/logo.png";
+import AppLogo from "../../../../assets/logo.png";
 import { CREATE_ACCOUNT } from "../../../res/strings";
 
 export const SignupHeader = () => (

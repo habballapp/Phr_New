@@ -11,8 +11,11 @@ export const Input = (props) => {
         onChangeText,
         secureTextEntry,
         inputStyle,
+        value,
         editable,
-        dense
+        dense,
+        multiline,
+        numberOfLines
     } = props;
 
     return(
@@ -21,6 +24,9 @@ export const Input = (props) => {
         placeholder = {placeholder}
         placeholderTextColor = {placeholderTextColor}
         keyboardType = {keyboardType}
+        defaultValue={value}
+        multiline={multiline}
+        numberOfLines={numberOfLines}
         returnKeyType = {returnKeyType}
         blurOnSubmit = {blurOnSubmit}
         onChangeText = {onChangeText}

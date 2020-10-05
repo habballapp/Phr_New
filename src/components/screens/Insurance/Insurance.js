@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Textview, Button, Statusbar, Checkbox, ImageView } from '../../default';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import AppLogo from "../../../assets/logo.png";
+import AppLogo from "../../../../assets/logo.png";
 import { Icon, Header, Title, Item } from 'native-base';
 import { FlatList, ActivityIndicator, ScrollView, TouchableOpacity } from 'react-native';
 import firebase from 'react-native-firebase';
@@ -52,24 +52,31 @@ export default class AboutUs extends Component {
 
         //   let userID = firebase.auth().currentUser.uid;
 
-        var dbref = firebase.database().ref(`users/urgentcare/${this.state.urgentcareID}/insurance/`)
-        console.log("userid", this.state.urgentcareID);
+         try {
 
-        dbref.on("value", (snapshot) => {
-            snapshot.forEach((data) => {
-                arr_insurance.push(data.val());
-            })
-
-            if (arr_insurance !== undefined || arr_insurance !== '' || arr_insurance !== null) {
-                this.setState({ insurances: arr_insurance }, () => {
-                    this.setState({ loading: false })
+            var dbref = firebase.database().ref(`users/urgentcare/${this.state.urgentcareID}/insurance/`)
+            console.log("userid", this.state.urgentcareID);
+    
+            dbref.on("value", (snapshot) => {
+                snapshot.forEach((data) => {
+                    arr_insurance.push(data.val());
                 })
-            }
-            console.log("insurances", arr_insurance)
-            arr_insurance = [];
+    
+                if (arr_insurance !== undefined || arr_insurance !== '' || arr_insurance !== null) {
+                    this.setState({ insurances: arr_insurance }, () => {
+                        this.setState({ loading: false })
+                    })
+                }
+                console.log("insurances", arr_insurance)
+                arr_insurance = [];
+    
+    
+            })
+             
+         } catch (error) {
+             
+         }
 
-
-        })
     }
 
 
@@ -84,7 +91,7 @@ export default class AboutUs extends Component {
                         barStyle='dark-content'
                     />
                     <TouchableOpacity onPress={() => { this.props.navigation.openDrawer() }}>
-                        <FontAwesome name="bars" style={{ padding: 10, marginLeft: 10 }} size={20} color="#EA2626" />
+                        <FontAwesome name="bars" style={{ padding: 10, marginLeft: 10 }} size={20} color='#653dd6' />
                     </TouchableOpacity>
                     <Title style={styles.titleStyles}>View Insurances</Title>
 

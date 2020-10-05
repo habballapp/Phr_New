@@ -5,6 +5,7 @@ import { Icon, Header, Title, Item } from 'native-base';
 import firebase from 'react-native-firebase';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+// import { transform } from '@babel/core';
 
 var arr_appointment = [];
 var arr_app = [];
@@ -24,12 +25,13 @@ export default class AppointmentHistory extends Component {
         this.takeAppointments();
     }
     takeAppointments() {
-        let userID = firebase.auth().currentUser.uid;
+        
+        try {
+            let userID = firebase.auth().currentUser.uid;
         //    let key = firebase.database().ref(`users/urgentcare/${this.state.urgentcareID}/`).child('appointments').push().key;
 
         var dbref = firebase.database().ref(`users/urgentcare/${this.state.urgentcareID}/appointments/`)
         console.log("userid", this.state.urgentcareID);
-
         dbref.on("value", (snapshot) => {
             snapshot.forEach((data) => {
                 if (userID === data.val().userID)
@@ -48,8 +50,12 @@ export default class AppointmentHistory extends Component {
             }
             arr_appointment = [];
 
-        })
+        })   
+        } catch (error) {
+            
+        }
     }
+
     render() {
         if (this.state.loading) {
             return (
@@ -66,7 +72,7 @@ export default class AppointmentHistory extends Component {
                             barStyle='dark-content'
                         />
                         <TouchableOpacity onPress={() => { this.props.navigation.openDrawer() }}>
-                            <FontAwesome name="bars" style={{ padding: 10, marginLeft: 10 }} size={20} color="#EA2626" />
+                            <FontAwesome name="bars" style={{ padding: 10, marginLeft: 10 }} size={20} color='#653dd6' />
                         </TouchableOpacity>
                         <Title style={styles.titleStyles}>Appointment History</Title>
                     </Header>

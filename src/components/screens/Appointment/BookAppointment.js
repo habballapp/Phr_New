@@ -110,7 +110,6 @@ class BookAppointment extends Component {
                 userID: userID
             });
             Alert.alert("Appointment Booked!","Your Appointment has been sent for confirmation. Once your Appointment is confirmed you will be notified")
-
             this.props.navigation.navigate("Home")
         }
 
@@ -150,7 +149,7 @@ class BookAppointment extends Component {
                                 barStyle='dark-content'
                             />
                             <TouchableOpacity onPress={() => { this.props.navigation.openDrawer(); }}>
-                                <FontAwesome name="bars" size={20} style={{ padding: 10, marginLeft: 10 }} color="#EA2626" />
+                                <FontAwesome name="bars" size={20} style={{ padding: 10, marginLeft: 10 }} color='#653dd6' />
                             </TouchableOpacity>
                             <Title style={styles.titleStyles}>Book Appointment</Title>
                         </Header>

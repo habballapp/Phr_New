@@ -29,7 +29,7 @@ export default class EmergencyScreen extends Component{
             defrelationToBeAdded:'Rescue',
             // UrgentCareNo:255-55-66,
             // UrgentCareName:this.props.navigation.getParam('urgentcareName')
-            UrgentCare : this.props.navigation.getParam('urgentcare')
+            PHR : this.props.navigation.getParam('urgentcare')
             
 
         }
@@ -61,21 +61,25 @@ export default class EmergencyScreen extends Component{
 
        
         if(flag==0){
-            let userID = firebase.auth().currentUser.uid;
-            var dbref = firebase.database().ref(`users/patients/${userID}/EmergencyContacts/`);
-            dbref.on("value", (snapshot)=>{
-                snapshot.forEach((data)=>{
-                    tempVar.push(data.val());
-                })  
-                emergency_numbers = tempVar;
-                console.log("emergency numbers", emergency_numbers)
-                if(emergency_numbers!==undefined || emergency_numbers!=='' || emergency_numbers!==null){    
-                    this.setState({numbers: emergency_numbers}, ()=>{
-                        this.setState({loading:false,refresh: !this.state.refresh})
-                    })                        
-                }
-                tempVar = [];
-            })
+            try {
+                let userID = firebase.auth().currentUser.uid;
+                var dbref = firebase.database().ref(`users/patients/${userID}/EmergencyContacts/`);
+                dbref.on("value", (snapshot)=>{
+                    snapshot.forEach((data)=>{
+                        tempVar.push(data.val());
+                    })  
+                    emergency_numbers = tempVar;
+                    console.log("emergency numbers", emergency_numbers)
+                    if(emergency_numbers!==undefined || emergency_numbers!=='' || emergency_numbers!==null){    
+                        this.setState({numbers: emergency_numbers}, ()=>{
+                            this.setState({loading:false,refresh: !this.state.refresh})
+                        })                        
+                    }
+                    tempVar = [];
+                })   
+            } catch (error) {
+                
+            }
         }
         else{
             this.setState({numbers:emergency_numbers}, ()=>{
@@ -169,7 +173,7 @@ export default class EmergencyScreen extends Component{
 
 
     onHomeIconPressed(){
-        let Number_ =this.state.UrgentCare.pnumber;
+        let Number_ =this.state.PHR.pnumber;
         let phoneNumber = Number_;
         if (Platform.OS !== 'android') {
             phoneNumber = `telprompt:${Number_}`;

@@ -70,6 +70,7 @@ export default class HealthTips extends Component{
     takeAppointments(){
        // let userID = firebase.auth().currentUser.uid;
        console.log("arr_images",this.state.urgentcareID);
+       try {
         var dbref = firebase.database().ref(`users/urgentcare/${this.state.urgentcareID}/splashImages/`);
         dbref.on("value", (snapshot)=>{
             snapshot.forEach((data)=>{
@@ -85,13 +86,18 @@ export default class HealthTips extends Component{
             })                        
         })
         this.setState({loading:false});
+           
+       } catch (error) {
+           
+       }
+       
 
         
     }
    
     render(){
         return(
-            this.state.loading ? <ActivityIndicator size="large" color="#EA2626" style={{flex:1,alignSelf:'center'}} /> :
+            this.state.loading ? <ActivityIndicator size="large" color='#653dd6' style={{flex:1,alignSelf:'center'}} /> :
             <Container ContainerStyle={{flex:1}}>
                  <Header style={{flexDirection:'row',alignItems:'center',backgroundColor:'#fff',height:70}}>
                     <Statusbar 
@@ -103,7 +109,7 @@ export default class HealthTips extends Component{
                         <Icon name= {Platform.OS == 'ios' ? "ios-arrow-back" : "md-arrow-back"} color="#0080ff" />
                     </NavButton>
                     <TouchableOpacity onPress={() => { this.props.navigation.openDrawer() }}>
-                        <FontAwesome name="bars" style={{ padding: 10, marginLeft: 10 }} size={20} color="#EA2626" />
+                        <FontAwesome name="bars" style={{ padding: 10, marginLeft: 10 }} size={20} color='#653dd6' />
                     </TouchableOpacity>
                     <Title style={styles.titleStyles}>Health Tips</Title>
                   

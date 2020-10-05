@@ -1,42 +1,64 @@
 {
   "project_info": {
-    "project_number": "1094017099438",
-    "firebase_url": "https://health-appointment.firebaseio.com",
-    "project_id": "health-appointment",
-    "storage_bucket": "health-appointment.appspot.com"
+    "project_number": "1069158008270",
+    "firebase_url": "https://personal-medical-record-pmr.firebaseio.com",
+    "project_id": "personal-medical-record-pmr",
+    "storage_bucket": "personal-medical-record-pmr.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1094017099438:android:c4211d38feec107d",
+        "mobilesdk_app_id": "1:1069158008270:android:312b274aa1f46e209ad79f",
         "android_client_info": {
-          "package_name": "com.medproject"
+          "package_name": "com.phr"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1094017099438-avdi1s0dt309v64k24m1qkj5bh1835nm.apps.googleusercontent.com",
+          "client_id": "1069158008270-lc9b99d6i2prijche06m5q6vpohi2equ.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAFdBDKdpqOE6gyhDHDYHGXuLPiD9glV30"
+          "current_key": "AIzaSyACCJJstG8czsOmF2uVO229KbpCtigTr_4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1094017099438-avdi1s0dt309v64k24m1qkj5bh1835nm.apps.googleusercontent.com",
+              "client_id": "1069158008270-lc9b99d6i2prijche06m5q6vpohi2equ.apps.googleusercontent.com",
               "client_type": 3
-            },
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1069158008270:android:15d510cfe5254e7a9ad79f",
+        "android_client_info": {
+          "package_name": "com.phrrbk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1069158008270-lc9b99d6i2prijche06m5q6vpohi2equ.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACCJJstG8czsOmF2uVO229KbpCtigTr_4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
             {
-              "client_id": "1094017099438-rd55lh8kbkpsmuksqe04g8io64e5haqk.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "org.reactjs.native.example.medproject"
-              }
+              "client_id": "1069158008270-lc9b99d6i2prijche06m5q6vpohi2equ.apps.googleusercontent.com",
+              "client_type": 3
             }
           ]
         }

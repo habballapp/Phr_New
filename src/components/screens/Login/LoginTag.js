@@ -1,18 +1,20 @@
 import React from 'react';
 import { Textview, Container, ImageView } from '../../default/index';
 import AppLogo from "../../../assets/logo.png";
-import { WELCOME, LOGIN_HEADER } from "../../../res/strings";
+import { WELCOME, LOGIN_HEADER } from '../../../res/strings';
+import { ImageBackground } from 'react-native';
 
 export const Logintag = () => {
-    const { appLogo, loginTagContainer, headingOne, headingTwo } = styles;
+    const { appLogo, loginTagContainer} = styles;
     return (
         <Container ContainerStyle={loginTagContainer}>
-            <ImageView
+            <ImageView 
+             
                 resizeMode="center"
                 imageStyle={appLogo}
-                imgSource={AppLogo} />
-            <Textview textStyle={headingOne} text={WELCOME} />
-            <Textview textStyle={headingTwo} text={LOGIN_HEADER} />
+                 imgSource={AppLogo} 
+                />
+            
         </Container>
     )
 }
@@ -20,11 +22,12 @@ export const Logintag = () => {
 const styles = {
     loginTagContainer: {
         marginTop: 60,
-        marginLeft: 30
+        marginLeft: 30,
+        alignItems:'center'
     },
     appLogo: {
-        height: 100,
-        width: 100,
+        height: 200,
+        width: 200,
     },
     headingOne: {
         marginTop: 25,

@@ -1,5 +1,5 @@
 framework module Pods_medproject_tvOSTests {
-  umbrella header "Pods-medproject-tvOSTests-umbrella.h"
+  umbrella header "Pods-phrrbk-tvOSTests-umbrella.h"
 
   export *
   module * { export * }

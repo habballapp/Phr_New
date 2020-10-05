@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Textview, Button, ImageView } from '../../default';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import AppLogo from "../../../assets/logo.png";
+import AppLogo from "../../../../assets/logo.png";
 import { ScrollView, TouchableOpacity } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
@@ -34,7 +34,7 @@ export default class AboutUs extends Component {
             <Container ContainerStyle={{ height:'100%' }}>
                 <Container ContainerStyle={{ justifyContent: 'center', alignSelf: 'center', padding: 20}}>
                     <TouchableOpacity onPress={() => { this.props.navigation.openDrawer() }}>
-                        <FontAwesome name="bars" style={{ padding: 10, marginRight: "90%" }} size={20} color="#EA2626" />
+                        <FontAwesome name="bars" style={{ padding: 10, marginRight: "90%" }} size={20} color='#653dd6' />
                     </TouchableOpacity>
                     <ImageView
                         resizeMode="center"

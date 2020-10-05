@@ -39,6 +39,7 @@ export default class ChatScreen extends Component {
       
     componentDidMount(){
         this.takeMessages();
+        console.log("This Old Screen")
         
     }
     async takeMessages(){
@@ -442,7 +443,7 @@ export default class ChatScreen extends Component {
     }
     render() {   
         return (
-            this.state.loading ? <ActivityIndicator size="large" color="#EA2626" style={{flex:1,alignSelf:'center'}} /> :
+            this.state.loading ? <ActivityIndicator size="large" color='#653dd6' style={{flex:1,alignSelf:'center'}} /> :
                 this.state.cameraOpen ? 
                     <Container ContainerStyle={{flex:1}}>
                         <RNCamera
@@ -512,7 +513,7 @@ export default class ChatScreen extends Component {
                                 </TouchableOpacity>
                             </Container> :
                             <Button style={{marginRight:10}} onPress={this.onSendMessage}>
-                                <Icon name="md-send" color="#EA2626" size={30}/>
+                                <Icon name="md-send" color='#653dd6' size={30}/>
                             </Button>}
                         </Container>
                         <Modal

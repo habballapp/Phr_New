@@ -113,7 +113,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.medproject"
+        applicationId "com.phrrbk"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -155,6 +155,8 @@ android {
 dependencies {
     implementation project(':react-native-fbsdk')
     implementation project(':react-native-audio-record')
+    implementation project(':react-native-webview')
+    implementation project(':react-native-image-picker')
     implementation project(':react-native-sound')
     implementation project(':react-native-audio')
     implementation project(':react-native-document-picker')
@@ -171,6 +173,8 @@ dependencies {
     implementation "com.google.firebase:firebase-storage:17.0.0"
     implementation 'me.leolin:ShortcutBadger:1.1.21@aar'
     compile project(':react-native-navybits-date-time-picker')
+    implementation project(':react-native-snackbar')
+
 
     // Firebase dependencies
     implementation "com.google.android.gms:play-services-base:16.1.0"

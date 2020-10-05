@@ -12,7 +12,8 @@ import firebase from 'react-native-firebase';
 import { LOGIN_CHECK } from '../../../constants/StorageConstans';
 import AsyncStorage from '@react-native-community/async-storage'
 import GetLocation from 'react-native-get-location';
-import Icon from 'react-native-vector-icons/Ionicons'
+import Icon from 'react-native-vector-icons/Ionicons';
+import { Alert} from 'react-native';
 
 var i = 0;
 var uc_data = [];
@@ -91,15 +92,17 @@ class Doctors extends Component{
         
     }
     getUCdata(){
-            
+         
         this.setState({loading:true})
+        try {
+             
         var dbref = firebase.database().ref(`users/urgentcare/`);
         dbref.on("value", (snapshot)=>{
             snapshot.forEach((data)=>{
                 uc_data.push(data.val())
                 console.log("snapshot urgent care... ", uc_data)
             })
-           //  uc_data
+          
           
            function compare(a, b) {
             if (a.first_name.toLowerCase() > b.first_name.toLowerCase()) return 1;
@@ -109,9 +112,8 @@ class Doctors extends Component{
           }
 
             urgentcares = uc_data.sort(compare);
-            
             uc_data = [];
-            // setTimeout(() => {
+           
                 
                 if(urgentcares != null && urgentcares != undefined && urgentcares != ''){
                     copyDoctorsList = urgentcares
@@ -125,11 +127,19 @@ class Doctors extends Component{
                                 this.setState({loading:false});
                                 this.geoDistance(this.state.latitude, this.state.longitude);
                             });
+                        }) .catch((error) => {
+                            Alert.alert("Location Not Available","Please Turn On Your Location To Proceed");
+                            
                         })
                     });
                 }
-            // }, 10000);
-        })
+              
+          
+        }) 
+        } catch (error) { 
+           
+        }
+        
 
         console.log("urgent care", urgentcares)
     }

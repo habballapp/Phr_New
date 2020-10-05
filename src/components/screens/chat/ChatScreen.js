@@ -54,25 +54,28 @@ export default class ChatScreen extends Component {
 
   componentDidMount() {
     this.takeMessages();
+    console.log("This Screen")
   }
   async takeMessages() {
     if (flag == 0) {
-      var userId = firebase.auth().currentUser.uid;
-      var dbref = firebase.database().ref(`users/patients/${userId}/messages/`);
-      dbref.on("value", (snapshot) => {
-        snapshot.forEach((data) => {
-          message_array.push(data.val());
-        });
-        if (
-          message_array !== undefined ||
-          message_array !== "" ||
-          message_array !== null
-        ) {
-          this.reverseObject(message_array);
-        }
-        message_array = [];
-      });
-    } else {
+     
+        var userId = firebase.auth().currentUser.uid;
+        var dbref = firebase.database().ref(`users/patients/${userId}/messages/`);
+        dbref.on("value", (snapshot) => {
+          snapshot.forEach((data) => {
+            message_array.push(data.val());
+          });
+          if (
+            message_array !== undefined ||
+            message_array !== "" ||
+            message_array !== null
+          ) {
+            this.reverseObject(message_array);
+          }
+          message_array = [];
+        }); 
+      }
+     else {
       this.setState({ messages: message_array }, () => {
         this.setState({ loading: false });
       });
@@ -531,7 +534,7 @@ export default class ChatScreen extends Component {
     return this.state.loading ? (
       <ActivityIndicator
         size="large"
-        color="#EA2626"
+        color='#653dd6'
         style={{ flex: 1, alignSelf: "center" }}
       />
     ) : this.state.cameraOpen ? (
@@ -677,7 +680,7 @@ export default class ChatScreen extends Component {
             </Container>
           ) : (
             <Button style={{ marginRight: 10 }} onPress={this.onSendMessage}>
-              <Icon name="md-send" color="#EA2626" size={30} />
+              <Icon name="md-send" color='#653dd6' size={30} />
             </Button>
           )}
         </Container>

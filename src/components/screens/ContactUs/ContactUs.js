@@ -59,7 +59,8 @@ onHomeIconPressed(){
 
     let Number_;
     console.log("Contact uS ",this.state.urgentcareID)
-    var dbref = firebase.database().ref(`users/urgentcare/${this.state.urgentcareID}/`);
+    try {
+        var dbref = firebase.database().ref(`users/urgentcare/${this.state.urgentcareID}/`);
     dbref.on("value", (snapshot)=>{
         console.log("pending_data", snapshot._value);
         Number_ = snapshot._value.pnumber
@@ -83,6 +84,10 @@ onHomeIconPressed(){
             }
         })
     })
+    } catch (error) {
+        
+    }
+    
    
    
 }
